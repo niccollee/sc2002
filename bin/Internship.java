@@ -13,7 +13,18 @@ public class Internship {
     private int numSlots;
     private boolean visibility;
 
-    public Internship(String title, String description, InternshipLevel level, String preferredMajor, Date appOpenDate, Date appCloseDate, Status status, String companyName, CompanyRep companyRep, int numSlots, boolean visibility) {
+    public Internship(
+            String title, 
+            String description, 
+            InternshipLevel level, 
+            String preferredMajor, 
+            Date appOpenDate, 
+            Date appCloseDate, 
+            Status status, 
+            String companyName, 
+            CompanyRep companyRep, 
+            int numSlots, 
+            boolean visibility) {
         this.title = title;
         this.description = description;
         this.level = level;
