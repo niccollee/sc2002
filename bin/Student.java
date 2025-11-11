@@ -21,6 +21,17 @@ public class Student implements IUser {
         this.appliedInternships = appliedInternships;
         this.acceptedInternships = null;
     }
+    // Null student
+    public Student() {
+        this.id = "null";
+        this.name = "null";
+        this.password = "null";
+        this.yearOfStudy = -1;
+        this.major = "null";
+        ArrayList<Internship> appliedInternships = new ArrayList<Internship>();
+        this.appliedInternships = appliedInternships;
+        this.acceptedInternships = null;
+    }
     // Getter method for id
     public String getId() {
         return id;
@@ -92,5 +103,12 @@ public class Student implements IUser {
     // Setter method for password
     public void setPassword(String password) {
         this.password = password;
+    }
+    // Check if student is null or invalid
+    public boolean isValid() {
+        if (yearOfStudy >= 1 && yearOfStudy <= 4) {
+            return true;
+        }
+        return false;
     }
 }
