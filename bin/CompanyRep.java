@@ -83,4 +83,15 @@ public class CompanyRep implements IUser {
 		}
 		return null;
 	}
+
+	// toggle visibility
+	public boolean toggleVisibility(Internship internship) {
+		if (repStatus != Status.APPROVED) return false;
+		if (internship == null) return false;
+
+		if (internship.getStatus() != Status.APPROVED) return false;
+
+		internship.setVisible(!internship.isVisibility());
+		return true;
+	}
 }
