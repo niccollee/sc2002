@@ -88,4 +88,9 @@ public class Internship {
     public boolean isVisibility() {
         return visibility;
     }
+
+    // setter for visibility
+    public void setVisible(boolean v) {
+        this.visibility = v;
+    }
 }
