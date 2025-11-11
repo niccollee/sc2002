@@ -1,0 +1,8 @@
+public enum CompanyRepAttributes {
+	ID,
+	NAME,
+	DEPARTMENT,
+	POSITION,
+	REPSTATUS,
+	INTERNSHIPADDED
+}
