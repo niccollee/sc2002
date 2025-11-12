@@ -85,12 +85,12 @@ public class Internship {
     }
 
     // Getter method for visibility
-    public boolean isVisibility() {
+    public boolean getVisibility() {
         return visibility;
     }
 
     // setter for visibility
-    public void setVisible(boolean v) {
+    public void setVisibility(boolean v) {
         this.visibility = v;
     }
 }
