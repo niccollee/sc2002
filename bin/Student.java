@@ -73,17 +73,9 @@ public class Student implements IUser {
         acceptedInternships = internship;
         return true;
     }
-    // Method to reject internship. Return true if operation successful, otherwise false.
-    // False when internship is not in appliedInternship or if internship is not acceptedInternship
-    public boolean rejectInternship(Internship internship) {
-        if (appliedInternships.contains(internship)) {
-            appliedInternships.remove(internship);
-        } else if (acceptedInternships == internship) {
-            acceptedInternships = null;
-        } else {
-            return false;
-        }
-        return true;
+    // Method to reject internship, set appliedInternships to null.
+    public void withdrawAcceptedInternship() {
+        acceptedInternships = null;
     }
     // Getter method for password
     public String getPassword() {

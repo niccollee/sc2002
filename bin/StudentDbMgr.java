@@ -5,23 +5,49 @@ import java.util.List;
 
 public class StudentDbMgr {
     private List<Student> studentList;
+    private static StudentDbMgr instance;
 
-    public StudentDbMgr() {
+    private StudentDbMgr() {
         this.studentList = new ArrayList<Student>();
     }
-    // Add students either by creating new student object
+    // Returns an instance of the this class
+    public static StudentDbMgr getInstance(){
+        if (instance == null) {
+            instance = new StudentDbMgr();
+        }
+        return instance;
+    }
+    // Add student to studentList. If id of student exist, 
+    // return false and student not added. 
+    // Else return true and add student to studentList.
     public boolean add(Student student) {
-        for (Student i : studentList) {
-            if (i.getId() == student.getId()) {
-                return false;
-            }
+        if (containsId(student.getId())) {
+            return false;
         }
         studentList.add(student);
         return true;
     }
-    // Getter method for
-    public Student get(int idx) {
-        return studentList.get(idx);
+    // Getter method to get student
+    public List<Student> get() {
+        return studentList;
+    }
+    // Method to check if duplicate id exist. Return true if id exist, otherwise false.
+    public boolean containsId(String id) {
+        for (Student i: studentList) {
+            if (i.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // Getter method for student from the studentList. If student does not exist, return null
+    public Student getStudent(String id) {
+        for (Student i: studentList) {
+            if (i.getId() == id) {
+                return i;
+            }
+        }
+        return null;
     }
     // Sort studentList by attribute specified in sortBy and return the sorted list.
     public List<Student> sort(StudentAttributes sortBy) {
@@ -67,7 +93,7 @@ public class StudentDbMgr {
                 return new ArrayList<Student>();    
         }
     }
-    // Filter studentList by attributes specified by filter by and return sorted list.
+    // Filter studentList by attributes specified by filterBy and return sorted list.
     public List<Student> filter(StudentAttributes filterBy, String args) {
         switch(filterBy) {
             // Filter by name based on alphabetical order
