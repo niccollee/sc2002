@@ -5,16 +5,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CareerStaffMgr {
+public class CareerStaffDbMgr {
 
     private List<CareerStaff> careerStaffList;
 
-    public CareerStaffMgr() {
+    public CareerStaffDbMgr() {
         this.careerStaffList = new ArrayList<>();
     }
 
     // read in from career staff list csv and initalize list of career staff
-    public boolean loadCareerStaff() {
+    public boolean importDb(String filename) {
         String filepath = "data/career_staff_list.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
