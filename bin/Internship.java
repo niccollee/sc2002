@@ -1,12 +1,13 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Internship {
+    private int id;
     private String title;
     private String description;
     private InternshipLevel level;
     private String preferredMajor;
-    private Date appOpenDate;
-    private Date appCloseDate;
+    private LocalDate appOpenDate;
+    private LocalDate appCloseDate;
     private Status status;
     private String companyName;
     private CompanyRep companyRep;
@@ -14,17 +15,19 @@ public class Internship {
     private boolean visibility;
 
     public Internship(
+            int id,
             String title, 
             String description, 
             InternshipLevel level, 
             String preferredMajor, 
-            Date appOpenDate, 
-            Date appCloseDate, 
+            LocalDate appOpenDate, 
+            LocalDate appCloseDate, 
             Status status, 
             String companyName, 
             CompanyRep companyRep, 
             int numSlots, 
             boolean visibility) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.level = level;
@@ -37,57 +40,19 @@ public class Internship {
         this.numSlots = numSlots;
         this.visibility = visibility;
     }
-    // Getter method for title
-    public String getTitle() {
-        return title;
-    }
-    // Getter method for description
-    public String getDescription() {
-        return description;
-    }
-    // Getter method for level
-    public InternshipLevel getLevel() {
-        return level;
-    }
-
-    // Getter method for preferredMajor
-    public String getPreferredMajor() {
-        return preferredMajor;
-    }
-
-    // Getter method for appOpenDate
-    public Date getAppOpenDate() {
-        return appOpenDate;
-    }
-
-    // Getter method for appCloseDate
-    public Date getAppCloseDate() {
-        return appCloseDate;
-    }
-    // Getter method for status
-    public Status getStatus() {
-        return status;
-    }
-
-    // Getter method for companyName
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    // Getter method for companyRep
-    public CompanyRep getCompanyRep() {
-        return companyRep;
-    }
-
-    // Getter method for numSlots
-    public int getNumSlots() {
-        return numSlots;
-    }
-
-    // Getter method for visibility
-    public boolean getVisibility() {
-        return visibility;
-    }
+    // Getter methods
+    public int getId() {return id;}
+    public String getTitle() {return title;}
+    public String getDescription() {return description;}
+    public InternshipLevel getLevel() {return level;}
+    public String getPreferredMajor() {return preferredMajor;}
+    public LocalDate getAppOpenDate() {return appOpenDate;}
+    public LocalDate getAppCloseDate() {return appCloseDate;}
+    public Status getStatus() {return status;}
+    public String getCompanyName() {return companyName;}
+    public CompanyRep getCompanyRep() {return companyRep;}
+    public int getNumSlots() {return numSlots;}
+    public boolean getVisibility() {return visibility;}
 
     // setter for visibility
     public void setVisibility(boolean v) {
