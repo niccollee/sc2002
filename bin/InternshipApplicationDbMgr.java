@@ -28,7 +28,7 @@ public class InternshipApplicationDbMgr {
     }
 
     public boolean add(InternshipApplication internshipApplication) {
-        if (count < 3) {
+        if (count > 3) {
             return false;
         }
         for (InternshipApplication i: internshipApplicationList) {

@@ -4,19 +4,18 @@ public class InternshipDisplay extends ADisplay{
     public void showInternships(List<Internship> internships) {
         System.out.println("=========================");
         System.out.println("Internship Opportunities");
-        System.out.println("No. \t:\tTitle \t:\tCompany \t:\tLevel \t:\tMajor \t:\tClosing Date");
+        System.out.println("Id. \t:\tTitle \t:\tCompany \t:\tLevel \t:\tClosing Date");
         for (int i = 0; i != internships.size(); i++) {
             System.out.println(i + " \t:\t" + 
                 internships.get(i).getTitle() + " \t:\t" + 
                 internships.get(i).getCompanyName() + "\t\t:\t" +
                 internships.get(i).getLevel() + "\t:\t" + 
-                internships.get(i).getPreferredMajor() + "\t:\t" + 
                 internships.get(i).getAppCloseDate());
         }
         System.out.println("=========================");
     }
     public void showSortMenu(boolean isStudent) {
-        String output = """
+        String outputNotStudent = """
                 =========================
                 Sort By:
                 1)Title
@@ -27,18 +26,23 @@ public class InternshipDisplay extends ADisplay{
                 6)Status
                 7)Company Name
                 8)Number of Slots
-                """;
-        String outputIsStudent = 
-                """
-                9)Quit
-                =========================
-                """;
-        String outputNotStudent = """
                 9)Visibility
                 10)Quit
                 =========================
                 """;
-        System.out.printf(output);
+        String outputIsStudent = 
+                """
+                =========================
+                Sort By:
+                1)Title
+                2)Company Name
+                3)Number of Slots
+                4)Level
+                5)Application Open Date
+                6)Application Close Date
+                7)Quit
+                =========================
+                """;
         if (isStudent) {
             System.out.println(outputIsStudent);
         } else {
@@ -46,7 +50,7 @@ public class InternshipDisplay extends ADisplay{
         }
     }
     public void showFilterMenu(boolean isStudent) {
-        String output = """
+        String outputNotStudent = """
                 =========================
                 Filter By:
                 1)Title
@@ -57,17 +61,23 @@ public class InternshipDisplay extends ADisplay{
                 6)Status
                 7)Company Name
                 8)Number of Slots
-                """;
-        String outputIsStudent = """
-                9)Quit
-                =========================
-                """;
-        String outputNotStudent = """
                 9)Visibility
                 10)Quit
                 =========================
                 """;
-        System.out.printf(output);
+        String outputIsStudent = 
+                """
+                =========================
+                Filter By:
+                1)Title
+                2)Company Name
+                3)Number of Slots
+                4)Level
+                5)Application Open Date
+                6)Application Close Date
+                7)Quit
+                =========================
+                """;
         if (isStudent) {
             System.out.println(outputIsStudent);
         } else {

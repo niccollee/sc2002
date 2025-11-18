@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class InternshipDbMgr {
     private List<Internship> internshipList;
     private static InternshipDbMgr instance;
-    private static int numInternship = 0;
     private InternshipDbMgr() {
         internshipList = new ArrayList<Internship>();
     }

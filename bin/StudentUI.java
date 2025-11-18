@@ -2,12 +2,14 @@ import java.util.Scanner;
 
 public class StudentUI {
     private StudentDisplay studentDisplay;
+    private InternshipDisplay internshipDisplay;
     private InternshipUI internshipUI;
     private Student student;
     private StudentDbMgr studentDbMgr;
     private InternshipDbMgr internshipDbMgr;
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
     private StudentPasswordMgr studentPasswordMgr;
+    private Scanner sc;
 
     public StudentUI(
         StudentDbMgr studentDbMgr,
@@ -16,19 +18,20 @@ public class StudentUI {
         StudentPasswordMgr studentPasswordMgr
         ) {
         studentDisplay = new StudentDisplay();
+        internshipDisplay = new InternshipDisplay();
         internshipUI = new InternshipUI();
         this.studentDbMgr = studentDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         this.studentPasswordMgr = studentPasswordMgr;
-        Scanner sc = Input.SC;
-        student = login(sc, studentPasswordMgr);
+        sc = Input.SC;
+        student = login();
         /* If login details is invalid, continue prompting user to login for 3 more
          * times. Afterwards return back to main page.
          */
         if (student == null) {
             for (int i = 0; i != 3; i++) {
-                student = login(sc, this.studentPasswordMgr);
+                student = login();
                 if (student != null) {
                     break;
                 }
@@ -37,44 +40,44 @@ public class StudentUI {
                 }
             }
         }
-        int choice = menu(sc);
+        int choice = menu();
         while (choice == -1) {
             System.out.println("Invalid input!");
-            choice = menu(sc);
+            choice = menu();
         }
         while (true) {
             switch (choice) {
             case 1:
-                viewOpportunities(sc);
+                viewOpportunities();
                 break;
             case 2:
-                applyForInternship(student, sc);
+                applyForInternship();
                 break;
             case 3:
-                viewAppliedInternships(student);
+                viewAppliedInternships();
                 break;
             case 4:
-                acceptInternship(student, sc);
+                acceptInternship();
                 break;
             case 5:
-                requestWithdrawal(student, sc);
+                requestWithdrawal();
                 break;
             case 6:
-                changePassword(student, sc, studentPasswordMgr);
+                changePassword();
                 break;
             case 7:
                 studentDisplay.showQuit();
                 return;
             }
-            choice = menu(sc);
+            choice = menu();
             while (choice == -1) {
                 System.out.println("Invalid input!");
-                choice = menu(sc);
+                choice = menu();
             }
         }        
     }
     // Login system. Returns the Student object with that username and password, otherwise return null
-    public Student login(Scanner sc, StudentPasswordMgr studentPasswordMgr) {
+    public Student login() {
         System.out.println("=========================");
         System.out.println("STUDENT");
         System.out.println("Enter Username: (matriculation number)");
@@ -91,7 +94,7 @@ public class StudentUI {
         }
         return null;
     }
-    public int menu(Scanner sc) {
+    public int menu() {
         studentDisplay.showMenu();
         int choice = sc.nextInt();
         sc.nextLine();
@@ -100,41 +103,56 @@ public class StudentUI {
         }
         return -1;
     }
-    public void viewOpportunities(Scanner sc) {
-        studentDisplay.showViewOpportunities(internshipDbMgr.showAll());
-        internshipUI.filterInternshipsBy(true);      
+    public void viewOpportunities() {
+        internshipDisplay.showInternships(internshipDbMgr.showAll());
+        internshipUI.filterInternshipsBy(student);      
     }
-    public void applyForInternship(Student student, Scanner sc) {
+    public void applyForInternship() {
         System.out.println("=========================");
         System.out.println("Apply for internship. Enter internship id: ");
         int id = sc.nextInt();
         sc.nextLine();
         Internship applyingInternship = internshipDbMgr.get(id);
         if (applyingInternship != null && applyingInternship.getVisibility() && applyingInternship.getStatus() == Status.APPROVED) {
-            student.applyInternship(applyingInternship);
-            System.out.println("Internship id: " + applyingInternship.getId() + " added!");
-            System.out.println("=========================");
-        } else {
-            System.out.println("Invalid internship!");
-            System.out.println("=========================");
-            return;
-        } 
+            if (student.applyInternship(applyingInternship)) {
+                System.out.println("Internship id: " + applyingInternship.getId() + " added!");
+                System.out.println("=========================");
+                return;
+            } 
+        }
+        System.out.println("Invalid internship!");
+        System.out.println("=========================");
     }
-    public void viewAppliedInternships(Student student) {
+    public void viewAppliedInternships() {
         studentDisplay.showAppliedInternships(student);
     }
-    public void acceptInternship(Student student, Scanner sc) {
+    public void acceptInternship() {
         studentDisplay.showAcceptInternships(student);
+        System.out.println("=========================");
+        if (student.getAcceptedInternship() == null) {
+            System.out.println("Enter internship id to accept: ");
+        } else {
+            System.out.println("You have accepted an internship.");
+            System.out.println("Accepted internship: ");
+            System.out.println("Intenship id \t\t:\tTitle");
+            System.out.println(student.getAcceptedInternship().getId() +  "\t\t\t:\t" + student.getAcceptedInternship().getTitle() + "\t\t");
+            System.out.println("=========================");
+            return;/
+        }
         int choice = sc.nextInt();
         if (choice < 0 || choice >= student.getAppliedInternships().showAll().size()) {
             System.out.println("Invalid response!");
             return;
         }
-        student.acceptInternship(student.getAppliedInternships().showAll().get(choice).getInternship());
-        System.out.println("Internship accepted!");
+        if (student.acceptInternship(student.getAppliedInternships().showAll().get(choice).getInternship())) {
+            System.out.println("Internship accepted!");
+        } else {
+            System.out.println("Internship not accepted!");
+        }
+        
         System.out.println("=========================");
     }
-    public void requestWithdrawal(Student student, Scanner sc) {
+    public void requestWithdrawal() {
         System.out.println("=========================");
         System.out.println("Enter internship id to withdraw: ");
         int id = sc.nextInt();
@@ -148,7 +166,7 @@ public class StudentUI {
         System.out.println("Internship id " + id + " added to withdrawal request.");
         System.out.println("=========================");
     }
-    public void changePassword(Student student, Scanner sc, StudentPasswordMgr studentPasswordMgr) {
+    public void changePassword() {
         System.out.println("=========================");
         System.out.println("Change Password");
         System.out.println("Old password: ");
