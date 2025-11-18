@@ -60,11 +60,20 @@ public class Student implements IUser {
     // False when internship is not in appliedInternship.
     public boolean acceptInternship(Internship internship) {
         InternshipApplication internshipApplication = appliedInternships.get(internship);
+		if (internshipApplication.getInternshipApplicationStatus() != InternshipApplicationStatus.SUCCESSFUL) {
+			return false;
+		}
+		
         if (appliedInternships.contains(internship)) {
             appliedInternships.remove(internshipApplication);
-        } else {
+        } 
+		else {
             return false;
         }
+		// only can accept one internship
+		// if (acceptedInternships != null) {
+		// 	return false;
+		// }
         acceptedInternships = internship;
         return true;
     }
