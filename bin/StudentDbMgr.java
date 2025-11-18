@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -7,8 +10,28 @@ public class StudentDbMgr {
     private List<Student> studentList;
     private static StudentDbMgr instance;
 
+    private boolean importDb() {
+        String filepath = "../data/student_list.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line;
+            String[] values;
+            br.readLine(); // ignore first read line of column headers
+            while ((line = br.readLine()) != null) {
+                System.out.println("reading in: " + line);
+                values = line.split(","); // seperate at delimiter ','
+                // Student(String id, String name, String password, int yearOfStudy, String major)
+                studentList.add(new Student(values[0], values[1], "password", Integer.parseInt(values[3]), values[4]));
+            }
+        } catch (IOException e) {
+            System.out.println("ERROR: Unable to read file");
+            return false;
+        }
+        return true;
+    }
+
     private StudentDbMgr() {
         this.studentList = new ArrayList<Student>();
+        importDb();
     }
     // Returns an instance of the this class
     public static StudentDbMgr getInstance(){
@@ -43,7 +66,7 @@ public class StudentDbMgr {
     // Getter method for student from the studentList. If student does not exist, return null
     public Student getStudent(String id) {
         for (Student i: studentList) {
-            if (i.getId() == id) {
+            if (i.getId().equals(id)) {
                 return i;
             }
         }
@@ -51,95 +74,10 @@ public class StudentDbMgr {
     }
     // Sort studentList by attribute specified in sortBy and return the sorted list.
     public List<Student> sort(StudentAttributes sortBy) {
-        switch(sortBy) {
-            // Sort by name based on alphabetical order
-            case StudentAttributes.ID:
-                return studentList
-                    .stream()
-                    .sorted(Comparator.comparing(Student::getId))
-                    .collect(Collectors.toList());
-            // Sort by name based on alphabetical order
-            case StudentAttributes.NAME:
-                return studentList
-                    .stream()
-                    .sorted(Comparator.comparing(Student::getName))
-                    .collect(Collectors.toList());
-            // Sory by yearOfStudy in numerical order
-            case StudentAttributes.YEAROFSTUDY:
-                return studentList
-                    .stream()
-                    .sorted(Comparator.comparing(Student::getYearOfStudy))
-                    .collect(Collectors.toList());
-            // sort by major in alphabetical order
-            case StudentAttributes.MAJOR:
-                return studentList
-                    .stream()
-                    .sorted(Comparator.comparing(Student::getMajor))
-                    .collect(Collectors.toList());
-            case StudentAttributes.APPLIEDINTERNSHIP:
-                return studentList
-                    .stream()
-                    .filter(student -> student.getAppliedInternship().size() != 0)
-                    .sorted(Comparator.comparing(student -> student.getAppliedInternship().get(0).getTitle()))
-                    .collect(Collectors.toList());
-            // sort by acceptedInternship by alphabetical order
-            case StudentAttributes.ACCEPTEDINTERNSHIP:
-                return studentList
-                    .stream()
-                    .filter(student -> student.getAcceptedInternship() != null)
-                    .sorted(Comparator.comparing(student -> student.getAcceptedInternship().getTitle()))  
-                    .collect(Collectors.toList());  
-            default:
-                return new ArrayList<Student>();    
-        }
+        return StudentSorter.sort(studentList, sortBy);
     }
-    // Filter studentList by attributes specified by filterBy and return sorted list.
+
     public List<Student> filter(StudentAttributes filterBy, String args) {
-        switch(filterBy) {
-            // Filter by name based on alphabetical order
-            case StudentAttributes.ID:
-                return studentList
-                    .stream()
-                    .filter(student -> student.getId() == args)
-                    .collect(Collectors.toList());
-            // Sort by name based on alphabetical order
-            case StudentAttributes.NAME:
-                return studentList
-                    .stream()
-                    .filter(student -> student.getName() == args)
-                    .collect(Collectors.toList());
-            // sort by major in alphabetical order
-            case StudentAttributes.MAJOR:
-                return studentList
-                    .stream()
-                    .filter(student -> student.getMajor() == args)
-                    .collect(Collectors.toList());
-            default:
-                return new ArrayList<Student>(); 
-        }
-    }
-
-    public List<Student> filter(StudentAttributes filterBy, int args) {
-        return studentList 
-            .stream() 
-            .filter(student -> student.getYearOfStudy() == args)
-            .collect(Collectors.toList());
-    }
-
-    public List<Student> filter(StudentAttributes filterBy, Internship internship) {
-        switch(filterBy) {
-            case StudentAttributes.ACCEPTEDINTERNSHIP:
-                return studentList     
-                    .stream()
-                    .filter(student -> student.getAcceptedInternship() == internship)
-                    .collect(Collectors.toList());
-            case StudentAttributes.APPLIEDINTERNSHIP:
-                return studentList
-                    .stream()
-                    .filter(student -> student.getAppliedInternship().contains(internship))
-                    .collect(Collectors.toList());
-            default:
-                return new ArrayList<Student>();
-        }
+        return StudentFilter.filter(studentList, filterBy, args);
     }
 }
