@@ -100,6 +100,7 @@ public class CompanyRep implements IUser {
             return false;
         }
 
+		// change the next line, should update the status of enum
         return student.acceptInternship(dbInternship);
     }
 
@@ -110,7 +111,7 @@ public class CompanyRep implements IUser {
 
 		if (internship.getStatus() != Status.APPROVED) return false;
 
-		internship.setVisible(!internship.isVisibility());
+		internship.setVisibility(!internship.getVisibility());
 		return true;
 	}
 }
