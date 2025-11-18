@@ -1,4 +1,6 @@
-public class CareerStaff {
+import java.util.List;
+
+public class CareerStaff implements IUser {
     private String id;
     private String password;
     private String name;
@@ -15,7 +17,7 @@ public class CareerStaff {
         this.email = email;
     }
 
-    public String getID() {
+    public String getId() {
         return this.id;
     }
 
@@ -33,6 +35,86 @@ public class CareerStaff {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
+
+    public boolean approveCompanyRep(String companyRepId) {
+        List<CompanyRep> companyRepList = CompanyRepDbMgr.getInstance().showAll();
+
+        CompanyRep companyRep;
+
+        // search for companyRepId in companyRepList
+        for (int i = 0; i < companyRepList.size(); i++) {
+            companyRep = companyRepList[i];
+            if (companyRep.getId() == companyRepId) {
+                companyRep.setRepStatus(CompanyRepStatus.APPROVED);
+                return true;
+            }
+        }
+
+        // When cannot find CompanyRepId in companyRepList to approve
+        return false;
+    }
+
+    public boolean rejectCompanyRep(String companyRepId) {
+        List<CompanyRep> companyRepList = CompanyRepDbMgr.getInstance().showAll();
+
+        CompanyRep companyRep;
+
+        // Search for companyRepId in companyRepList
+        for (int i = 0; i < companyRepList.size(); i++) {
+            companyRep = companyRepList[i];
+            if (companyRep.getId() == companyRepId) {
+                companyRep.setRepStatus(CompanyRepStatus.REJECT);
+                return true;
+            }
+        }
+
+        // When cannot find CompanyRepId in companyRepList to approve
+        return false;
+    }
+
+    public boolean approveInternship(String internshipId) {
+        List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
+
+        Internship internship;
+
+        // Search for internshipId in internshipList
+        for (int i = 0; i < internshipList.size(); i++) {
+            internship = internshipList[i];
+            if (internship.getId() == internshipId) {
+                internship.setStatus(Status.APPROVED);
+                return true;
+            }
+        }
+
+        // when cannot find internshipId in internshipList
+        return false;
+    }
+
+    public boolean rejectInternship(String internshipId) {
+        List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
+
+        Internship internship;
+
+        // Search for internshipId in internshipList
+        for (int i = 0; i < internshipList.size(); i++) {
+            internship = internshipList[i];
+            if (internship.getId() == internshipId) {
+                internship.setStatus(Status.REJECT);
+                return true;
+            }
+        }
+
+        // when cannot find internshipId in internshipList
+        return false;
     }
 
 }

@@ -7,7 +7,7 @@ public class CompanyRep implements IUser {
 	private String name;
 	private String department;
 	private String position;
-	private Status repStatus;
+	private CompanyRepStatus repStatus;
 	private List<Internship> internshipAdded;
 	private String password;
 
@@ -19,7 +19,7 @@ public class CompanyRep implements IUser {
 	 * @param position      position/title
 	 * @param repStatus     (PENDING/APROVED/REJECTED)
 	 */
-	public CompanyRep(String id, String companyName, String department, String position, Status repStatus) {
+	public CompanyRep(String id, String companyName, String department, String position, CompanyRepStatus repStatus) {
 		this.id = id;
 		this.name = companyName;
 		this.department = department;
@@ -35,12 +35,12 @@ public class CompanyRep implements IUser {
 	public String getName() {return this.name;}
 	public String getDepartment() {return this.department;}
 	public String getPosition() {return this.position;}
-	public Status getRepStatus() {return this.repStatus;}
+	public CompanyRepStatus getRepStatus() {return this.repStatus;}
 	public List<Internship> getInternshipAdded() {return internshipAdded;}
 	public String getPassword() {return password;}
 
 	// setters
-	public void setRepStatus(Status repStatus) {this.repStatus = repStatus;}
+	public void setRepStatus(CompanyRepStatus repStatus) {this.repStatus = repStatus;}
 	public void setPassword(String newPassword) {this.password = newPassword;}
 
 	/*  adds an internship created by this company rep 
@@ -51,7 +51,7 @@ public class CompanyRep implements IUser {
 	*/
 	public boolean addInternship(Internship internship) {
 		if (internship == null) return false;
-		if (repStatus != Status.APPROVED) return false;
+		if (repStatus != CompanyRepStatus.APPROVED) return false;
 		if (internshipAdded.size() >= 5) return false;
 
 		String title = internship.getTitle();
@@ -86,7 +86,7 @@ public class CompanyRep implements IUser {
 
 	// toggle visibility
 	public boolean toggleVisibility(Internship internship) {
-		if (repStatus != Status.APPROVED) return false;
+		if (repStatus != CompanyRepStatus.APPROVED) return false;
 		if (internship == null) return false;
 
 		if (internship.getStatus() != Status.APPROVED) return false;
