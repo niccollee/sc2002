@@ -96,4 +96,8 @@ public class CompanyRepDbMgr {
 				.collect(Collectors.toList());
 		};
 	}
+
+	public List<CompanyRep> showAll() {
+		return this.companyRepList;
+	}
 }
