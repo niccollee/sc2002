@@ -28,38 +28,14 @@ public class InternshipDbMgr {
     // Add internship based on parameters.
     // If title does not exist, create internship and add it to list and return true,
     // otherwise return false.
-    public boolean add(
-        String title,
-        String description,
-        InternshipLevel level,
-        String preferredMajor,
-        LocalDate appOpenDate,
-        LocalDate appCloseDate,
-        Status status,
-        String companyName,
-        CompanyRep companyRep,
-        int numSlot,
-        boolean visibility
-    ) {
-        int id = numInternship++;
-        if (get(id) == null) {
-            Internship internship = new Internship(
-                id,
-                title,
-                description, 
-                level, 
-                preferredMajor, 
-                appOpenDate, 
-                appCloseDate, 
-                status, 
-                companyName, 
-                companyRep, 
-                numSlot, 
-                visibility);
-            internshipList.add(internship);
-            return true;
+    public boolean add(Internship internship) {
+       for (Internship i: internshipList) {
+        if (i.getId() == internship.getId()) {
+            return false;
+            }
         }
-    return false;
+        internshipList.add(internship);
+        return true;
     }
     // Remove internship from the list
     public void remove(Internship internship) {
