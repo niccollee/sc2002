@@ -28,7 +28,7 @@ public class CareerStaffDbMgr {
 
                 values = line.split(","); // seperate at delimiter ','
                 careerStaffList.add(new CareerStaff(values[0], values[1], values[2], values[3], values[4], "password"));
-                
+
             }
         } catch (IOException e) {
             System.out.println("ERROR: Unable to read file");
@@ -39,22 +39,30 @@ public class CareerStaffDbMgr {
 
     }
 
-    /*
-     * public boolean approveRep(){
-     * 
-     * }
-     * 
-     * public boolean approveInternOpp(){
-     * 
-     * }
-     * 
-     * public boolean approveStudentWidthdrawl(){
-     * 
-     * }
-     * 
-     * public void viewInternOpp(){
-     * 
-     * }
-     */
+    public List<CareerStaff> sort(CareerStaffAttributes sortBy) {
+        return CareerStaffSorter.sort(careerStaffList, sortBy);
+    }
+
+    public List<CareerStaff> filter(CareerStaffAttributes filterBy, String args) {
+        return CareerStaffFilter.filter(careerStaffList, filterBy, args);
+    }
+
+    public boolean remove(CareerStaff careerStaff) {
+        return careerStaffList.remove(careerStaff);
+    }
+
+    public CareerStaff get(String id) {
+        for (CareerStaff cStaff : this.careerStaffList) {
+            if (cStaff.getId() == id) {
+                return cStaff;
+            }
+        }
+
+        return null;
+    }
+
+    public List<CareerStaff> showAll() {
+        return this.careerStaffList;
+    }
 
 }
