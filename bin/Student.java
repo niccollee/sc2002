@@ -21,38 +21,26 @@ public class Student implements IUser {
         this.appliedInternships = appliedInternships;
         this.acceptedInternships = null;
     }
-    // Getter method for id
-    public String getId() {
-        return id;
-    }
-    // Getter method for name
-    public String getName() {
-        return name;
-    }  
-    // Getter method for yearOfStudy
-    public int getYearOfStudy() {
-        return yearOfStudy;
-    }
-    // Setter method for yearOfStudy
+    // Getter method
+    public String getId() {return id;}
+    public String getName() {return name;}  
+    public int getYearOfStudy() {return yearOfStudy;}
+    public String getMajor() {return major;}
+    public List<Internship> getAppliedInternship() {return appliedInternships;}
+    public Internship getAcceptedInternship() {return acceptedInternships;}   
+    public String getPassword() {return password;}
+    
+    // Setters
     public void setYearOfStudy(int yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
-    // Getter method for major
-    public String getMajor() {
-        return major;
-    }   
-    // Setter method for major
     public void setMajor(String major) {
         this.major = major;
     }
-    // Getter method for appliedInternship
-    public List<Internship> getAppliedInternship() {
-        return appliedInternships;
+    public void setPassword(String password) {
+        this.password = password;
     }
-    // Getter method for acceptdInternship
-    public Internship getAcceptedInternship() {
-        return acceptedInternships;
-    }   
+    
     // Method to apply internship. Return true if operation is successful, otherwise false.
     // False when internship is already in the list.
     public boolean applyInternship(Internship internship) {
@@ -76,13 +64,5 @@ public class Student implements IUser {
     // Method to reject internship, set appliedInternships to null.
     public void withdrawAcceptedInternship() {
         acceptedInternships = null;
-    }
-    // Getter method for password
-    public String getPassword() {
-        return password;
-    }
-    // Setter method for password
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    }    
 }
