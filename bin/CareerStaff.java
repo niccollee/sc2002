@@ -8,9 +8,9 @@ public class CareerStaff implements IUser {
     private String department;
     private String email;
 
-    public CareerStaff(String id, String name, String role, String department, String email, String password) {
+    public CareerStaff(String id, String name, String role, String department, String email, String passwordHash) {
         this.id = id;
-        this.password = password;
+        this.password = passwordHash;
         this.name = name;
         this.role = role;
         this.department = department;
@@ -52,7 +52,7 @@ public class CareerStaff implements IUser {
 
         // search for companyRepId in companyRepList
         for (int i = 0; i < companyRepList.size(); i++) {
-            companyRep = companyRepList[i];
+            companyRep = companyRepList.get(i);
             if (companyRep.getId() == companyRepId) {
                 companyRep.setRepStatus(CompanyRepStatus.APPROVED);
                 return true;
@@ -70,7 +70,7 @@ public class CareerStaff implements IUser {
 
         // Search for companyRepId in companyRepList
         for (int i = 0; i < companyRepList.size(); i++) {
-            companyRep = companyRepList[i];
+            companyRep = companyRepList.get(i);
             if (companyRep.getId() == companyRepId) {
                 companyRep.setRepStatus(CompanyRepStatus.REJECT);
                 return true;
@@ -81,14 +81,14 @@ public class CareerStaff implements IUser {
         return false;
     }
 
-    public boolean approveInternship(String internshipId) {
+    public boolean approveInternship(int internshipId) {
         List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
 
         Internship internship;
 
         // Search for internshipId in internshipList
         for (int i = 0; i < internshipList.size(); i++) {
-            internship = internshipList[i];
+            internship = internshipList.get(i);
             if (internship.getId() == internshipId) {
                 internship.setStatus(Status.APPROVED);
                 return true;
@@ -99,14 +99,14 @@ public class CareerStaff implements IUser {
         return false;
     }
 
-    public boolean rejectInternship(String internshipId) {
+    public boolean rejectInternship(int internshipId) {
         List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
 
         Internship internship;
 
         // Search for internshipId in internshipList
         for (int i = 0; i < internshipList.size(); i++) {
-            internship = internshipList[i];
+            internship = internshipList.get(i);
             if (internship.getId() == internshipId) {
                 internship.setStatus(Status.REJECT);
                 return true;
