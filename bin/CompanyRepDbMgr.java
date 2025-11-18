@@ -104,7 +104,7 @@ public class CompanyRepDbMgr {
 
 			for (CompanyRep cRep : this.companyRepList) {
 				String[] fields = new String[] { cRep.getId(), "", cRep.getName(), cRep.getDepartment(),
-						cRep.getPosition(), cRep.getId(), cRep.getRepStatus().name(), cRep.getPassword() };
+						cRep.getPosition(), cRep.getId(), cRep.getRepStatus().toString(), cRep.getPassword() };
 
 				String line = String.join(",", fields);
 

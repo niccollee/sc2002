@@ -90,7 +90,7 @@ public class CareerStaffDbMgr {
         return careerStaffList.remove(careerStaff);
     }
 
-    public CareerStaff get(String id) {
+    public CareerStaff getCareerStaff(String id) {
         for (CareerStaff cStaff : this.careerStaffList) {
             if (cStaff.getId() == id) {
                 return cStaff;
@@ -101,7 +101,7 @@ public class CareerStaffDbMgr {
     }
 
     public boolean add(String id, String name, String role, String department, String email, String passwordTxt) {
-        if (this.get(id) == null) {
+        if (this.getCareerStaff(id) == null) {
             return false;
         } else {
             careerStaffList

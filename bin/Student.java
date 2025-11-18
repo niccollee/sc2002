@@ -81,10 +81,4 @@ public class Student implements IUser {
     public void withdrawAcceptedInternship() {
         acceptedInternships = null;
     }    
-
-	//Check password
-	public boolean validatePassword(String password){
-        StudentPasswordMgr passwordMgr = new StudentPasswordMgr();
-        return passwordMgr.validate(this, password);
-    }
 }

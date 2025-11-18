@@ -117,9 +117,21 @@ public class CareerStaff implements IUser {
         return false;
     }
 
-    public boolean validatePassword(String password) {
-        CareerStaffPasswordMgr passwordMgr = new CareerStaffPasswordMgr();
-        return passwordMgr.validate(this, password);
+    //
+    public boolean approveStudentWidthdrawl(String studentID){
+        List<InternshipWithdrawalApplicants> internshipWithdrawalApplicantsList = InternshipWithdrawalDbMgr.getInstance().showAll();
+        for(int i = 0;i< internshipWithdrawalApplicantsList.size() ;i++){
+            if(internshipWithdrawalApplicantsList.get(i).getStudent().getId() == studentID){
+                internshipWithdrawalApplicantsList.get(i).withdrawInternship();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //rejecting studentWithdrawl does nothing, internshipWithdrawlApplicants remain inside
+    public boolean rejectStudentWithdrawl(String studentID){
+        return true;
     }
 
 }
