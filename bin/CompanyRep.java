@@ -19,13 +19,13 @@ public class CompanyRep implements IUser {
 	 * @param position      position/title
 	 * @param repStatus     (PENDING/APROVED/REJECTED)
 	 */
-	public CompanyRep(String id, String companyName, String department, String position, CompanyRepStatus repStatus) {
+	public CompanyRep(String id, String companyName, String department, String position, CompanyRepStatus repStatus, String passwordHash){
 		this.id = id;
 		this.name = companyName;
 		this.department = department;
 		this.position = position;
 		this.repStatus = repStatus;
-		this.password = "password";
+		this.password = passwordHash;
 		this.internshipcounter = 0;
 	}
 

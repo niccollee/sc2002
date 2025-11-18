@@ -18,7 +18,7 @@ public class StudentDbMgr {
                 System.out.println("reading in: " + line);
                 values = line.split(","); // seperate at delimiter ','
                 // Student(String id, String name, String password, int yearOfStudy, String major)
-                studentList.add(new Student(values[0], values[1], "password", Integer.parseInt(values[3]), values[4]));
+                studentList.add(new Student(values[0], values[1], values[5], Integer.parseInt(values[3]), values[4]));
             }
         } catch (IOException e) {
             System.out.println("ERROR: Unable to read file");

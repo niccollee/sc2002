@@ -11,10 +11,10 @@ public class Student implements IUser {
     private Internship acceptedInternships;
 
     // Initially appliedInternships will be an empty ArrayList and appliedInternship is null
-    public Student(String id, String name, String password, int yearOfStudy, String major) {
+    public Student(String id, String name, String passwordHash, int yearOfStudy, String major) {
         this.id = id;
         this.name = name;
-        this.password = password;
+        this.password = passwordHash;
         this.yearOfStudy = yearOfStudy;
         this.major = major;
         ArrayList<Internship> appliedInternships = new ArrayList<Internship>();

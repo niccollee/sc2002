@@ -12,17 +12,18 @@ public class CareerStaffDbMgr {
 
     private CareerStaffDbMgr() {
         this.careerStaffList = new ArrayList<>();
+        this.importDb();
     }
 
-    public static CareerStaffDbMgr getInstance(){
-        if(instance == null){
+    public static CareerStaffDbMgr getInstance() {
+        if (instance == null) {
             instance = new CareerStaffDbMgr();
         }
         return instance;
     }
 
     // read in from career staff list csv and initalize list of career staff
-    public boolean importDb(String filename) {
+    public boolean importDb() {
         String filepath = "data/career_staff_list.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -35,7 +36,7 @@ public class CareerStaffDbMgr {
                 System.out.println("reading in: " + line);
 
                 values = line.split(","); // seperate at delimiter ','
-                careerStaffList.add(new CareerStaff(values[0], values[1], values[2], values[3], values[4], "password"));
+                careerStaffList.add(new CareerStaff(values[0], values[1], values[2], values[3], values[4], values[5]));
 
             }
         } catch (IOException e) {
@@ -69,10 +70,18 @@ public class CareerStaffDbMgr {
         return null;
     }
 
+    public boolean add(String id, String name, String role, String department, String email, String passwordTxt) {
+        if (this.get(id) == null) {
+            return false;
+        } else {
+            careerStaffList
+                    .add(new CareerStaff(id, name, role, department, email, IPasswordMgr.hashPassword(passwordTxt)));
+            return true;
+        }
+    }
+
     public List<CareerStaff> showAll() {
         return this.careerStaffList;
     }
-
-
 
 }
