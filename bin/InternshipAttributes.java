@@ -1,4 +1,5 @@
 public enum InternshipAttributes {
+    ID,
     TITLE,
     LEVEL,
     PREFERREDMAJOR,
