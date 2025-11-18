@@ -1,0 +1,204 @@
+import java.util.Scanner;
+
+public class CareerStaffUI {
+    private CareerStaffDisplay careerStaffDisplay;
+    private CareerStaff careerStaff;
+    private CareerStaffDbMgr careerStaffDbMgr;
+    private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
+    private InternshipDbMgr internshipDbMgr;
+
+    public CareerStaffUI(CareerStaffDbMgr careerStaffDbMgr, InternshipDbMgr internshipDbMgr,
+            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr) {
+        this.careerStaffDisplay = new CareerStaffDisplay();
+        this.careerStaffDbMgr = careerStaffDbMgr;
+        this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
+        this.internshipDbMgr = internshipDbMgr;
+
+        CareerStaffPasswordMgr careerStaffPasswordMgr = new CareerStaffPasswordMgr();
+        Scanner sc = Input.SC;
+
+        careerStaff = login(sc, careerStaffPasswordMgr);
+        /*
+         * If login details is invalid, continue prompting user to login for 3 more
+         * times. Afterwards return back to main page.
+         */
+        if (careerStaff == null) {
+            for (int i = 0; i < 3; i++) {
+                careerStaff = login(sc, careerStaffPasswordMgr);
+                if (careerStaff != null) {
+                    break;
+                }
+                if (i == 2) {
+                    return;
+                }
+            }
+        }
+        int choice = menu(sc);
+        while (choice == -1) {
+            System.out.println("Invalid input!");
+            choice = menu(sc);
+        }
+
+        // Traverse menu options
+        while (true) {
+            switch (choice) {
+                case 1:
+
+                    choice = menu(sc);
+                    while (choice == -1) {
+                        System.out.println("Invalid input!");
+                        choice = menu(sc);
+                    }
+            }
+        }
+
+    }
+
+    public int menu(Scanner sc) {
+        careerStaffDisplay.showMenu();
+
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        if (choice > 0 && choice < 7) {
+            return choice;
+        }
+
+        return -1;
+    }
+
+    public CareerStaff login(Scanner sc, CareerStaffPasswordMgr careerStaffPasswordMgr) {
+        System.out.println("=========================");
+        System.out.println("CAREER STAFF");
+        System.out.println("Enter StaffID: ");
+        String username = sc.nextLine();
+        System.out.println("Enter Password: ");
+        String password = sc.nextLine();
+
+        CareerStaff careerStaff = careerStaffDbMgr.getCareerStaff(username);
+        if (careerStaff != null) {
+            if (careerStaffPasswordMgr.validate(careerStaff, password)) {
+                return careerStaff;
+            }
+        } else {
+            System.out.println("Error: Either StaffId Or Password is wrong");
+        }
+
+        return null;
+    }
+
+    public void approveCompanyRepApplication(Scanner sc) {
+        careerStaffDisplay.showCompanyRepApplications();
+        System.out.println("=========================");
+
+        System.out.println("Enter CompanyRepID");
+        String companyRepId = sc.nextLine();
+
+        while (careerStaffDbMgr.getCareerStaff(companyRepId) == null) {
+            System.out.println("Invalid CompanyRepID, enter again");
+            companyRepId = sc.nextLine();
+        }
+
+        System.out.println("Enter 1 or 0 to (Approve or reject)");
+        int approveOrReject = sc.nextInt();
+        sc.nextLine();
+
+        while (approveOrReject < 0 || approveOrReject > 1) {
+            System.out.println("Invalid option, enter again");
+            approveOrReject = sc.nextInt();
+            sc.nextLine();
+        }
+
+        if (approveOrReject == 1) {
+            careerStaff.approveCompanyRep(companyRepId);
+        } else {
+            careerStaff.rejectCompanyRep(companyRepId);
+        }
+
+    }
+
+    public void approveStudentWithdrawlApplication(Scanner sc) {
+        careerStaffDisplay.showWithdrawalRequest();
+        System.out.println("=========================");
+        System.out.println("Enter Index Option of interest: ");
+
+        String IndexOption = sc.nextLine();
+        while (internshipWithdrawalDbMgr.get(Integer.parseInt(IndexOption)) == null) {
+            System.out.println("Invalid option, enter from options shown");
+            IndexOption = sc.nextLine();
+        }
+
+        InternshipWithdrawalApplicants internshipWithdrawalApplicants = internshipWithdrawalDbMgr
+                .get(Integer.parseInt(IndexOption));
+
+        System.out.println("Enter 1 or 0 to (Approve or reject)");
+        int approveOrReject = sc.nextInt();
+        sc.nextLine();
+
+        while (approveOrReject < 0 || approveOrReject > 1) {
+            System.out.println("Invalid option, enter again");
+            approveOrReject = sc.nextInt();
+            sc.nextLine();
+        }
+
+        if (approveOrReject == 1) {
+            internshipWithdrawalApplicants.withdrawInternship();
+        }
+
+    }
+
+    public void approveInternshipOpportunity(Scanner sc) {
+        careerStaffDisplay.showInternshipsPending();
+        System.out.println("=========================");
+        System.out.println("Enter Intership ID of interest: ");
+        int internshipID = sc.nextInt();
+        sc.nextLine();
+
+        while (internshipDbMgr.get(internshipID) == null) {
+            System.out.println("Invalid internship ID, Enter again");
+            internshipID = sc.nextInt();
+            sc.nextLine();
+        }
+
+        Internship internship = internshipDbMgr.get(internshipID);
+
+        System.out.println("Enter 1 or 0 to (Approve or Reject)");
+        int approveOrReject = sc.nextInt();
+        sc.nextLine();
+
+        while (approveOrReject < 0 || approveOrReject > 1) {
+            System.out.println("Invalid option, enter again");
+            approveOrReject = sc.nextInt();
+            sc.nextLine();
+        }
+
+        if(approveOrReject == 1){
+            internship.setStatus(Status.APPROVED);
+        }
+        else{
+            internship.setStatus(Status.REJECT);
+        }
+
+    }
+
+    public void changePassword(CareerStaff careerStaff, Scanner sc, CareerStaffPasswordMgr careerStaffPasswordMgr) {
+        System.out.println("=========================");
+        System.out.println("Change Password");
+
+        System.out.println("Old password: ");
+        String oldPassword = sc.nextLine();
+
+        System.out.println("New password: ");
+        String newPassword = sc.nextLine();
+
+        boolean changed = careerStaffPasswordMgr.changePassword(careerStaff, oldPassword, newPassword);
+        if (changed) {
+            System.out.println("Successfully changed password!");
+            System.out.println("=========================");
+        } else {
+            System.out.println("Failed to change password...");
+            System.out.println("=========================");
+        }
+    }
+
+}

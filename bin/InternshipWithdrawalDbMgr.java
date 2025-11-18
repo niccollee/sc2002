@@ -92,5 +92,11 @@ public class InternshipWithdrawalDbMgr {
         }
         return null;
     }
+
+    public List<InternshipWithdrawalApplicants> showAll(){
+        return this.internshipWithdrawalList;
+    }
+
+
         
 }
