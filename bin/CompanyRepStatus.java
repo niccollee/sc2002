@@ -1,4 +1,4 @@
-public enum RepStatus {
+public enum CompanyRepStatus {
     APPROVED,
     PENDING,
     REJECT
