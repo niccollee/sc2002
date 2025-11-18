@@ -89,7 +89,7 @@ public class CompanyRep implements IUser {
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
 		if (internship == null) return false;
 
-		if (internship.getStatus() != CompanyRepStatus.APPROVED) return false;
+		if (internship.getStatus() != Status.APPROVED) return false;
 
 		internship.setVisibility(!internship.getVisibility());
 		return true;
