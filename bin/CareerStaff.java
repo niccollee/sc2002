@@ -117,4 +117,8 @@ public class CareerStaff implements IUser {
         return false;
     }
 
+    public boolean validatePassword(String password){
+
+    }
+
 }
