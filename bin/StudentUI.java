@@ -137,7 +137,7 @@ public class StudentUI {
             System.out.println("Intenship id \t\t:\tTitle");
             System.out.println(student.getAcceptedInternship().getId() +  "\t\t\t:\t" + student.getAcceptedInternship().getTitle() + "\t\t");
             System.out.println("=========================");
-            return;/
+            return;
         }
         int choice = sc.nextInt();
         if (choice < 0 || choice >= student.getAppliedInternships().showAll().size()) {

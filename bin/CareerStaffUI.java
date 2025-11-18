@@ -6,13 +6,15 @@ public class CareerStaffUI {
     private CareerStaffDbMgr careerStaffDbMgr;
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
     private InternshipDbMgr internshipDbMgr;
+    private InternshipUI internshipUi;
 
     public CareerStaffUI(CareerStaffDbMgr careerStaffDbMgr, InternshipDbMgr internshipDbMgr,
-            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr) {
+            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi) {
         this.careerStaffDisplay = new CareerStaffDisplay();
         this.careerStaffDbMgr = careerStaffDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         this.internshipDbMgr = internshipDbMgr;
+        this.internshipUi = internshipUi;
 
         CareerStaffPasswordMgr careerStaffPasswordMgr = new CareerStaffPasswordMgr();
         Scanner sc = Input.SC;
@@ -33,22 +35,31 @@ public class CareerStaffUI {
                 }
             }
         }
-        int choice = menu(sc);
-        while (choice == -1) {
-            System.out.println("Invalid input!");
-            choice = menu(sc);
-        }
 
         // Traverse menu options
         while (true) {
+            int choice = menu(sc);
+            while (choice == -1) {
+                System.out.println("Invalid input!");
+                choice = menu(sc);
+            }
             switch (choice) {
                 case 1:
-
-                    choice = menu(sc);
-                    while (choice == -1) {
-                        System.out.println("Invalid input!");
-                        choice = menu(sc);
-                    }
+                    approveCompanyRepApplication(sc);
+                    break;
+                case 2:
+                    approveStudentWithdrawlApplication(sc);
+                    break;
+                case 3:
+                    approveInternshipOpportunity(sc);
+                    break;
+                case 4:
+                    viewInternshipOpportunity(sc);
+                    break;
+                case 5:
+                    changePassword(careerStaff, sc, careerStaffPasswordMgr);
+                default:
+                    break;
             }
         }
 
@@ -172,13 +183,19 @@ public class CareerStaffUI {
             sc.nextLine();
         }
 
-        if(approveOrReject == 1){
+        if (approveOrReject == 1) {
             internship.setStatus(Status.APPROVED);
-        }
-        else{
+        } else {
             internship.setStatus(Status.REJECT);
         }
 
+    }
+
+    public void viewInternshipOpportunity(Scanner sc) {
+        System.out.println("=========================");
+        System.out.println("Viewing Internship opportunites: ");
+
+        internshipUi.filterInternshipsBy();
     }
 
     public void changePassword(CareerStaff careerStaff, Scanner sc, CareerStaffPasswordMgr careerStaffPasswordMgr) {

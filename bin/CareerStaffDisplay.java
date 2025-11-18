@@ -69,18 +69,19 @@ public class CareerStaffDisplay {
     public void showInternshipsPending() {
         List<Internship> notApprovedinternshipList = InternshipDbMgr.getInstance().filter(InternshipAttributes.STATUS,
                 "PENDING");
-        
+
         System.out.println("=========================");
         System.out.println("Internship Pending Approval");
-        System.out.println("No. \t:\tInternship Title \t:\t Internship ID \t:\t Opening Date \t:\t Closing Date \t:\t Status");
+        System.out.println(
+                "No. \t:\tInternship Title \t:\t Internship ID \t:\t Opening Date \t:\t Closing Date \t:\t Status");
 
-        for(int i = 0; i< notApprovedinternshipList.size(); i++){
+        for (int i = 0; i < notApprovedinternshipList.size(); i++) {
             System.out.println(
-            notApprovedinternshipList.get(i).getTitle() + "\t:\t" +
-            notApprovedinternshipList.get(i).getId() + "\t:\t" + 
-            notApprovedinternshipList.get(i).getAppOpenDate() + "\t:\t" +
-            notApprovedinternshipList.get(i).getAppCloseDate() + "\t:\t" +
-            notApprovedinternshipList.get(i).getStatus().toString() + "\t:\t");
+                    notApprovedinternshipList.get(i).getTitle() + "\t:\t" +
+                            notApprovedinternshipList.get(i).getId() + "\t:\t" +
+                            notApprovedinternshipList.get(i).getAppOpenDate() + "\t:\t" +
+                            notApprovedinternshipList.get(i).getAppCloseDate() + "\t:\t" +
+                            notApprovedinternshipList.get(i).getStatus().toString() + "\t:\t");
         }
 
         System.out.println("=========================");
