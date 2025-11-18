@@ -4,11 +4,20 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class CompanyRepDbMgr {
-
+	
 	private List<CompanyRep> companyRepList;
+	private static CompanyRepDbMgr instance;
 
-	public CompanyRepDbMgr() {
+	private CompanyRepDbMgr() {
 		this.companyRepList = new ArrayList<>();
+		// maybe import?
+	}
+
+	public static CompanyRepDbMgr getInstance() {
+		if (instance == null) {
+			instance = new CompanyRepDbMgr();
+		}
+		return instance;
 	}
 
 	// returns rep with given id or null is not found
