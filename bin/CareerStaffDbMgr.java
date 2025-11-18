@@ -2,10 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class CareerStaffDbMgr {
+    public static void main(String[] args) {
+        CareerStaffDbMgr.getInstance();
+        CareerStaffDbMgr.getInstance().exportDb();
+    }
 
     private List<CareerStaff> careerStaffList;
     private static CareerStaffDbMgr instance;
@@ -23,8 +29,8 @@ public class CareerStaffDbMgr {
     }
 
     // read in from career staff list csv and initalize list of career staff
-    public boolean importDb() {
-        String filepath = "data/career_staff_list.csv";
+    private boolean importDb() {
+        String filepath = "../data/career_staff_list.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
@@ -40,12 +46,36 @@ public class CareerStaffDbMgr {
 
             }
         } catch (IOException e) {
-            System.out.println("ERROR: Unable to read file");
+            System.out.println("ERROR: Unable to read file: " + e.getMessage());
             return false;
         }
 
         return true;
+    }
 
+    // export list of career staff into csv
+    private void exportDb() {
+        String filepath = "../data/career_staff_list.csv";
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filepath))) {
+            // write CSV header
+            bw.write("StaffID,Name,Role,Department,Email,PasswordHash");
+            bw.newLine();
+
+            for (CareerStaff cStaff : this.careerStaffList) {
+                String[] fields = new String[] { cStaff.getId(), cStaff.getName(), cStaff.getRole(), cStaff.getDept(),
+                        cStaff.getEmail(), cStaff.getPassword() };
+
+                String line = String.join(",", fields);
+
+                System.out.println("writing out: " + line);
+                bw.write(line);
+                bw.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("ERROR: Unable to write file: " + e.getMessage());
+        }
     }
 
     public List<CareerStaff> sort(CareerStaffAttributes sortBy) {

@@ -7,16 +7,18 @@ public class Student implements IUser {
     private String password;
     private int yearOfStudy;
     private String major;
+    private String email;
     private List<Internship> appliedInternships;
     private Internship acceptedInternships;
 
     // Initially appliedInternships will be an empty ArrayList and appliedInternship is null
-    public Student(String id, String name, String passwordHash, int yearOfStudy, String major) {
+    public Student(String id, String name, String passwordHash, int yearOfStudy, String major, String email) {
         this.id = id;
         this.name = name;
         this.password = passwordHash;
         this.yearOfStudy = yearOfStudy;
         this.major = major;
+        this.email = email;
         ArrayList<Internship> appliedInternships = new ArrayList<Internship>();
         this.appliedInternships = appliedInternships;
         this.acceptedInternships = null;
@@ -29,6 +31,7 @@ public class Student implements IUser {
     public List<Internship> getAppliedInternship() {return appliedInternships;}
     public Internship getAcceptedInternship() {return acceptedInternships;}   
     public String getPassword() {return password;}
+    public String getEmail(){return email;}
     
     // Setters
     public void setYearOfStudy(int yearOfStudy) {
