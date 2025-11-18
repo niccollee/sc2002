@@ -5,8 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public class CompanyRepDbMgr {
 
@@ -58,68 +56,12 @@ public class CompanyRepDbMgr {
 
 	// returns a new list sorted by the specified attribute
 	public List<CompanyRep> sort(CompanyRepAttributes sortBy) {
-		if (sortBy == null)
-			return new ArrayList<>(companyRepList);
-
-		Comparator<String> S = Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER);
-		Comparator<CompanyRep> cmp = switch (sortBy) {
-			case ID -> Comparator.comparing(CompanyRep::getId, S);
-			case NAME -> Comparator.comparing(CompanyRep::getName, S);
-			case DEPARTMENT -> Comparator.comparing(CompanyRep::getDepartment, S);
-			case POSITION -> Comparator.comparing(CompanyRep::getPosition, S);
-			case REPSTATUS -> Comparator.comparing(r -> r.getRepStatus() == null ? null : r.getRepStatus().name(), S);
-			case INTERNSHIPADDED -> Comparator.comparingInt(
-					(CompanyRep r) -> {
-						var list = r.getInternshipAdded();
-						return (list == null) ? 0 : list.size();
-					});
-		};
-
-		return companyRepList.stream().sorted(cmp).collect(Collectors.toList());
+		return CompanyRepSorter.sort(companyRepList, sortBy);
 	}
 
 	// filter by attribute
 	public List<CompanyRep> filter(CompanyRepAttributes filterBy, String args) {
-		if (filterBy == null)
-			return new ArrayList<>(companyRepList);
-
-		return switch (filterBy) {
-			case ID -> companyRepList.stream()
-					.filter(rep -> rep.getId() != null && args != null && rep.getId().equalsIgnoreCase(args))
-					.collect(Collectors.toList());
-
-			case NAME -> companyRepList.stream()
-					.filter(rep -> rep.getName() != null && args != null && rep.getName().equalsIgnoreCase(args))
-					.collect(Collectors.toList());
-
-			case DEPARTMENT -> companyRepList.stream()
-					.filter(rep -> rep.getDepartment() != null && args != null
-							&& rep.getDepartment().equalsIgnoreCase(args))
-					.collect(Collectors.toList());
-
-			case POSITION -> companyRepList.stream()
-					.filter(rep -> rep.getPosition() != null && args != null
-							&& rep.getPosition().equalsIgnoreCase(args))
-					.collect(Collectors.toList());
-
-			case REPSTATUS -> {
-				CompanyRepStatus target = null;
-				if (args != null) {
-					try {
-						target = CompanyRepStatus.valueOf(args.trim().toUpperCase());
-					} catch (Exception ignored) {
-					}
-				}
-				CompanyRepStatus t = target;
-				yield companyRepList.stream()
-						.filter(rep -> rep.getRepStatus() == t)
-						.collect(Collectors.toList());
-			}
-
-			case INTERNSHIPADDED -> companyRepList.stream()
-					.filter(rep -> rep.getInternshipAdded() != null && !rep.getInternshipAdded().isEmpty())
-					.collect(Collectors.toList());
-		};
+		return CompanyRepFilter.filter(companyRepList, filterBy, args);
 	}
 
 	public List<CompanyRep> showAll() {

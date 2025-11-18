@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyRep implements IUser {
