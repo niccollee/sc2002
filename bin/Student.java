@@ -42,14 +42,18 @@ public class Student implements IUser {
         this.password = IPasswordMgr.hashPassword(password);
     }
     
-    // Method to apply internship. Return true if operation is successful, otherwise false.
-    // False when internship is already in the list.
+    /**
+     * Method to apply internship. Return true if operation is successful, otherwise false.
+     * False when internship is already in the list.
+     *  */ 
     public boolean applyInternship(Internship internship) {
         if (appliedInternships.contains(internship)) {
             return false;
         }
         InternshipApplication internshipApplication = new InternshipApplication(internship, InternshipApplicationStatus.PENDING);
-        appliedInternships.add(internshipApplication);
+        if (!appliedInternships.add(internshipApplication)) {
+            return false;
+        }
         return true;
     }
     // Method to accept internship. Return true if operation is successful, otherwise false.
