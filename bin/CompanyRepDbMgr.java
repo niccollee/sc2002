@@ -9,7 +9,7 @@ public class CompanyRepDbMgr {
 	private static CompanyRepDbMgr instance;
 
 	private CompanyRepDbMgr() {
-		this.companyRepList = new ArrayList<>();
+		this.companyRepList = new ArrayList<CompanyRep>();
 		// maybe import?
 	}
 
