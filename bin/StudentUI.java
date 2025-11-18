@@ -107,7 +107,7 @@ public class StudentUI {
         int id = sc.nextInt();
         sc.nextLine();
         Internship applyingInternship = internshipDbMgr.get(id);
-        if (applyingInternship != null && applyingInternship.getVisibility()) {
+        if (applyingInternship != null && applyingInternship.getVisibility() && applyingInternship.getStatus() == Status.APPROVED) {
             student.applyInternship(applyingInternship);
             System.out.println("Internship id: " + applyingInternship.getId() + " added!");
             System.out.println("=========================");
