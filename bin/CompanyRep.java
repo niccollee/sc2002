@@ -40,7 +40,7 @@ public class CompanyRep implements IUser {
 	public String getPassword() {return password;}
 
 	// setters
-	public void setRepStatus(Status repStatus) {this.repStatus = repStatus;}
+	public void setRepStatus(CompanyRepStatus repStatus) {this.repStatus = repStatus;}
 	public void setPassword(String newPassword) {this.password = newPassword;}
 
 	/*  adds an internship created by this company rep 
