@@ -40,10 +40,7 @@ public class StudentFilter {
                     .stream()
                     .filter(student -> student.getAppliedInternship()
                         .stream()
-                        .anyMatch(internship -> internship.getTitle()
-                        .toLowerCase()
-                        .trim()
-                        .contains(args.toLowerCase().trim())))
+                        .anyMatch(internship -> internship.getId() == Integer.parseInt(args)))
                     .collect(Collectors.toList());
         };
     }
