@@ -24,7 +24,7 @@ public class CompanyRepDbMgr {
 
 	// add new rep to the list of CompanyReps
 	// before adding need to check rep status!
-	public boolean add(String id, String companyName, String department, String position, Status repStatus) {
+	public boolean add(String id, String companyName, String department, String position, CompanyRepStatus repStatus) {
 		if (id == null) return false;
 		if (get(id) != null) return false; // no duplicates
 		CompanyRep rep = new CompanyRep(id, companyName, department, position, repStatus);
@@ -81,11 +81,11 @@ public class CompanyRepDbMgr {
 				.collect(Collectors.toList());
 
 			case REPSTATUS -> {
-				Status target = null;
+				CompanyRepStatus target = null;
 				if (args != null) {
 					try {target = Status.valueOf(args.trim().toUpperCase());} catch (Exception ignored) {}
 				}
-				Status t = target;
+				CompanyRepStatus t = target;
 				yield companyRepList.stream()
 					.filter(rep -> rep.getRepStatus() == t)
 					.collect(Collectors.toList());
