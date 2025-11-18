@@ -83,7 +83,7 @@ public class CompanyRepDbMgr {
 			case REPSTATUS -> {
 				CompanyRepStatus target = null;
 				if (args != null) {
-					try {target = Status.valueOf(args.trim().toUpperCase());} catch (Exception ignored) {}
+					try {target = CompanyRepStatus.valueOf(args.trim().toUpperCase());} catch (Exception ignored) {}
 				}
 				CompanyRepStatus t = target;
 				yield companyRepList.stream()
