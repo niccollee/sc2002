@@ -7,18 +7,20 @@ public class StudentUI {
     private StudentDbMgr studentDbMgr;
     private InternshipDbMgr internshipDbMgr;
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
+    private StudentPasswordMgr studentPasswordMgr;
 
     public StudentUI(
         StudentDbMgr studentDbMgr,
         InternshipDbMgr internshipDbMgr,
-        InternshipWithdrawalDbMgr internshipWithdrawalDbMgr
+        InternshipWithdrawalDbMgr internshipWithdrawalDbMgr,
+        StudentPasswordMgr studentPasswordMgr
         ) {
         studentDisplay = new StudentDisplay();
         internshipUI = new InternshipUI();
         this.studentDbMgr = studentDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
-        StudentPasswordMgr studentPasswordMgr = new StudentPasswordMgr();
+        this.studentPasswordMgr = studentPasswordMgr;
         Scanner sc = Input.SC;
         student = login(sc, studentPasswordMgr);
         /* If login details is invalid, continue prompting user to login for 3 more
@@ -26,7 +28,7 @@ public class StudentUI {
          */
         if (student == null) {
             for (int i = 0; i != 3; i++) {
-                student = login(sc, studentPasswordMgr);
+                student = login(sc, this.studentPasswordMgr);
                 if (student != null) {
                     break;
                 }
@@ -71,6 +73,7 @@ public class StudentUI {
             }
         }        
     }
+    // Login system. Returns the Student object with that username and password, otherwise return null
     public Student login(Scanner sc, StudentPasswordMgr studentPasswordMgr) {
         System.out.println("=========================");
         System.out.println("STUDENT");
@@ -123,11 +126,11 @@ public class StudentUI {
     public void acceptInternship(Student student, Scanner sc) {
         studentDisplay.showAcceptInternships(student);
         int choice = sc.nextInt();
-        if (choice < 0 || choice >= student.getAppliedInternship().size()) {
+        if (choice < 0 || choice >= student.getAppliedInternships().showAll().size()) {
             System.out.println("Invalid response!");
             return;
         }
-        student.acceptInternship(student.getAppliedInternship().get(choice));
+        student.acceptInternship(student.getAppliedInternships().showAll().get(choice).getInternship());
         System.out.println("Internship accepted!");
         System.out.println("=========================");
     }

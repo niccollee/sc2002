@@ -38,9 +38,9 @@ public class StudentFilter {
             case StudentAttributes.APPLIEDINTERNSHIP ->
                 studentList
                     .stream()
-                    .filter(student -> student.getAppliedInternship()
+                    .filter(student -> student.getAppliedInternships().showAll()
                         .stream()
-                        .anyMatch(internship -> internship.getId() == Integer.parseInt(args)))
+                        .anyMatch(internshipApplication -> internshipApplication.getInternship().getId() == Integer.parseInt(args)))
                     .collect(Collectors.toList());
         };
     }

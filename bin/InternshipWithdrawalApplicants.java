@@ -23,7 +23,7 @@ public class InternshipWithdrawalApplicants {
     }
     // Method to withdraw internship.
     public boolean withdrawInternship() {
-        if (student.getAppliedInternship() == null) {
+        if (student.getAppliedInternships().showAll().size() == 0) {
             return false;
         }
         student.withdrawAcceptedInternship();

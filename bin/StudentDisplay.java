@@ -52,8 +52,8 @@ public class StudentDisplay extends ADisplay {
     public void showAppliedInternships(Student student) {
         System.out.println("=========================");
         System.out.println("INTERNSHIPS APPLIED");
-        for (Internship i: student.getAppliedInternship()) {
-            System.out.println(i.getTitle());
+        for (InternshipApplication i: student.getAppliedInternships().showAll()) {
+            System.out.println(i +  "\t:\t" + i.getInternship().getTitle() + "\t:\t" +i.getInternshipApplicationStatus());
         }
         System.out.println("=========================");
     }

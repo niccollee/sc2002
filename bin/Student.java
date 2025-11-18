@@ -1,13 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Student implements IUser {
     private String id;
     private String name;
     private String password;
     private int yearOfStudy;
     private String major;
-    private List<Internship> appliedInternships;
+    private InternshipApplicationDbMgr appliedInternships;
     private Internship acceptedInternships;
 
     // Initially appliedInternships will be an empty ArrayList and appliedInternship is null
@@ -17,8 +14,7 @@ public class Student implements IUser {
         this.password = password;
         this.yearOfStudy = yearOfStudy;
         this.major = major;
-        ArrayList<Internship> appliedInternships = new ArrayList<Internship>();
-        this.appliedInternships = appliedInternships;
+        this.appliedInternships = new InternshipApplicationDbMgr();
         this.acceptedInternships = null;
     }
     // Getter method
@@ -26,7 +22,7 @@ public class Student implements IUser {
     public String getName() {return name;}  
     public int getYearOfStudy() {return yearOfStudy;}
     public String getMajor() {return major;}
-    public List<Internship> getAppliedInternship() {return appliedInternships;}
+    public InternshipApplicationDbMgr getAppliedInternships() {return appliedInternships;}
     public Internship getAcceptedInternship() {return acceptedInternships;}   
     public String getPassword() {return password;}
     
@@ -47,14 +43,16 @@ public class Student implements IUser {
         if (appliedInternships.contains(internship)) {
             return false;
         }
-        appliedInternships.add(internship);
+        InternshipApplication internshipApplication = new InternshipApplication(internship, InternshipApplicationStatus.PENDING);
+        appliedInternships.add(internshipApplication);
         return true;
     }
     // Method to accept internship. Return true if operation is successful, otherwise false.
     // False when internship is not in appliedInternship.
     public boolean acceptInternship(Internship internship) {
+        InternshipApplication internshipApplication = appliedInternships.get(internship);
         if (appliedInternships.contains(internship)) {
-            appliedInternships.remove(internship);
+            appliedInternships.remove(internshipApplication);
         } else {
             return false;
         }
