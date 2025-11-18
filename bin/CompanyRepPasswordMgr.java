@@ -1,4 +1,4 @@
-public class CompanyRepPasswordMgr extends APasswordMgr<CompanyRep> {
+public class CompanyRepPasswordMgr implements IPasswordMgr<CompanyRep> {
     @Override
     public boolean validate(CompanyRep rep, String password) {
         if (hashPassword(password) == rep.getPassword()) {
