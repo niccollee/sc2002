@@ -20,7 +20,7 @@ public class InternshipUI {
     }
 
     public void filterInternshipsBy(boolean isStudent) {
-        internshipDisplay.showFilterMenu();
+        internshipDisplay.showFilterMenu(true);
         System.out.println("Enter your input:");
         int choice = sc.nextInt();
         String argString;
@@ -115,7 +115,7 @@ public class InternshipUI {
                 break;
             case 6:
                 System.out.println("Filtering by status.");
-                internshipDisplay.showStatusmenu();
+                internshipDisplay.showStatusMenu();
                 System.out.println("Enter your input: ");
                 argInt = sc.nextInt();
                 Status status;
@@ -146,8 +146,21 @@ public class InternshipUI {
                 break;
             case 9:
                 if (isStudent) {
-                    System.out.println("Invalid input!");
+                    System.out.println("Quiting...");
                     return;
+                } else {
+                    System.out.println("Filtering by visibility.");
+                    internshipDisplay.showVisibilityMenu();
+                    System.out.println("Enter your inputs: ");
+                    argString = sc.nextLine();
+                    switch (argString) {
+                        case "1":
+                            internshipList = internshipDbMgr.filter(InternshipAttributes.VISIBILITY, "true");
+                            break;
+                        case "2":
+                            internshipList = internshipDbMgr.filter(InternshipAttributes.VISIBILITY, "false");
+                            break;
+                    }
                 }
             default:
                 System.out.println("Invalid input!");
