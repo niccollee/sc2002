@@ -13,6 +13,7 @@ public class Internship {
     private CompanyRep companyRep;
     private int numSlots;
     private boolean visibility;
+    private int confirmedSlots = 0;
 
     public Internship(
             int id,
@@ -39,6 +40,7 @@ public class Internship {
         this.companyRep = companyRep;
         this.numSlots = numSlots;
         this.visibility = visibility;
+        this.confirmedSlots = 0;
     }
     // Getter methods
     public int getId() {return id;}
@@ -53,6 +55,7 @@ public class Internship {
     public CompanyRep getCompanyRep() {return companyRep;}
     public int getNumSlots() {return numSlots;}
     public boolean getVisibility() {return visibility;}
+    public int getConfirmedSlots() {return confirmedSlots;}
 
     // Setter methods
     public void setStatus(Status status){
@@ -62,5 +65,14 @@ public class Internship {
     // setter for visibility
     public void setVisibility(boolean v) {
         this.visibility = v;
+    }
+
+    public void incrementConfirmedSlots() {
+        if (confirmedSlots < numSlots) {
+            confirmedSlots++:
+            if (confirmedSlots >= numSlots) {
+                this.status = Status.FILLED;
+            }
+        }
     }
 }
