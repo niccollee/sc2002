@@ -5,6 +5,7 @@ public class Student implements IUser {
     private int yearOfStudy;
     private String major;
     private InternshipApplicationDbMgr appliedInternships;
+    private String email;
     private Internship acceptedInternships;
 
     // Initially appliedInternships will be an empty ArrayList and appliedInternship is null
@@ -15,6 +16,9 @@ public class Student implements IUser {
         this.yearOfStudy = yearOfStudy;
         this.major = major;
         this.appliedInternships = new InternshipApplicationDbMgr();
+        this.email = email;
+        InternshipApplicationDbMgr appliedInternships = new InternshipApplicationDbMgr();
+        this.appliedInternships = appliedInternships;
         this.acceptedInternships = null;
     }
     // Getter method
@@ -25,6 +29,7 @@ public class Student implements IUser {
     public InternshipApplicationDbMgr getAppliedInternships() {return appliedInternships;}
     public Internship getAcceptedInternship() {return acceptedInternships;}   
     public String getPassword() {return password;}
+    public String getEmail(){return email;}
     
     // Setters
     public void setYearOfStudy(int yearOfStudy) {
