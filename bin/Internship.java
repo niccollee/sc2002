@@ -69,7 +69,7 @@ public class Internship {
 
     public void incrementConfirmedSlots() {
         if (confirmedSlots < numSlots) {
-            confirmedSlots++:
+            confirmedSlots++;
             if (confirmedSlots >= numSlots) {
                 this.status = Status.FILLED;
             }
