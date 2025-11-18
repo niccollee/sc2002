@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class CareerStaff {
     private String id;
     private String password;
@@ -33,6 +35,22 @@ public class CareerStaff {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public boolean approveCompanyRep(String companyRepId){
+        List<CompanyRep> companyRepList = CompanyRepDbMgr.getInstance().showAll();
+
+        CompanyRep companyRep;
+        for(int i = 0; i < companyRepList.size(); i++){
+            companyRep = companyRepList[i];
+            if(companyRep.getId() == companyRepId){
+                companyRep.setRepStatus(companyRep)
+            }
+        }
+    }
+
+    public boolean approveInternship(String internshipId){
+        List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
     }
 
 }

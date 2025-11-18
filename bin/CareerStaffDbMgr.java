@@ -8,9 +8,17 @@ import java.io.IOException;
 public class CareerStaffDbMgr {
 
     private List<CareerStaff> careerStaffList;
+    private static CareerStaffDbMgr instance;
 
-    public CareerStaffDbMgr() {
+    private CareerStaffDbMgr() {
         this.careerStaffList = new ArrayList<>();
+    }
+
+    public static CareerStaffDbMgr getInstance(){
+        if(instance == null){
+            instance = new CareerStaffDbMgr();
+        }
+        return instance;
     }
 
     // read in from career staff list csv and initalize list of career staff
@@ -64,5 +72,7 @@ public class CareerStaffDbMgr {
     public List<CareerStaff> showAll() {
         return this.careerStaffList;
     }
+
+
 
 }
