@@ -38,7 +38,7 @@ public class Student implements IUser {
         this.major = major;
     }
     public void setPassword(String password) {
-        this.password = password;
+        this.password = IPasswordMgr.hashPassword(password);
     }
     
     // Method to apply internship. Return true if operation is successful, otherwise false.
@@ -65,4 +65,10 @@ public class Student implements IUser {
     public void withdrawAcceptedInternship() {
         acceptedInternships = null;
     }    
+
+	//Check password
+	public boolean validatePassword(String password){
+        StudentPasswordMgr passwordMgr = new StudentPasswordMgr();
+        return passwordMgr.validate(this, password);
+    }
 }

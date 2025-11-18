@@ -37,11 +37,11 @@ public class CareerStaff implements IUser {
         return this.email;
     }
 
-    public void setPassword(String password){
-        this.password = password;
+    public void setPassword(String password) {
+        this.password = IPasswordMgr.hashPassword(password);
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
 
@@ -117,8 +117,9 @@ public class CareerStaff implements IUser {
         return false;
     }
 
-    public boolean validatePassword(String password){
-
+    public boolean validatePassword(String password) {
+        CareerStaffPasswordMgr passwordMgr = new CareerStaffPasswordMgr();
+        return passwordMgr.validate(this, password);
     }
 
 }

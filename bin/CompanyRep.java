@@ -41,7 +41,7 @@ public class CompanyRep implements IUser {
 
 	// setters
 	public void setRepStatus(CompanyRepStatus repStatus) {this.repStatus = repStatus;}
-	public void setPassword(String newPassword) {this.password = newPassword;}
+	public void setPassword(String newPassword) {this.password = IPasswordMgr.hashPassword(newPassword);}
 
 	/*  adds an internship created by this company rep 
 	 * rules:
@@ -94,4 +94,11 @@ public class CompanyRep implements IUser {
 		internship.setVisibility(!internship.getVisibility());
 		return true;
 	}
+
+	//Check password
+	public boolean validatePassword(String password){
+        CompanyRepPasswordMgr passwordMgr = new CompanyRepPasswordMgr();
+        return passwordMgr.validate(this, password);
+    }
+	
 }

@@ -1,15 +1,10 @@
 public class CareerStaffPasswordMgr implements IPasswordMgr<CareerStaff> {
     @Override
     public boolean validate(CareerStaff careerStaff, String password) {
-        try {
-            if (IPasswordMgr.hashPassword(password).equals(careerStaff.getPassword()))
-                return true;
-            else
-                return false;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (IPasswordMgr.hashPassword(password).equals(careerStaff.getPassword()))
+            return true;
+        else
             return false;
-        }
     }
 
     @Override
