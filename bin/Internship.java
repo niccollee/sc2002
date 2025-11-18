@@ -54,6 +54,11 @@ public class Internship {
     public int getNumSlots() {return numSlots;}
     public boolean getVisibility() {return visibility;}
 
+    // Setter methods
+    public void setStatus(Status status){
+        this.status = status;
+    }
+
     // setter for visibility
     public void setVisibility(boolean v) {
         this.visibility = v;
