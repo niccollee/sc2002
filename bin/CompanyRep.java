@@ -87,31 +87,54 @@ public class CompanyRep implements IUser {
 	}
 
 	// accept student internship
-	public boolean acceptStudentInternship(Student student, Internship internship) {
-        if (student == null || internship == null) return false;
-        if (repStatus != CompanyRepStatus.APPROVED) return false;
+	public boolean acceptStudentInternship(Student student, Internship internship, int decisionStatus) {
+		if (student == null || internship == null) return false;
+		if (repStatus != CompanyRepStatus.APPROVED) return false;
 
-        Internship dbInternship = internshipdbmanager.get(internship.getId());
-        if (dbInternship == null) return false;
-        if (dbInternship.getCompanyRep() != this) return false;
-        if (dbInternship.getStatus() != Status.APPROVED) return false;
+		Internship dbInternship = internshipdbmanager.get(internship.getId());
+		if (dbInternship == null) return false;
+		if (dbInternship.getCompanyRep() != this) return false;
+		if (dbInternship.getStatus() != Status.APPROVED) return false;
 
-        if (!student.getAppliedInternship().contains(dbInternship)) {
-            return false;
-        }
+		InternshipApplicationDbMgr appDb = student.getAppliedInternships();
+		InternshipApplication application = appDb.get(dbInternship);
+		if (application == null) {
+			// student did not apply for this internship
+			return false;
+		}
 
-		// change the next line, should update the status of enum
-        return student.acceptInternship(dbInternship);
-    }
+		InternshipApplicationStatus newStatus;
+		switch (decisionStatus) {
+			case 1:
+				newStatus = InternshipApplicationStatus.SUCCESSFUL;
+				break;
+			case 2:
+				newStatus = InternshipApplicationStatus.UNSUCCESSFUL;
+				break;
+			default:
+				// invalid input
+				return false;
+		}
+
+		// update the application status
+		application.setInternshipApplicationStatus(newStatus);
+		return true;
+	}
+
 
 	// toggle visibility
 	public boolean toggleVisibility(Internship internship) {
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
 		if (internship == null) return false;
 
-		if (internship.getStatus() != Status.APPROVED) return false;
+		Internship dbInternship = internshipdbmanager.get(internship.getId());
+		if (dbInternship == null) return false;
 
-		internship.setVisibility(!internship.getVisibility());
+		// only allow this rep to toggle visibility for their own internships
+		if (dbInternship.getCompanyRep() != this) return false;
+		if (dbInternship.getStatus() != Status.APPROVED) return false;
+
+		dbInternship.setVisibility(!dbInternship.getVisibility());
 		return true;
 	}
 }
