@@ -32,7 +32,7 @@ public class StudentDisplay extends ADisplay {
         for (int i = 0; i != internships.size(); i++) {
             System.out.println(i + " \t:\t" + 
                 internships.get(i).getTitle() + " \t:\t" + 
-                internships.get(i).getCompanyName() + "\t:\t" +
+                internships.get(i).getCompanyName() + "\t\t:\t" +
                 internships.get(i).getLevel() + "\t:\t" + 
                 internships.get(i).getPreferredMajor() + "\t:\t" + 
                 internships.get(i).getAppCloseDate());
@@ -53,7 +53,7 @@ public class StudentDisplay extends ADisplay {
         System.out.println("=========================");
         System.out.println("INTERNSHIPS APPLIED");
         for (Internship i: student.getAppliedInternship()) {
-            System.out.printf(i.getTitle());
+            System.out.println(i.getTitle());
         }
         System.out.println("=========================");
     }

@@ -28,7 +28,8 @@ public class InternshipDisplay extends ADisplay{
                 7)Company Name
                 8)Number of Slots
                 """;
-        String outputIsStudent = """
+        String outputIsStudent = 
+                """
                 9)Quit
                 =========================
                 """;
@@ -37,7 +38,7 @@ public class InternshipDisplay extends ADisplay{
                 10)Quit
                 =========================
                 """;
-        System.out.println(output);
+        System.out.printf(output);
         if (isStudent) {
             System.out.println(outputIsStudent);
         } else {
@@ -66,7 +67,7 @@ public class InternshipDisplay extends ADisplay{
                 10)Quit
                 =========================
                 """;
-        System.out.println(output);
+        System.out.printf(output);
         if (isStudent) {
             System.out.println(outputIsStudent);
         } else {
@@ -101,6 +102,16 @@ public class InternshipDisplay extends ADisplay{
                 1)Approved
                 2)Pending
                 3)Rejected
+                =========================
+                """;
+        System.out.println(output);
+    }
+    public void showVisibilityMenu() {
+        String output = """
+                =========================
+                Filter visibility by:
+                1)Visible
+                2)Not visible
                 =========================
                 """;
         System.out.println(output);
