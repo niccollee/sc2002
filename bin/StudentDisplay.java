@@ -1,6 +1,5 @@
 import java.util.List;
-
-public class StudentDisplay implements IDisplay {
+public class StudentDisplay extends ADisplay {
     public void showStudentLogin() {
         String output = """
                 =========================
@@ -26,21 +25,19 @@ public class StudentDisplay implements IDisplay {
         System.out.println(output);
     }
 
-    public void showViewOpportunities() {
-        String output = """
-                =========================
-                Sort By:
-                1)Status
-                2)Preferred Majors
-                3)Internship Levels
-                4)Closing Date
-                (print list of internship opportunities according to user specification)
-                INTERNSHIP OPPORTUNITIES:
-                Internship A : Company : Level : Major : Closing Date
-
-                =========================
-                """;
-        System.out.println(output);
+    public void showViewOpportunities(List<Internship> internships) {
+        System.out.println("=========================");
+        System.out.println("Internship Opportunities");
+        System.out.println("No. \t:\tTitle \t:\tCompany \t:\tLevel \t:\tMajor \t:\tClosing Date");
+        for (int i = 0; i != internships.size(); i++) {
+            System.out.println(i + " \t:\t" + 
+                internships.get(i).getTitle() + " \t:\t" + 
+                internships.get(i).getCompanyName() + "\t:\t" +
+                internships.get(i).getLevel() + "\t:\t" + 
+                internships.get(i).getPreferredMajor() + "\t:\t" + 
+                internships.get(i).getAppCloseDate());
+        }
+        System.out.println("=========================");
     }
     public void showApplyFor() {
         String output = """
@@ -55,9 +52,37 @@ public class StudentDisplay implements IDisplay {
     public void showAppliedInternships(Student student) {
         System.out.println("=========================");
         System.out.println("INTERNSHIPS APPLIED");
-        for (Internship i: internships) {
+        for (Internship i: student.getAppliedInternship()) {
             System.out.printf(i.getTitle());
-            if (i.)
         }
+        System.out.println("=========================");
+    }
+    public void showAcceptInternships(Student student) {
+        Internship acceptedInternship = student.getAcceptedInternship();
+        System.out.println("=========================");
+        if (acceptedInternship != null) {
+            System.out.println("Accepted Internship: " +
+                acceptedInternship.getTitle() + "\t:\t" +
+                acceptedInternship.getCompanyName());
+        } else {
+            System.out.println("No Accepted Internships");
+        }
+        System.out.println("=========================");
+    }
+    public void showSortInternshipsBy() {
+        String output = """
+                Sort By:
+                1)Title
+                2)Internship Levels
+                3)Preferred Major
+                4)Application Open Date
+                5)Application Close Date
+                6)Status
+                7)Company Name
+                8)Number of Slots
+                """;
+        System.out.println("=========================");
+        System.out.println(output);
+        System.out.println("=========================");
     }
 }
