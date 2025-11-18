@@ -8,7 +8,7 @@ public class CompanyRep implements IUser {
 	private String department;
 	private String position;
 	private CompanyRepStatus repStatus;
-	private List<Internship> internshipAdded;
+	private int internshipcounter;
 	private String password;
 
 	/**
@@ -25,8 +25,8 @@ public class CompanyRep implements IUser {
 		this.department = department;
 		this.position = position;
 		this.repStatus = repStatus;
-		this.internshipAdded = new ArrayList<>();
 		this.password = "password";
+		this.internshipcounter = 0;
 	}
 
 	// getters
@@ -36,12 +36,14 @@ public class CompanyRep implements IUser {
 	public String getDepartment() {return this.department;}
 	public String getPosition() {return this.position;}
 	public CompanyRepStatus getRepStatus() {return this.repStatus;}
-	public List<Internship> getInternshipAdded() {return internshipAdded;}
 	public String getPassword() {return password;}
+	public int getInternshipCounter() {return internshipcounter;}
 
 	// setters
 	public void setRepStatus(CompanyRepStatus repStatus) {this.repStatus = repStatus;}
-	public void setPassword(String newPassword) {this.password = IPasswordMgr.hashPassword(newPassword);}
+	public void setPassword(String newPassword) {this.password = newPassword;}
+
+	private InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
 
 	/*  adds an internship created by this company rep 
 	 * rules:
@@ -52,37 +54,54 @@ public class CompanyRep implements IUser {
 	public boolean addInternship(Internship internship) {
 		if (internship == null) return false;
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
-		if (internshipAdded.size() >= 5) return false;
+		if(internship.getCompanyRep() != this) return false;
 
-		String title = internship.getTitle();
-		for (Internship in : internshipAdded)
-		{
-			if (in.getTitle() == null && in.getTitle().equalsIgnoreCase(title))
-			{
-				return false;
+		int countForThisRep = 0;
+		for (Internship i : internshipdbmanager.showAll()) {
+			if (i.getCompanyRep() == this) {
+				countForThisRep++;
 			}
 		}
-		internshipAdded.add(internship);
-		return true;
+		if (countForThisRep >= 5) return false;
+
+		boolean added = internshipdbmanager.add(internship);
+		if (added) {
+			internshipcounter = countForThisRep + 1;
+		}
+		return added;
 	}
 
-	// remove internship created by this rep
-	public boolean removeInternship(Internship internship) {
-		if (internship == null) return false;
-		return internshipAdded.remove(internship);
-	}
 
-	// finds exact internship added by rep
+	// finds exact internship added by rep TO EDIT
 	public Internship getInternship(String title) {
 		if (title == null) return null;
-		for (Internship in : internshipAdded)
-		{
-			if (in.getTitle() != null && in.getTitle().equalsIgnoreCase(title)) {
-				return in;
+
+		List<Internship> byTitle = internshipdbmanager.filter(InternshipAttributes.TITLE, title);
+
+		for (Internship i : byTitle) {
+			if (i.getCompanyRep() == this && i.getTitle() != null && i.getTitle().equalsIgnoreCase(title)) {
+				return i;
 			}
 		}
 		return null;
 	}
+
+	// accept student internship
+	public boolean acceptStudentInternship(Student student, Internship internship) {
+        if (student == null || internship == null) return false;
+        if (repStatus != CompanyRepStatus.APPROVED) return false;
+
+        Internship dbInternship = internshipdbmanager.get(internship.getId());
+        if (dbInternship == null) return false;
+        if (dbInternship.getCompanyRep() != this) return false;
+        if (dbInternship.getStatus() != Status.APPROVED) return false;
+
+        if (!student.getAppliedInternship().contains(dbInternship)) {
+            return false;
+        }
+
+        return student.acceptInternship(dbInternship);
+    }
 
 	// toggle visibility
 	public boolean toggleVisibility(Internship internship) {
@@ -91,14 +110,7 @@ public class CompanyRep implements IUser {
 
 		if (internship.getStatus() != Status.APPROVED) return false;
 
-		internship.setVisibility(!internship.getVisibility());
+		internship.setVisible(!internship.isVisibility());
 		return true;
 	}
-
-	//Check password
-	public boolean validatePassword(String password){
-        CompanyRepPasswordMgr passwordMgr = new CompanyRepPasswordMgr();
-        return passwordMgr.validate(this, password);
-    }
-	
 }
