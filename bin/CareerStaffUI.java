@@ -7,14 +7,16 @@ public class CareerStaffUI {
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
     private InternshipDbMgr internshipDbMgr;
     private InternshipUI internshipUi;
+    private CompanyRepDbMgr companyRepDbMgr;
 
     public CareerStaffUI(CareerStaffDbMgr careerStaffDbMgr, InternshipDbMgr internshipDbMgr,
-            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi) {
+            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi, CompanyRepDbMgr companyRepDbMgr) {
         this.careerStaffDisplay = new CareerStaffDisplay();
         this.careerStaffDbMgr = careerStaffDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipUi = internshipUi;
+        this.companyRepDbMgr = companyRepDbMgr;
 
         CareerStaffPasswordMgr careerStaffPasswordMgr = new CareerStaffPasswordMgr();
         Scanner sc = Input.SC;
@@ -102,10 +104,14 @@ public class CareerStaffUI {
         careerStaffDisplay.showCompanyRepApplications();
         System.out.println("=========================");
 
-        System.out.println("Enter CompanyRepID");
+        System.out.println("Enter CompanyRepID to approve");
+        System.out.println("or -1 to return back to menu");
         String companyRepId = sc.nextLine();
+        if(Integer.parseInt(companyRepId) == -1){
+            return;
+        }
 
-        while (careerStaffDbMgr.getCareerStaff(companyRepId) == null) {
+        while (companyRepDbMgr.get(companyRepId) == null) {
             System.out.println("Invalid CompanyRepID, enter again");
             companyRepId = sc.nextLine();
         }
@@ -130,10 +136,20 @@ public class CareerStaffUI {
 
     public void approveStudentWithdrawlApplication(Scanner sc) {
         careerStaffDisplay.showWithdrawalRequest();
+        if(InternshipWithdrawalApplicants.getCounter()==0){
+            System.out.println("No Student Withdrawal Applicants");
+            return;
+        }
+        
         System.out.println("=========================");
         System.out.println("Enter Index Option of interest: ");
+        System.out.println("or -1 to return back to menu");
 
         String IndexOption = sc.nextLine();
+        if(Integer.parseInt(IndexOption) == -1){
+            return;
+        }
+
         while (internshipWithdrawalDbMgr.get(Integer.parseInt(IndexOption)) == null) {
             System.out.println("Invalid option, enter from options shown");
             IndexOption = sc.nextLine();
@@ -162,8 +178,13 @@ public class CareerStaffUI {
         careerStaffDisplay.showInternshipsPending();
         System.out.println("=========================");
         System.out.println("Enter Intership ID of interest: ");
+        System.out.println("or -1 to return back to menu");
         int internshipID = sc.nextInt();
         sc.nextLine();
+
+        if(internshipID == -1){
+            return;
+        }
 
         while (internshipDbMgr.get(internshipID) == null) {
             System.out.println("Invalid internship ID, Enter again");
