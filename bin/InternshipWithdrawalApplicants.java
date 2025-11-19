@@ -8,6 +8,12 @@ public class InternshipWithdrawalApplicants {
         this.internship = internship;
         this.id = counter++;
     }
+
+    //Getter method for counter
+    public static int getCounter(){
+        return InternshipWithdrawalApplicants.counter;
+    }
+    
     // Getter method for student
     public Student getStudent() {
         return student;

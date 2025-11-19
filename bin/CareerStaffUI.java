@@ -7,14 +7,16 @@ public class CareerStaffUI {
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
     private InternshipDbMgr internshipDbMgr;
     private InternshipUI internshipUi;
+    private CompanyRepDbMgr companyRepDbMgr;
 
     public CareerStaffUI(CareerStaffDbMgr careerStaffDbMgr, InternshipDbMgr internshipDbMgr,
-            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi) {
+            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi, CompanyRepDbMgr companyRepDbMgr) {
         this.careerStaffDisplay = new CareerStaffDisplay();
         this.careerStaffDbMgr = careerStaffDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipUi = internshipUi;
+        this.companyRepDbMgr = companyRepDbMgr;
 
         CareerStaffPasswordMgr careerStaffPasswordMgr = new CareerStaffPasswordMgr();
         Scanner sc = Input.SC;
@@ -109,7 +111,7 @@ public class CareerStaffUI {
             return;
         }
 
-        while (careerStaffDbMgr.getCareerStaff(companyRepId) == null) {
+        while (companyRepDbMgr.get(companyRepId) == null) {
             System.out.println("Invalid CompanyRepID, enter again");
             companyRepId = sc.nextLine();
         }
@@ -134,6 +136,11 @@ public class CareerStaffUI {
 
     public void approveStudentWithdrawlApplication(Scanner sc) {
         careerStaffDisplay.showWithdrawalRequest();
+        if(InternshipWithdrawalApplicants.getCounter()==0){
+            System.out.println("No Student Withdrawal Applicants");
+            return;
+        }
+        
         System.out.println("=========================");
         System.out.println("Enter Index Option of interest: ");
         System.out.println("or -1 to return back to menu");

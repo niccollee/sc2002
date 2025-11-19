@@ -46,17 +46,11 @@ public class CareerStaff implements IUser {
     }
 
     public boolean approveCompanyRep(String companyRepId) {
-        List<CompanyRep> companyRepList = CompanyRepDbMgr.getInstance().showAll();
+        CompanyRep companyRep = CompanyRepDbMgr.getInstance().get(companyRepId);
 
-        CompanyRep companyRep;
-
-        // search for companyRepId in companyRepList
-        for (int i = 0; i < companyRepList.size(); i++) {
-            companyRep = companyRepList.get(i);
-            if (companyRep.getId() == companyRepId) {
-                companyRep.setRepStatus(CompanyRepStatus.APPROVED);
-                return true;
-            }
+        if (companyRep != null) {
+            companyRep.setRepStatus(CompanyRepStatus.APPROVED);
+            return true;
         }
 
         // When cannot find CompanyRepId in companyRepList to approve
@@ -64,17 +58,11 @@ public class CareerStaff implements IUser {
     }
 
     public boolean rejectCompanyRep(String companyRepId) {
-        List<CompanyRep> companyRepList = CompanyRepDbMgr.getInstance().showAll();
+        CompanyRep companyRep = CompanyRepDbMgr.getInstance().get(companyRepId);
 
-        CompanyRep companyRep;
-
-        // Search for companyRepId in companyRepList
-        for (int i = 0; i < companyRepList.size(); i++) {
-            companyRep = companyRepList.get(i);
-            if (companyRep.getId() == companyRepId) {
-                companyRep.setRepStatus(CompanyRepStatus.REJECT);
-                return true;
-            }
+        if (companyRep != null) {
+            companyRep.setRepStatus(CompanyRepStatus.REJECT);
+            return true;
         }
 
         // When cannot find CompanyRepId in companyRepList to approve
@@ -82,17 +70,11 @@ public class CareerStaff implements IUser {
     }
 
     public boolean approveInternship(int internshipId) {
-        List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
+        Internship internship = InternshipDbMgr.getInstance().get(internshipId);
 
-        Internship internship;
-
-        // Search for internshipId in internshipList
-        for (int i = 0; i < internshipList.size(); i++) {
-            internship = internshipList.get(i);
-            if (internship.getId() == internshipId) {
-                internship.setStatus(Status.APPROVED);
-                return true;
-            }
+        if(internship != null){
+            internship.setStatus(Status.APPROVED);
+            return true;
         }
 
         // when cannot find internshipId in internshipList
@@ -100,17 +82,11 @@ public class CareerStaff implements IUser {
     }
 
     public boolean rejectInternship(int internshipId) {
-        List<Internship> internshipList = InternshipDbMgr.getInstance().showAll();
+        Internship internship = InternshipDbMgr.getInstance().get(internshipId);
 
-        Internship internship;
-
-        // Search for internshipId in internshipList
-        for (int i = 0; i < internshipList.size(); i++) {
-            internship = internshipList.get(i);
-            if (internship.getId() == internshipId) {
-                internship.setStatus(Status.REJECT);
-                return true;
-            }
+        if(internship != null){
+            internship.setStatus(Status.REJECT);
+            return true;
         }
 
         // when cannot find internshipId in internshipList
@@ -118,10 +94,11 @@ public class CareerStaff implements IUser {
     }
 
     //
-    public boolean approveStudentWidthdrawl(String studentID){
-        List<InternshipWithdrawalApplicants> internshipWithdrawalApplicantsList = InternshipWithdrawalDbMgr.getInstance().showAll();
-        for(int i = 0;i< internshipWithdrawalApplicantsList.size() ;i++){
-            if(internshipWithdrawalApplicantsList.get(i).getStudent().getId() == studentID){
+    public boolean approveStudentWidthdrawl(String studentID) {
+        List<InternshipWithdrawalApplicants> internshipWithdrawalApplicantsList = InternshipWithdrawalDbMgr
+                .getInstance().showAll();
+        for (int i = 0; i < internshipWithdrawalApplicantsList.size(); i++) {
+            if (internshipWithdrawalApplicantsList.get(i).getStudent().getId() == studentID) {
                 internshipWithdrawalApplicantsList.get(i).withdrawInternship();
                 return true;
             }
@@ -129,8 +106,9 @@ public class CareerStaff implements IUser {
         return false;
     }
 
-    //rejecting studentWithdrawl does nothing, internshipWithdrawlApplicants remain inside
-    public boolean rejectStudentWithdrawl(String studentID){
+    // rejecting studentWithdrawl does nothing, internshipWithdrawlApplicants remain
+    // inside
+    public boolean rejectStudentWithdrawl(String studentID) {
         return true;
     }
 
