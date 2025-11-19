@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class StudentUI {
     private StudentDisplay studentDisplay;
-    private InternshipDisplay internshipDisplay;
     private InternshipUI internshipUI;
     private Student student;
     private StudentDbMgr studentDbMgr;
@@ -19,7 +18,6 @@ public class StudentUI {
         StudentPasswordMgr studentPasswordMgr
         ) {
         studentDisplay = new StudentDisplay();
-        internshipDisplay = new InternshipDisplay();
         internshipUI = new InternshipUI();
         this.studentDbMgr = studentDbMgr;
         this.internshipDbMgr = internshipDbMgr;
