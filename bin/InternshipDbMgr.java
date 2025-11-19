@@ -1,12 +1,18 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class InternshipDbMgr {
     private List<Internship> internshipList;
     private static InternshipDbMgr instance;
     private InternshipDbMgr() {
         internshipList = new ArrayList<Internship>();
+        importDb(CompanyRepDbMgr.getInstance());
     }
     // Get an instance of this DbMgr. If it exist, return it, otherwise create a new instance of it.
     public static InternshipDbMgr getInstance() {
@@ -15,6 +21,59 @@ public class InternshipDbMgr {
         }
         return instance;
     }
+
+    // read in from Company Rep list csv and initalize list of Company Rep
+	private boolean importDb(CompanyRepDbMgr companyRepDbMgr) {
+		String filepath = "../data/internship_list.csv";
+
+		try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+			String line;
+			String[] values;
+
+			br.readLine(); // ignore first read line of column headers
+			while ((line = br.readLine()) != null) {
+
+				System.out.println("reading in: " + line);
+
+				values = line.split(","); // seperate at delimiter ','
+                LocalDate openDate;
+                LocalDate closeDate;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                try {
+                    openDate = LocalDate.parse(values[5], formatter);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date format!");
+                    return false;
+                }
+                try {
+                    closeDate = LocalDate.parse(values[6], formatter);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date format!");
+                    return false;
+                }
+                CompanyRep companyRep = companyRepDbMgr.get(values[9]);
+                Internship internship = new Internship(
+                    Integer.parseInt(values[0]), 
+                    values[1], 
+                    values[2], 
+                    InternshipLevel.valueOf(values[3]), 
+                    values[4], 
+                    openDate, 
+                    closeDate, 
+                    Status.valueOf(values[7]), 
+                    values[8], 
+                    companyRep, 
+                    Integer.parseInt(values[10]), 
+                    Boolean.parseBoolean(values[11]));
+				internshipList.add(internship);
+			}
+		} catch (IOException e) {
+			System.out.println("ERROR: Unable to read file" + e.getMessage());
+			return false;
+		}
+
+		return true;
+	}
     // Getter method for internship based on id. If does not exist, return null.
     public Internship get(int id) {
         for (Internship i: internshipList) {

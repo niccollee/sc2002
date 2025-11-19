@@ -289,6 +289,17 @@ public class InternshipUI {
                 System.out.println("Invalid input!");
                 return;
         }
+        internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.PREFERREDMAJOR, student.getMajor());
+        internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.VISIBILITY, "true");
+        internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.STATUS, "APPROVED");
+        switch(student.getYearOfStudy()) {
+            case 1:
+            case 2:
+                internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.LEVEL, "BASIC");
+                break;
+            default:
+                break;
+        };
         internshipDisplay.showInternships(internshipList);
     }
 }

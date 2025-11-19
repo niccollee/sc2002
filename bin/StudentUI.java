@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StudentUI {
@@ -42,7 +43,7 @@ public class StudentUI {
         }
         int choice = menu();
         while (choice == -1) {
-            System.out.println("Invalid input!");
+            System.out.println("Invalid input! Enter input again.");
             choice = menu();
         }
         while (true) {
@@ -71,7 +72,7 @@ public class StudentUI {
             }
             choice = menu();
             while (choice == -1) {
-                System.out.println("Invalid input!");
+                System.out.println("Invalid input! Enter input again.");
                 choice = menu();
             }
         }        
@@ -96,22 +97,40 @@ public class StudentUI {
     }
     public int menu() {
         studentDisplay.showMenu();
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice;
+        while (true) {
+            try {
+                choice = sc.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Enter input again.");
+                sc.nextLine();
+            }
+            
+        }
         if (choice > 0 && choice < 8) {
             return choice;
         }
         return -1;
     }
     public void viewOpportunities() {
-        internshipDisplay.showInternships(internshipDbMgr.showAll());
+        internshipUI.viewAllInternships(student);
         internshipUI.filterInternshipsBy(student);      
     }
     public void applyForInternship() {
         System.out.println("=========================");
         System.out.println("Apply for internship. Enter internship id: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        int id;
+        while (true) {
+            try {
+                id = sc.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Enter input again.");
+                sc.nextLine();
+                continue;
+            }
+        }
         Internship applyingInternship = internshipDbMgr.get(id);
         if (applyingInternship != null && applyingInternship.getVisibility() && applyingInternship.getStatus() == Status.APPROVED) {
             if (student.applyInternship(applyingInternship)) {
@@ -139,7 +158,17 @@ public class StudentUI {
             System.out.println("=========================");
             return;
         }
-        int choice = sc.nextInt();
+        int choice;
+        while (true) {
+            try {
+                choice = sc.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Enter input again.");
+                sc.nextLine();
+                continue;
+            }
+        }
         if (choice < 0 || choice >= student.getAppliedInternships().showAll().size()) {
             System.out.println("Invalid response!");
             return;
@@ -155,7 +184,17 @@ public class StudentUI {
     public void requestWithdrawal() {
         System.out.println("=========================");
         System.out.println("Enter internship id to withdraw: ");
-        int id = sc.nextInt();
+        int id;
+        while (true) {
+            try {
+                id = sc.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Enter input again.");
+                sc.nextLine();
+                continue;
+            }
+        }
         Internship internship = internshipDbMgr.get(id);
         if (internship == null) {
             System.out.println("Invalid internship id!");

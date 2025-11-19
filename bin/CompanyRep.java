@@ -1,3 +1,4 @@
+
 import java.util.List;
 
 public class CompanyRep implements IUser {
@@ -9,7 +10,6 @@ public class CompanyRep implements IUser {
 	private CompanyRepStatus repStatus;
 	private int internshipcounter;
 	private String password;
-
 	/**
 	 * 
 	 * @param id			company rep ID (email)
@@ -42,7 +42,7 @@ public class CompanyRep implements IUser {
 	public void setRepStatus(CompanyRepStatus repStatus) {this.repStatus = repStatus;}
 	public void setPassword(String newPassword) {this.password = newPassword;}
 
-	private InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
+	
 
 	/*  adds an internship created by this company rep 
 	 * rules:
@@ -51,6 +51,7 @@ public class CompanyRep implements IUser {
 	 * no duplicate titles uneder the same rep
 	*/
 	public boolean addInternship(Internship internship) {
+		InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
 		if (internship == null) return false;
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
 		if(internship.getCompanyRep() != this) return false;
@@ -73,6 +74,7 @@ public class CompanyRep implements IUser {
 
 	// finds exact internship added by rep TO EDIT
 	public Internship getInternship(String title) {
+		InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
 		if (title == null) return null;
 
 		List<Internship> byTitle = internshipdbmanager.filter(InternshipAttributes.TITLE, title);
@@ -87,6 +89,7 @@ public class CompanyRep implements IUser {
 
 	// accept student internship
 	public boolean acceptStudentInternship(Student student, Internship internship, int decisionStatus) {
+		InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
 		if (student == null || internship == null) return false;
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
 
@@ -123,6 +126,7 @@ public class CompanyRep implements IUser {
 
 	// toggle visibility
 	public boolean toggleVisibility(Internship internship) {
+		InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
 		if (internship == null) return false;
 

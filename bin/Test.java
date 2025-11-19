@@ -8,13 +8,15 @@ public class Test {
             "ABC Company",
             "HR",
             "Manager",
-            CompanyRepStatus.APPROVED
+            CompanyRepStatus.APPROVED,
+            "password"
         );
-        Student s1 = new Student("null", "null", "null", 0, "null");
+        Student s1 = new Student("null", "null", IPasswordMgr.hashPassword("null"), 0, "null", "null");
         InternshipDbMgr internshipDbMgr = InternshipDbMgr.getInstance();
         StudentDbMgr studentDbMgr = StudentDbMgr.getInstance();
         InternshipWithdrawalDbMgr internshipWithdrawalDbMgr = InternshipWithdrawalDbMgr.getInstance();
-        internshipDbMgr.add(
+        Internship internship = new Internship(
+            0,
             "null", 
             "null", 
             InternshipLevel.ADVANCE, 
@@ -26,10 +28,12 @@ public class Test {
             c1, 
             0, 
             true);
+        internshipDbMgr.add(internship);
         for (Student i: studentDbMgr.get()) {
             System.out.println(i.getId());
         }
         studentDbMgr.add(s1);
-        new StudentUI(studentDbMgr, internshipDbMgr, internshipWithdrawalDbMgr);        
+        StudentPasswordMgr studentPasswordMgr = new StudentPasswordMgr();
+        new StudentUI(studentDbMgr, internshipDbMgr, internshipWithdrawalDbMgr, studentPasswordMgr);        
     }
 }

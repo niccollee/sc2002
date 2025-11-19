@@ -67,6 +67,11 @@ public class Student implements IUser {
             return false;
         }
 
+        if (getAppliedInternships().showAll().size() > 2) {
+            System.out.println("You have already applied for 3 internships!");
+            return false;
+        }
+
         InternshipApplication internshipApplication = new InternshipApplication(internship, InternshipApplicationStatus.PENDING);
         if (!appliedInternships.add(internshipApplication)) {
             return false;

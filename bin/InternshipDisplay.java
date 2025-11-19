@@ -2,18 +2,23 @@ import java.util.List;
 
 public class InternshipDisplay extends ADisplay{
     public void showInternships(List<Internship> internships) {
-        System.out.println("=========================");
-        System.out.println("Internship Opportunities");
-        System.out.println("Id. \t:\tTitle \t:\tCompany \t:\tLevel \t:\tClosing Date");
-        for (int i = 0; i != internships.size(); i++) {
-            System.out.println(i + " \t:\t" + 
-                internships.get(i).getTitle() + " \t:\t" + 
-                internships.get(i).getCompanyName() + "\t\t:\t" +
-                internships.get(i).getLevel() + "\t:\t" + 
-                internships.get(i).getAppCloseDate());
+        System.out.println("==============================================================");
+        System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n", 
+                        "ID", "Title", "Company", "Level", "Closing Date");
+        System.out.println("==============================================================");
+
+        for (Internship internship : internships) {
+            System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n",
+                            internship.getId(),
+                            internship.getTitle(),
+                            internship.getCompanyName(),
+                            internship.getLevel(),
+                            internship.getAppCloseDate());
         }
-        System.out.println("=========================");
+
+        System.out.println("==============================================================");
     }
+
     public void showSortMenu(boolean isStudent) {
         String outputNotStudent = """
                 =========================
