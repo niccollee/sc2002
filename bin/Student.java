@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Student implements IUser {
     private String id;
     private String name;
@@ -50,6 +52,21 @@ public class Student implements IUser {
         if (appliedInternships.contains(internship)) {
             return false;
         }
+
+        if (internship.getStatus() == Status.FILLED) {
+            System.out.println("Internship application is full.");
+            return false;
+        }
+
+        if (internship.getStatus() != Status.APPROVED) {
+            return false;
+        }
+
+        LocalDate today = LocalDate.now();
+        if (today.isBefore(internship.getAppOpenDate()) ||today.isAfter(internship.getAppCloseDate())) {
+            return false;
+        }
+
         InternshipApplication internshipApplication = new InternshipApplication(internship, InternshipApplicationStatus.PENDING);
         if (!appliedInternships.add(internshipApplication)) {
             return false;
@@ -59,22 +76,27 @@ public class Student implements IUser {
     // Method to accept internship. Return true if operation is successful, otherwise false.
     // False when internship is not in appliedInternship.
     public boolean acceptInternship(Internship internship) {
-        InternshipApplication internshipApplication = appliedInternships.get(internship);
-		if (internshipApplication.getInternshipApplicationStatus() != InternshipApplicationStatus.SUCCESSFUL) {
-			return false;
-		}
-		
-        if (appliedInternships.contains(internship)) {
-            appliedInternships.remove(internshipApplication);
-        } 
-		else {
-            return false;
-        }
-		// only can accept one internship
+        if (internship == null) return false;
+        // only can accept one internship
 		// if (acceptedInternships != null) {
 		// 	return false;
 		// }
+        
+        InternshipApplication internshipApplication = appliedInternships.get(internship);
+        if (internshipApplication == null) return false;
+        
+		if (internshipApplication.getInternshipApplicationStatus() != InternshipApplicationStatus.SUCCESSFUL) {
+			return false;
+		}
+
+        appliedInternships.remove(internshipApplication);
         acceptedInternships = internship;
+
+        InternshipDbMgr internshipDbMgr = InternshipDbMgr.getInstance();
+        Internship dbInternship = internshipDbMgr.get(internship.getId());
+        if (dbInternship != null) {
+            dbInternship.incrementConfirmedSlots();
+        }
         return true;
     }
     // Method to reject internship, set appliedInternships to null.
