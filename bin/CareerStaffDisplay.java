@@ -38,9 +38,9 @@ public class CareerStaffDisplay {
                 "No. \t:\tCompany Rep ID \t:\tCompany Name \t:\tDepartment \t:\tPositon \t:\tCompany Rep Status");
         for (int i = 0; i < cRepList.size(); i++) {
 
-            System.out.println(i +
+            System.out.println(i + " \t:\t" +
                     cRepList.get(i).getId() + " \t:\t" +
-                    cRepList.get(i).getName() + " \t:\t" +
+                    cRepList.get(i).getName() + " \t\t:\t\t" +
                     cRepList.get(i).getDepartment() + " \t:\t" +
                     cRepList.get(i).getPosition() + " \t:\t" +
                     cRepList.get(i).getRepStatus() + " \t:\t");

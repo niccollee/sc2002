@@ -92,7 +92,7 @@ public class CareerStaffDbMgr {
 
     public CareerStaff getCareerStaff(String id) {
         for (CareerStaff cStaff : this.careerStaffList) {
-            if (cStaff.getId() == id) {
+            if (cStaff.getId().equals(id)) {
                 return cStaff;
             }
         }
