@@ -1,5 +1,9 @@
 import java.time.LocalDate;
-
+/**
+ * Represents a student who can apply for internships, accept a confirmed internship, 
+ * and manage applied internships.
+ * Implements {@link IUser} interface.
+ */
 public class Student implements IUser {
     private String id;
     private String name;
@@ -10,7 +14,15 @@ public class Student implements IUser {
     private String email;
     private Internship acceptedInternships;
 
-    // Initially appliedInternships will be an empty ArrayList and appliedInternship is null
+    /**
+     * Creates a student object.
+     * @param id the id of the student, which is their matriculation number.
+     * @param name the name of the student
+     * @param passwordHash the hashed password of the student
+     * @param yearOfStudy the year of study of the student
+     * @param major the major of the student
+     * @param email the email of the student
+     */
     public Student(String id, String name, String passwordHash, int yearOfStudy, String major, String email) {
         this.id = id;
         this.name = name;
@@ -45,9 +57,10 @@ public class Student implements IUser {
     }
     
     /**
-     * Method to apply internship. Return true if operation is successful, otherwise false.
-     * False when internship is already in the list.
-     *  */ 
+     * Method to apply internship. 
+     * @param internship is the internship object that this student is applying for.
+     * @return true if application is successful, otherwise false. 
+     */
     public boolean applyInternship(Internship internship) {
         if (appliedInternships.contains(internship)) {
             return false;
@@ -78,8 +91,11 @@ public class Student implements IUser {
         }
         return true;
     }
-    // Method to accept internship. Return true if operation is successful, otherwise false.
-    // False when internship is not in appliedInternship.
+    /**
+     * Method to accept internship
+     * @param internship is the internship object to be accepted.
+     * @return true if internship is successfully accepted, otherwise false.
+     */
     public boolean acceptInternship(Internship internship) {
         if (internship == null) return false;
         // only can accept one internship
@@ -104,7 +120,10 @@ public class Student implements IUser {
         }
         return true;
     }
-    // Method to reject internship, set appliedInternships to null.
+    /**
+     * Method to withdraw internship. Sets the acceptedInternships attribute
+     * to null.
+     */
     public void withdrawAcceptedInternship() {
         acceptedInternships = null;
     }    
