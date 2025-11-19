@@ -189,7 +189,8 @@ public class CompanyRepUI {
 
 
     public void viewInternshipOpps(companyRep, sc){
-
+        internshipList = internshipDbMgr.filter(InternshipAttributes.companyRep.companyName, argString);
+        internshipDisplay.showInternships(internshipList);
     }
 
     public void changePassword(CompanyRep companyRep, Scanner sc, CompanyRepPasswordMgr companyRepPasswordMgr) {
