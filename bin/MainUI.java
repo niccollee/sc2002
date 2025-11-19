@@ -28,7 +28,7 @@ public class MainUI {
                 case "4":
                     new RepRegisterUI(
                         CompanyRepDbMgr.getInstance()
-                    );
+                    ).start();
                     break;
                 case "5":
                     mainDisplay.showQuit();
