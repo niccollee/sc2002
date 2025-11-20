@@ -43,7 +43,7 @@ public class CompanyRepUI {
         this.internshipDbMgr = internshipDbMgr;
         CompanyRepPasswordMgr companyRepPasswordMgr = new CompanyRepPasswordMgr();
         sc = Input.SC;
-        companyRep = login(sc, companyRepPasswordMgr);
+        companyRep = null;
         
         /* If login details is invalid, continue prompting user to login for 3 more
          * times. Afterwards return back to main page.
@@ -58,10 +58,7 @@ public class CompanyRepUI {
                 if (companyRep != null) {
                     break;
                 }
-                if (companyRep.getRepStatus() != CompanyRepStatus.APPROVED) {
-                    System.out.println("Company rep is not approved!");
-                    return;
-                }
+                
                 if (i == 2) {
                     return;
                 }
