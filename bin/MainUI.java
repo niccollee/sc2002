@@ -67,7 +67,10 @@ public class MainUI {
      */
     public static void main(String[] args) {
         MainUI mainUI = new MainUI();
+        AppStateMgr appStateMgr = AppStateMgr.getInstance();
+        appStateMgr.readFileState();
         mainUI.menu();
+        appStateMgr.writeFileState();
     }
 
     

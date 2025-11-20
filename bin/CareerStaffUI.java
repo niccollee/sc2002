@@ -66,7 +66,7 @@ public class CareerStaffUI {
                 System.out.println("Invalid input!");
                 choice = menu(sc);
             }
-            AppStateMgr smgr = AppStateMgr.getInstance();
+            
             switch (choice) {
                 case 1:
                     approveCompanyRepApplication(sc);
@@ -85,10 +85,6 @@ public class CareerStaffUI {
                     break;
                 case 6:
                     return;
-                case 7: smgr.writeFileState();
-                break;
-                case 8: smgr.readFileState();
-                    break;
                 default:
                     break;
             }
