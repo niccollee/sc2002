@@ -29,7 +29,7 @@ public class MainUI {
                         StudentDbMgr.getInstance(), 
                         InternshipDbMgr.getInstance(),
                         InternshipWithdrawalDbMgr.getInstance(), 
-                        new StudentPasswordMgr()).start();
+                        new StudentPasswordMgr());
                     break;
                 case "2":
                     new CareerStaffUI(
@@ -38,10 +38,15 @@ public class MainUI {
                         InternshipWithdrawalDbMgr.getInstance(), 
                         internshipUI,
                         CompanyRepDbMgr.getInstance(),
-                        CareerStaffController.getInstance());
+                        CareerStaffController.getInstance(),
+                        new CareerStaffPasswordMgr());
                     break;
                 case "3":
-                    new CompanyRepUI(StudentDbMgr.getInstance(),CompanyRepDbMgr.getInstance(), InternshipDbMgr.getInstance(), InternshipWithdrawalDbMgr.getInstance());
+                    new CompanyRepUI(
+                        StudentDbMgr.getInstance(),
+                        CompanyRepDbMgr.getInstance(), 
+                        InternshipDbMgr.getInstance(), 
+                        InternshipWithdrawalDbMgr.getInstance());
                     break;
                 case "4":
                     new RepRegisterUI(

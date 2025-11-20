@@ -13,12 +13,10 @@ import java.time.format.DateTimeParseException;
  */
 public class CompanyRepUI {
     private CompanyRepDisplay companyRepDisplay;
-    private InternshipUI internshipUI;
     private CompanyRep companyRep;
     private StudentDbMgr studentDbMgr;
     private CompanyRepDbMgr companyRepDbMgr;
     private InternshipDbMgr internshipDbMgr;
-    private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
     private DateTimeFormatter formatter;
     Scanner sc;
 
@@ -40,11 +38,9 @@ public class CompanyRepUI {
         ) {
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         companyRepDisplay = new CompanyRepDisplay();
-        internshipUI = new InternshipUI();
         this.studentDbMgr = studentDbMgr;
         this.companyRepDbMgr = companyRepDbMgr;
         this.internshipDbMgr = internshipDbMgr;
-        this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         CompanyRepPasswordMgr companyRepPasswordMgr = new CompanyRepPasswordMgr();
         sc = Input.SC;
         companyRep = login(sc, companyRepPasswordMgr);

@@ -30,7 +30,8 @@ public class CareerStaffUI {
      */
     public CareerStaffUI(CareerStaffDbMgr careerStaffDbMgr, InternshipDbMgr internshipDbMgr,
             InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi,
-            CompanyRepDbMgr companyRepDbMgr, CareerStaffController careerStaffController) {
+            CompanyRepDbMgr companyRepDbMgr, CareerStaffController careerStaffController, 
+            CareerStaffPasswordMgr careerStaffPasswordMgr) {
         this.careerStaffDisplay = new CareerStaffDisplay();
         this.careerStaffDbMgr = careerStaffDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
@@ -38,10 +39,15 @@ public class CareerStaffUI {
         this.internshipUi = internshipUi;
         this.companyRepDbMgr = companyRepDbMgr;
         this.careerStaffController = careerStaffController;
-
-        CareerStaffPasswordMgr careerStaffPasswordMgr = new CareerStaffPasswordMgr();
         Scanner sc = Input.SC;
-
+        start(sc, careerStaffPasswordMgr);
+    }
+    /**
+     * Method to start and run the main career staff ui class.
+     * @param sc
+     * @param careerStaffPasswordMgr
+    */
+    public void start(Scanner sc, CareerStaffPasswordMgr careerStaffPasswordMgr) {
         careerStaff = login(sc, careerStaffPasswordMgr);
         /*
          * If login details is invalid, continue prompting user to login for 3 more
@@ -89,7 +95,6 @@ public class CareerStaffUI {
                     break;
             }
         }
-
     }
 
     /**

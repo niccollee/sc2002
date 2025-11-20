@@ -87,20 +87,23 @@ public class CareerStaffDisplay {
          * The data is retrieved from {@link InternshipWithdrawalDbMgr}.
          */
         public void showWithdrawalRequest() {
-                List<InternshipWithdrawalApplicant> internshipWithdrawlList = InternshipWithdrawalDbMgr.getInstance()
-                                .getAll();
+                List<InternshipWithdrawalApplicant> list = InternshipWithdrawalDbMgr.getInstance().getAll();
 
-                System.out.println("=========================");
-                System.out.println("Internship Withdrawl Applicants");
-                System.out.println("No. \t:\tStudent Name \t:\t Internship ID");
+                System.out.println("==============================================================");
+                System.out.println("INTERNSHIP WITHDRAWAL APPLICANTS");
+                System.out.printf("%-5s | %-25s | %-15s%n",
+                                "No.", "Student Name", "Internship ID");
+                System.out.println("==============================================================");
 
-                for (int i = 0; i < internshipWithdrawlList.size(); i++) {
-                        System.out.println(internshipWithdrawlList.get(i).getId() + "\t:\t"
-                                        + internshipWithdrawlList.get(i).getStudent().getName() + "\t:\t"
-                                        + internshipWithdrawlList.get(i).getInternship().getId());
+                for (int i = 0; i < list.size(); i++) {
+                        InternshipWithdrawalApplicant app = list.get(i);
+                        System.out.printf("%-5d | %-25s | %-15s%n",
+                                        i,
+                                        app.getStudent().getName(),
+                                        app.getInternship().getId());
                 }
 
-                System.out.println("=========================");
+                System.out.println("==============================================================");
         }
 
         /**

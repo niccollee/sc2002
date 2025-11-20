@@ -45,19 +45,28 @@ public class StudentDisplay extends ADisplay {
      * @param internships the internships to display
      */
     public void showViewOpportunities(List<Internship> internships) {
-        System.out.println("=========================");
-        System.out.println("Internship Opportunities");
-        System.out.println("No. \t:\tTitle \t:\tCompany \t:\tLevel \t:\tMajor \t:\tClosing Date");
-        for (int i = 0; i != internships.size(); i++) {
-            System.out.println(i + " \t:\t" + 
-                internships.get(i).getTitle() + " \t:\t" + 
-                internships.get(i).getCompanyName() + "\t\t:\t" +
-                internships.get(i).getLevel() + "\t:\t" + 
-                internships.get(i).getPreferredMajor() + "\t:\t" + 
-                internships.get(i).getAppCloseDate());
-        }
-        System.out.println("=========================");
+    System.out.println("==============================================================================================");
+    System.out.println("Internship Opportunities");
+    System.out.printf("%-4s | %-30s | %-20s | %-10s | %-25s | %-12s%n",
+            "No.", "Title", "Company", "Level", "Major", "Closing Date");
+    System.out.println("==============================================================================================");
+
+    for (int i = 0; i < internships.size(); i++) {
+        Internship in = internships.get(i);
+        System.out.printf(
+            "%-4d | %-30s | %-20s | %-10s | %-25s | %-12s%n",
+            i,
+            in.getTitle(),
+            in.getCompanyName(),
+            in.getLevel(),
+            in.getPreferredMajor(),
+            in.getAppCloseDate()
+        );
     }
+
+    System.out.println("==============================================================================================");
+}
+
 
     /**
      * Display a list of students.
@@ -65,19 +74,25 @@ public class StudentDisplay extends ADisplay {
      * @param student the students to display
      */
     public void showStudentList(List<Student> students) {
-        System.out.println("=========================");
-        System.out.println("Student list");
-        System.out.println("Id \t:\t Name \t:\t Major \t:\t Year");
-        for (Student i: students) {
-            System.out.println(
-                i.getId() + "\t:\t " + 
-                i.getName() + " \t:\t " +
-                i.getMajor() + " \t:\t " +
-                i.getYearOfStudy() + " \t:\t "
-            );
-        }
-        System.out.println("=========================");
+    System.out.println("==============================================================");
+    System.out.println("Student List");
+    System.out.printf("%-10s | %-25s | %-20s | %-4s%n",
+            "ID", "Name", "Major", "Year");
+    System.out.println("==============================================================");
+
+    for (Student s : students) {
+        System.out.printf(
+            "%-10s | %-25s | %-20s | %-4d%n",
+            s.getId(),
+            s.getName(),
+            s.getMajor(),
+            s.getYearOfStudy()
+        );
     }
+
+    System.out.println("==============================================================");
+}
+
 
     /**
      * Show the internship application header.
@@ -99,15 +114,26 @@ public class StudentDisplay extends ADisplay {
      * @param student the student whose applications are shown
      */
     public void showAppliedInternships(Student student) {
-        System.out.println("=========================");
-        System.out.println("INTERNSHIPS APPLIED");
-        System.out.println("Application id \t:\t Intenship id \t\t:\tTitle \t\t:\tStatus");
-        int idx = 0;
-        for (InternshipApplication i: student.getAppliedInternships().getAll()) {
-            System.out.println(idx++ + "\t\t:\t" + i.getInternship().getId() +  "\t\t\t:\t" + i.getInternship().getTitle() + "\t\t:\t" +i.getInternshipApplicationStatus());
-        }
-        System.out.println("=========================");
+    System.out.println("==========================================================================");
+    System.out.println("INTERNSHIPS APPLIED");
+    System.out.printf("%-15s | %-15s | %-30s | %-10s%n",
+            "Application No.", "Internship ID", "Title", "Status");
+    System.out.println("==========================================================================");
+
+    int idx = 0;
+    for (InternshipApplication app : student.getAppliedInternships().getAll()) {
+        System.out.printf(
+            "%-15d | %-15s | %-30s | %-10s%n",
+            idx++,
+            app.getInternship().getId(),
+            app.getInternship().getTitle(),
+            app.getInternshipApplicationStatus()
+        );
     }
+
+    System.out.println("==========================================================================");
+}
+
 
     /**
      * Show the student's accepted internship if any.
@@ -115,17 +141,25 @@ public class StudentDisplay extends ADisplay {
      * @param student the student whose accepted internship is shown
      */
     public void showAcceptInternships(Student student) {
-        Internship acceptedInternship = student.getAcceptedInternship();
-        System.out.println("=========================");
-        if (acceptedInternship != null) {
-            System.out.println("Accepted Internship: " +
-                acceptedInternship.getTitle() + "\t:\t" +
-                acceptedInternship.getCompanyName());
-        } else {
-            System.out.println("No Accepted Internships");
-        }
-        System.out.println("=========================");
+    Internship acceptedInternship = student.getAcceptedInternship();
+
+    System.out.println("==============================================================");
+    System.out.println("ACCEPTED INTERNSHIP");
+    System.out.println("==============================================================");
+
+    if (acceptedInternship != null) {
+        System.out.printf("%-15s : %s%n", "Title", acceptedInternship.getTitle());
+        System.out.printf("%-15s : %s%n", "Company", acceptedInternship.getCompanyName());
+        System.out.printf("%-15s : %s%n", "Level", acceptedInternship.getLevel());
+        System.out.printf("%-15s : %s%n", "Major", acceptedInternship.getPreferredMajor());
+        System.out.printf("%-15s : %s%n", "Closing Date", acceptedInternship.getAppCloseDate());
+    } else {
+        System.out.println("No accepted internships.");
     }
+
+    System.out.println("==============================================================");
+}
+
 
     /**
      * Show sorting options for internships.

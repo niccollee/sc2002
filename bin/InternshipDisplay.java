@@ -6,7 +6,7 @@ import java.util.List;
  * Provides methods to print a formatted internship table and several
  * menu prompts used by student and staff UIs.
  */
-public class InternshipDisplay extends ADisplay{
+public class InternshipDisplay extends ADisplay {
     /**
      * Print a formatted table of internships to stdout.
      *
@@ -14,18 +14,18 @@ public class InternshipDisplay extends ADisplay{
      */
     public void showInternships(List<Internship> internships) {
         System.out.println("==============================================================");
-        System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n | %-15s", 
-                        "ID", "Title", "Company", "Level", "Closing Date", "Status");
+        System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s | %-15s%n",
+                "ID", "Title", "Company", "Level", "Closing Date", "Status");
         System.out.println("==============================================================");
 
         for (Internship internship : internships) {
-            System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n | %-15s" ,
-                            internship.getId(),
-                            internship.getTitle(),
-                            internship.getCompanyName(),
-                            internship.getLevel(),
-                            internship.getAppCloseDate(),
-                            internship.getStatus());
+            System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s | %-15s%n",
+                    internship.getId(),
+                    internship.getTitle(),
+                    internship.getCompanyName(),
+                    internship.getLevel(),
+                    internship.getAppCloseDate(),
+                    internship.getStatus());
         }
 
         System.out.println("==============================================================");
@@ -34,7 +34,8 @@ public class InternshipDisplay extends ADisplay{
     /**
      * Print the sort options menu.
      *
-     * @param isStudent if true, print the student-specific sort options; otherwise print full options
+     * @param isStudent if true, print the student-specific sort options; otherwise
+     *                  print full options
      */
     public void showSortMenu(boolean isStudent) {
         String outputNotStudent = """
@@ -52,8 +53,7 @@ public class InternshipDisplay extends ADisplay{
                 10)Quit
                 =========================
                 """;
-        String outputIsStudent = 
-                """
+        String outputIsStudent = """
                 =========================
                 Sort By:
                 1)Title
@@ -75,7 +75,8 @@ public class InternshipDisplay extends ADisplay{
     /**
      * Print the filter options menu.
      *
-     * @param isStudent if true, print the student-specific filter options; otherwise print full options
+     * @param isStudent if true, print the student-specific filter options;
+     *                  otherwise print full options
      */
     public void showFilterMenu(boolean isStudent) {
         String outputNotStudent = """
@@ -93,8 +94,7 @@ public class InternshipDisplay extends ADisplay{
                 10)Quit
                 =========================
                 """;
-        String outputIsStudent = 
-                """
+        String outputIsStudent = """
                 =========================
                 Filter By:
                 1)Title
@@ -156,7 +156,7 @@ public class InternshipDisplay extends ADisplay{
                 """;
         System.out.println(output);
     }
-    
+
     /**
      * Print the visibility filter selection menu.
      */
