@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class RepRegisterUI {
     private Scanner sc;
     private CompanyRepDbMgr companyRepDbMgr;
+
     /**
      * Creates a new UI component for company representative
      * registration.
@@ -17,9 +18,13 @@ public class RepRegisterUI {
         sc = Input.SC;
         this.companyRepDbMgr = companyRepDbMgr;
     }
+
     /**
-     * Shows the registration page for company rep. Prompts
-     * them for their details and give them a default password.
+     * Run the registration flow.
+     *
+     * Prompts for id, company name, department and position. Attempts to add a new
+     * {@link CompanyRep} with a default password ("password", hashed) and prints
+     * success or failure messages to stdout.
      */
     public void start() {
         String output = """
