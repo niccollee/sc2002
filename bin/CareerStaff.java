@@ -4,7 +4,7 @@
  * an ID, name, role, department and email. The password is stored in hashed
  * form for security.
  */
-public class CareerStaff implements IUser {
+public class CareerStaff implements IUser{
     private String id;
     private String password;
     private String name;

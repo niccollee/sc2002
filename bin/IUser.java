@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Common user interface for entities that have identity and credentials.
  *
  * Implementations represent an application user and must provide accessors
  * for id, name and password, and a mutator for updating the password.
  */
-public interface IUser {
+public interface IUser extends Serializable{
     /**
      * Return the unique identifier for the user.
      *

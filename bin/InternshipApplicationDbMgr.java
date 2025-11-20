@@ -1,8 +1,9 @@
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class InternshipApplicationDbMgr {
+public class InternshipApplicationDbMgr implements Serializable {
     private List<InternshipApplication> internshipApplicationList;
     
     public InternshipApplicationDbMgr() {

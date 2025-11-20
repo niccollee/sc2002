@@ -1,4 +1,6 @@
-public class InternshipApplication {
+import java.io.Serializable;
+
+public class InternshipApplication implements Serializable {
     private Internship internship;
     private InternshipApplicationStatus internshipApplicationStatus;
 

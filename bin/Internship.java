@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Internship {
+public class Internship implements Serializable{
     private int id;
     private String title;
     private String description;
