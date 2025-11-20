@@ -8,4 +8,4 @@ CompanyRepID,Name,CompanyName,Department,Position,Email,Status,PasswordHash
 7,Eva Ng,TechFusion,IT,Engineer,eva.ng@techfusion.com,PENDING,XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=
 8,Frank Ong,Synergia,Research,Scientist,frank.ong@synergia.com,APPROVED,XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=
 9,Grace Tan,Innovent,Design,Designer,grace.tan@innovent.com,REJECT,XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=
-10,Hank Lim,NextWave,Logistics,Coordinator,hank.lim@nextwave.com,PENDING,XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=
+10,Hank Lim,NextWave,Logistics,Coordinator,hank.lim@nextwave.com,APPROVED,XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=

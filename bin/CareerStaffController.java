@@ -125,6 +125,9 @@ public class CareerStaffController {
             return false;
         } else {
             internshipWithdrawalApplicants.withdrawInternship();
+            Student student = internshipWithdrawalApplicants.getStudent();
+            student.withdrawAcceptedInternship();
+            internshipWithdrawalDbMgr.remove(internshipWithdrawalApplicants.getId());
             return true;
         }
 

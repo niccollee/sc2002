@@ -177,10 +177,11 @@ public class StudentUI {
      * Display process for  accepting internship.
      */
     public void acceptInternship() {
-        studentDisplay.showAcceptInternships(student);
+        studentDisplay.showAppliedInternships(student);
+        
         System.out.println("=========================");
         if (student.getAcceptedInternship() == null) {
-            System.out.println("Enter internship id to accept: ");
+            System.out.println("Enter application id to accept: ");
         } else {
             System.out.println("You have accepted an internship.");
             System.out.println("Accepted internship: ");
@@ -193,6 +194,7 @@ public class StudentUI {
         while (true) {
             try {
                 choice = sc.nextInt();
+                sc.nextLine();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! Enter input again.");
@@ -235,8 +237,12 @@ public class StudentUI {
             System.out.println("=========================");
             return;
         }
-        internshipWithdrawalDbMgr.add(student, internship);
-        System.out.println("Internship id " + id + " added to withdrawal request.");
+        if (internshipWithdrawalDbMgr.add(student, internship)) {
+            System.out.println("Internship id " + id + " added to withdrawal request.");
+        } else {
+            System.out.println("Error: internship id " + id + " not added to withdrawal request.");
+        }
+        
         System.out.println("=========================");
     }
     /**

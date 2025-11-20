@@ -175,17 +175,11 @@ public class CompanyRep implements IUser {
 	 */
 	// accept student internship
 	public boolean acceptStudentInternship(Student student, Internship internship, int decisionStatus) {
-		InternshipDbMgr internshipdbmanager = InternshipDbMgr.getInstance();
 		if (student == null || internship == null) return false;
 		if (repStatus != CompanyRepStatus.APPROVED) return false;
 
-		Internship dbInternship = internshipdbmanager.get(internship.getId());
-		if (dbInternship == null) return false;
-		if (dbInternship.getCompanyRep() != this) return false;
-		if (dbInternship.getStatus() != Status.APPROVED) return false;
-
 		InternshipApplicationDbMgr appDb = student.getAppliedInternships();
-		InternshipApplication application = appDb.get(dbInternship);
+		InternshipApplication application = appDb.get(internship);
 		if (application == null) {
 			// student did not apply for this internship
 			return false;

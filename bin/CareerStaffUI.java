@@ -198,7 +198,7 @@ public class CareerStaffUI {
         }
 
         System.out.println("=========================");
-        System.out.println("Enter Index Option of interest (-1 to escape): ");
+        System.out.println("Enter student id of interest (-1 to escape): ");
         String studentId = sc.nextLine();
         if (studentId.equals("-1")) {
             return;

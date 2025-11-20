@@ -277,10 +277,12 @@ switch(level_no) {
         System.out.println();
         System.out.print("Application decision. Enter 1 for accept, 2 for reject: ");
         int decision_no = sc.nextInt();
+        sc.nextLine();
         System.out.println();
         while (decision_no!=1 && decision_no!=2){
             System.out.println("please enter either 1 or 2");
             decision_no = sc.nextInt();
+            sc.nextLine();
         }
         boolean successfulDecide = companyRep.acceptStudentInternship(student, internship, decision_no);
         if (successfulDecide) System.out.println("Application decision successful. ");

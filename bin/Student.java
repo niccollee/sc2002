@@ -35,8 +35,6 @@ public class Student implements IUser {
         this.major = major;
         this.appliedInternships = new InternshipApplicationDbMgr();
         this.email = email;
-        InternshipApplicationDbMgr appliedInternships = new InternshipApplicationDbMgr();
-        this.appliedInternships = appliedInternships;
         this.acceptedInternships = null;
     }
 
