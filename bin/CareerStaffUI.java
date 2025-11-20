@@ -130,12 +130,11 @@ public class CareerStaffUI {
         CareerStaff careerStaff = careerStaffDbMgr.getCareerStaff(username);
         if (careerStaff != null) {
             if (careerStaffPasswordMgr.validate(careerStaff, password)) {
+                System.out.println("\nlogin Successful!!!");
                 return careerStaff;
             }
-        } else {
-            System.out.println("Error: Either StaffId Or Password is wrong");
         }
-
+        System.out.println("\nError: Either StaffId Or Password is wrong");
         return null;
     }
 
@@ -303,10 +302,10 @@ public class CareerStaffUI {
 
         boolean changed = careerStaffPasswordMgr.changePassword(careerStaff, oldPassword, newPassword);
         if (changed) {
-            System.out.println("Successfully changed password!");
+            System.out.println("\nSuccessfully changed password!");
             System.out.println("=========================");
         } else {
-            System.out.println("Failed to change password...");
+            System.out.println("\nFailed to change password...");
             System.out.println("=========================");
         }
     }
