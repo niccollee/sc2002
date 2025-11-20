@@ -132,7 +132,7 @@ public class CareerStaffUI {
 
         System.out.println("Enter StaffID: ");
         String username = sc.nextLine();
-        System.out.println("\nEnter Password: ");
+        System.out.println("Enter Password: ");
         String password = sc.nextLine();
 
         CareerStaff careerStaff = careerStaffDbMgr.getCareerStaff(username);
@@ -200,8 +200,7 @@ public class CareerStaffUI {
      */
     public void approveStudentWithdrawlApplication(Scanner sc) {
         careerStaffDisplay.showWithdrawalRequest();
-        if (InternshipWithdrawalApplicant.getCounter() == 0) {
-            System.out.println("\nNo Student Withdrawal Applicants\n");
+        if(InternshipWithdrawalDbMgr.getInstance().getAll().size() == 0){
             return;
         }
 

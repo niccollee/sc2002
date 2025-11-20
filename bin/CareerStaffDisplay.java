@@ -98,6 +98,10 @@ public class CareerStaffDisplay {
                 System.out.printf("%-5s | %-20s | %-20s | %-15s%n",
                                 "No.", "Student ID", "Student Name", "Internship ID");
                 System.out.println("==============================================================");
+                if(list.size() == 0){
+                        System.out.println("No Student Internship Withdrawal Request!!!");
+                        return;
+                }
 
                 for (int i = 0; i < list.size(); i++) {
                         InternshipWithdrawalApplicant app = list.get(i);
