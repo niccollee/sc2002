@@ -76,6 +76,10 @@ public class CareerStaffDisplay {
                                         cRepList.get(i).getRepStatus());
                 }
 
+                if (cRepList.size() == 0) {
+                        System.out.println("No Company Rep Applications!!!");
+                }
+
                 System.out.println(
                                 "===============================================================================================================");
 
@@ -91,19 +95,21 @@ public class CareerStaffDisplay {
 
                 System.out.println("==============================================================");
                 System.out.println("INTERNSHIP WITHDRAWAL APPLICANTS");
-                System.out.printf("%-5s | %-25s | %-15s%n",
-                                "No.", "Student Name", "Internship ID");
+                System.out.printf("%-5s | %-20s | %-20s | %-15s%n",
+                                "No.", "Student ID", "Student Name", "Internship ID");
                 System.out.println("==============================================================");
 
                 for (int i = 0; i < list.size(); i++) {
                         InternshipWithdrawalApplicant app = list.get(i);
-                        System.out.printf("%-5d | %-25s | %-15s%n",
-                                        i,
+                        System.out.printf("%-5d | %-20s | %-20s | %-15s%n",
+                                        i + 1,
+                                        app.getStudent().getId(),
                                         app.getStudent().getName(),
                                         app.getInternship().getId());
                 }
 
                 System.out.println("==============================================================");
+
         }
 
         /**
