@@ -1,4 +1,6 @@
-import java.util.List;
+
+
+
 
 public class CareerStaff implements IUser {
     private String id;
@@ -45,71 +47,6 @@ public class CareerStaff implements IUser {
         return this.password;
     }
 
-    public boolean approveCompanyRep(String companyRepId) {
-        CompanyRep companyRep = CompanyRepDbMgr.getInstance().get(companyRepId);
 
-        if (companyRep != null) {
-            companyRep.setRepStatus(CompanyRepStatus.APPROVED);
-            return true;
-        }
-
-        // When cannot find CompanyRepId in companyRepList to approve
-        return false;
-    }
-
-    public boolean rejectCompanyRep(String companyRepId) {
-        CompanyRep companyRep = CompanyRepDbMgr.getInstance().get(companyRepId);
-
-        if (companyRep != null) {
-            companyRep.setRepStatus(CompanyRepStatus.REJECT);
-            return true;
-        }
-
-        // When cannot find CompanyRepId in companyRepList to approve
-        return false;
-    }
-
-    public boolean approveInternship(int internshipId) {
-        Internship internship = InternshipDbMgr.getInstance().get(internshipId);
-
-        if(internship != null){
-            internship.setStatus(Status.APPROVED);
-            return true;
-        }
-
-        // when cannot find internshipId in internshipList
-        return false;
-    }
-
-    public boolean rejectInternship(int internshipId) {
-        Internship internship = InternshipDbMgr.getInstance().get(internshipId);
-
-        if(internship != null){
-            internship.setStatus(Status.REJECT);
-            return true;
-        }
-
-        // when cannot find internshipId in internshipList
-        return false;
-    }
-
-    //
-    public boolean approveStudentWidthdrawl(String studentID) {
-        List<InternshipWithdrawalApplicants> internshipWithdrawalApplicantsList = InternshipWithdrawalDbMgr
-                .getInstance().showAll();
-        for (int i = 0; i < internshipWithdrawalApplicantsList.size(); i++) {
-            if (internshipWithdrawalApplicantsList.get(i).getStudent().getId() == studentID) {
-                internshipWithdrawalApplicantsList.get(i).withdrawInternship();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // rejecting studentWithdrawl does nothing, internshipWithdrawlApplicants remain
-    // inside
-    public boolean rejectStudentWithdrawl(String studentID) {
-        return true;
-    }
 
 }

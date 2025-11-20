@@ -8,15 +8,18 @@ public class CareerStaffUI {
     private InternshipDbMgr internshipDbMgr;
     private InternshipUI internshipUi;
     private CompanyRepDbMgr companyRepDbMgr;
+    private CareerStaffController careerStaffController;
 
     public CareerStaffUI(CareerStaffDbMgr careerStaffDbMgr, InternshipDbMgr internshipDbMgr,
-            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi, CompanyRepDbMgr companyRepDbMgr) {
+            InternshipWithdrawalDbMgr internshipWithdrawalDbMgr, InternshipUI internshipUi,
+            CompanyRepDbMgr companyRepDbMgr, CareerStaffController careerStaffController) {
         this.careerStaffDisplay = new CareerStaffDisplay();
         this.careerStaffDbMgr = careerStaffDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipUi = internshipUi;
         this.companyRepDbMgr = companyRepDbMgr;
+        this.careerStaffController = careerStaffController;
 
         CareerStaffPasswordMgr careerStaffPasswordMgr = new CareerStaffPasswordMgr();
         Scanner sc = Input.SC;
@@ -107,7 +110,7 @@ public class CareerStaffUI {
         System.out.println("Enter CompanyRepID to approve");
         System.out.println("or -1 to return back to menu");
         String companyRepId = sc.nextLine();
-        if(Integer.parseInt(companyRepId) == -1){
+        if (Integer.parseInt(companyRepId) == -1) {
             return;
         }
 
@@ -127,36 +130,28 @@ public class CareerStaffUI {
         }
 
         if (approveOrReject == 1) {
-            careerStaff.approveCompanyRep(companyRepId);
+            careerStaffController.approveCompanyRep(companyRepId, companyRepDbMgr);
         } else {
-            careerStaff.rejectCompanyRep(companyRepId);
+            careerStaffController.rejectCompanyRep(companyRepId, companyRepDbMgr);
         }
 
     }
 
     public void approveStudentWithdrawlApplication(Scanner sc) {
         careerStaffDisplay.showWithdrawalRequest();
-        if(InternshipWithdrawalApplicants.getCounter()==0){
+        if (InternshipWithdrawalApplicants.getCounter() == 0) {
             System.out.println("No Student Withdrawal Applicants");
             return;
         }
-        
+
         System.out.println("=========================");
         System.out.println("Enter Index Option of interest: ");
         System.out.println("or -1 to return back to menu");
 
-        String IndexOption = sc.nextLine();
-        if(Integer.parseInt(IndexOption) == -1){
+        String studentId = sc.nextLine();
+        if (Integer.parseInt(studentId) == -1) {
             return;
         }
-
-        while (internshipWithdrawalDbMgr.get(Integer.parseInt(IndexOption)) == null) {
-            System.out.println("Invalid option, enter from options shown");
-            IndexOption = sc.nextLine();
-        }
-
-        InternshipWithdrawalApplicants internshipWithdrawalApplicants = internshipWithdrawalDbMgr
-                .get(Integer.parseInt(IndexOption));
 
         System.out.println("Enter 1 or 0 to (Approve or reject)");
         int approveOrReject = sc.nextInt();
@@ -169,7 +164,9 @@ public class CareerStaffUI {
         }
 
         if (approveOrReject == 1) {
-            internshipWithdrawalApplicants.withdrawInternship();
+            careerStaffController.approveStudentWidthdrawl(studentId, internshipWithdrawalDbMgr);
+        } else {
+            careerStaffController.rejectStudentWithdrawl(studentId, internshipWithdrawalDbMgr);
         }
 
     }
@@ -182,7 +179,7 @@ public class CareerStaffUI {
         int internshipID = sc.nextInt();
         sc.nextLine();
 
-        if(internshipID == -1){
+        if (internshipID == -1) {
             return;
         }
 
@@ -191,8 +188,6 @@ public class CareerStaffUI {
             internshipID = sc.nextInt();
             sc.nextLine();
         }
-
-        Internship internship = internshipDbMgr.get(internshipID);
 
         System.out.println("Enter 1 or 0 to (Approve or Reject)");
         int approveOrReject = sc.nextInt();
@@ -205,9 +200,9 @@ public class CareerStaffUI {
         }
 
         if (approveOrReject == 1) {
-            internship.setStatus(Status.APPROVED);
+            careerStaffController.approveInternship(internshipID, internshipDbMgr);
         } else {
-            internship.setStatus(Status.REJECT);
+            careerStaffController.rejectInternship(internshipID, internshipDbMgr);
         }
 
     }
