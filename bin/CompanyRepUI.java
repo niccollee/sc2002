@@ -1,6 +1,8 @@
-import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 // import the classes over //
 
 /**
@@ -16,6 +18,8 @@ public class CompanyRepUI {
     private CompanyRepDbMgr companyRepDbMgr;
     private InternshipDbMgr internshipDbMgr;
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
+    private DateTimeFormatter formatter;
+    Scanner sc;
 
     /**
      * Creates a new {@code CompanyRepUI} and starts the interaction flow.
@@ -31,14 +35,16 @@ public class CompanyRepUI {
         InternshipDbMgr internshipDbMgr,
         InternshipWithdrawalDbMgr internshipWithdrawalDbMgr
         ) {
+        formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         companyRepDisplay = new CompanyRepDisplay();
         internshipUI = new InternshipUI();
         this.companyRepDbMgr = companyRepDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         CompanyRepPasswordMgr companyRepPasswordMgr = new CompanyRepPasswordMgr();
-        Scanner sc = Input.SC;
+        sc = Input.SC;
         companyRep = login(sc, companyRepPasswordMgr);
+        
         /* If login details is invalid, continue prompting user to login for 3 more
          * times. Afterwards return back to main page.
          */
@@ -96,6 +102,9 @@ public class CompanyRepUI {
      * @return the logged-in {@link CompanyRep} if successful, or {@code null} if login fails
      */
     public CompanyRep login(Scanner sc, CompanyRepPasswordMgr companyRepPasswordMgr) {
+        for (CompanyRep i : companyRepDbMgr.showAll()) {
+            System.out.println(i.getId());
+        }
         System.out.println("=========================");
         System.out.println("COMPANY REP");
         System.out.println("Enter Username: (email address)");
@@ -104,6 +113,7 @@ public class CompanyRepUI {
         String password = sc.nextLine();
         CompanyRep companyRep = companyRepDbMgr.get(username);
         if (companyRep != null) {
+            System.out.println(companyRep.getId());
             if (companyRepPasswordMgr.validate(companyRep, password)) {
                 return companyRep;
             }
@@ -170,13 +180,29 @@ switch(level_no) {
         System.out.print("Preferred major: ");
         String preferredMajor = sc.nextLine();
         System.out.println();
+        LocalDate appOpenDate;
+        LocalDate appCloseDate;
         System.out.print("Application opening date (dd-mm-yyyy format): "); 
-        String date1 = sc.nextLine();
-        Date appOpenDate = new SimpleDateFormat("dd-MM-yyyy").parse(date1);  
+        while (true) {
+            String date1 = sc.nextLine();
+            try {
+                appOpenDate = LocalDate.parse(date1, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format! Try again.");
+            }
+        }
         System.out.println();
         System.out.print("Application closing date (dd-mm-yyyy format): "); 
-        String date2 = sc.nextLine();
-        Date appCloseDate = new SimpleDateFormat("dd-MM-yyyy").parse(date2);  
+        while (true) {
+            String date2 = sc.nextLine();
+            try {
+                appCloseDate = LocalDate.parse(date2, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format! Try again.");
+            }
+        }
         System.out.println();
         System.out.print("Company name: ");
         String companyName = sc.nextLine();
@@ -185,7 +211,7 @@ switch(level_no) {
         int noSlots = sc.nextInt();
         System.out.println();
         boolean visibility = false;
-        Internship internship = new Internship(title, description, level, preferredMajor, appOpenDate, appCloseDate, visibility, companyName, companyRep, noSlots, visibility);
+        Internship internship = new Internship(title, description, level, preferredMajor, appOpenDate, appCloseDate, Status.PENDING, companyName, companyRep, noSlots, visibility);
         boolean successfulAdd = companyRep.addInternship(internship);
         if (successfulAdd) System.out.println("Internship added successfully.");
         else System.out.println("Internship adding failed.");
@@ -242,7 +268,7 @@ switch(level_no) {
         }
         boolean decision;
         if (decision_no==0){decision = false;}
-        else if (decision==1){decision = true;}
+        else {decision = true;}
         internship.setVisibility(decision);
         System.out.println("=========================");
     }
@@ -255,7 +281,9 @@ switch(level_no) {
      * @param sc         shared {@link Scanner} for user input
      */
     public void viewInternshipOpps(CompanyRep companyRep, Scanner sc){
-        internshipList = internshipDbMgr.filter(InternshipAttributes.companyRep.companyName, argString);
+        System.out.println("=========================");
+        List<Internship> internshipList = internshipDbMgr.filter(InternshipAttributes.COMPANYNAME, companyRep.getName());
+        InternshipDisplay internshipDisplay = new InternshipDisplay();
         internshipDisplay.showInternships(internshipList);
     }
 
