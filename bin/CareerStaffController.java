@@ -1,5 +1,3 @@
-import java.util.List;
-
 /**
  * Controller class that handles actions performed by career staff users.
  * This controller provides operations to approve or reject company representatives,
