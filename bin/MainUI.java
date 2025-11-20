@@ -1,7 +1,20 @@
 import java.util.Scanner;
 
+/**
+ * Main application UI controller.
+ *
+ * Presents the top-level menu and dispatches user selections to the appropriate
+ * sub-UIs until the user chooses to quit.
+ */
 public class MainUI {
     private Scanner sc;
+
+    /**
+     * Run the interactive main menu loop.
+     *
+     * Reads user input and launches the selected UI actions. Returns when the
+     * user selects the quit option.
+     */
     public void menu() {
         sc = Input.SC;
         MainDisplay mainDisplay = new MainDisplay();
@@ -42,6 +55,13 @@ public class MainUI {
         }
     }
 
+    /**
+     * Application entry point.
+     *
+     * Creates a MainUI instance and starts the menu loop.
+     *
+     * @param args command line arguments (ignored)
+     */
     public static void main(String[] args) {
         MainUI mainUI = new MainUI();
         mainUI.menu();
