@@ -1,7 +1,17 @@
 import java.util.List;
 
+/**
+ * Handles console display operations for career centre staff.
+ * This includes login prompts, main menu options, and formatted tables
+ * for company representative applications, student withdrawal requests,
+ * and internship opportunities.
+ */
 public class CareerStaffDisplay {
 
+        /**
+         * Displays the login prompt for career centre staff.
+         * Shows fields for username and password in a formatted block.
+         */
         public void showStaffLogin() {
                 String output = """
                                 =========================
@@ -14,6 +24,11 @@ public class CareerStaffDisplay {
                 System.out.println(output);
         }
 
+        /**
+         * Displays the main menu for career centre staff.
+         * Lists the available actions such as reviewing applications,
+         * handling withdrawal requests and managing internships.
+         */
         public void showMenu() {
                 String output = """
                                 =========================
@@ -28,6 +43,11 @@ public class CareerStaffDisplay {
                 System.out.println(output);
         }
 
+        /**
+         * Displays a formatted table of pending company representative applications.
+         * The data is retrieved from {@link CompanyRepDbMgr} and only representatives
+         * with PENDING status are shown.
+         */
         public void showCompanyRepApplications() {
                 List<CompanyRep> cRepList = CompanyRepDbMgr.getInstance().filter(CompanyRepAttributes.REPSTATUS,
                                 CompanyRepStatus.PENDING.toString());
@@ -61,6 +81,11 @@ public class CareerStaffDisplay {
 
         }
 
+        /**
+         * Displays a list of internship withdrawal requests made by students.
+         * Each line shows the applicant number, student name and internship ID.
+         * The data is retrieved from {@link InternshipWithdrawalDbMgr}.
+         */
         public void showWithdrawalRequest() {
                 List<InternshipWithdrawalApplicants> internshipWithdrawlList = InternshipWithdrawalDbMgr.getInstance()
                                 .showAll();
@@ -78,6 +103,11 @@ public class CareerStaffDisplay {
                 System.out.println("=========================");
         }
 
+        /**
+         * Displays a formatted table of internships that are pending approval.
+         * The data is retrieved from {@link InternshipDbMgr} and filtered by
+         * PENDING status.
+         */
         public void showInternshipsPending() {
                 List<Internship> notApprovedinternshipList = InternshipDbMgr.getInstance().filter(
                                 InternshipAttributes.STATUS,
