@@ -252,7 +252,7 @@ switch(level_no) {
                 System.out.println("Invalid input!");
             }
         }
-        List<Student> studentList = studentDbMgr.get();
+        List<Student> studentList = studentDbMgr.getAll();
         studentList = StudentFilter.filter(studentList, StudentAttributes.APPLIEDINTERNSHIP, ""+internship.getId());
         StudentDisplay studentDisplay = new StudentDisplay();
         studentDisplay.showStudentList(studentList);
