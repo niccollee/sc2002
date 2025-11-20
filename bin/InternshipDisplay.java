@@ -14,17 +14,18 @@ public class InternshipDisplay extends ADisplay{
      */
     public void showInternships(List<Internship> internships) {
         System.out.println("==============================================================");
-        System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n", 
-                        "ID", "Title", "Company", "Level", "Closing Date");
+        System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n | %-15s", 
+                        "ID", "Title", "Company", "Level", "Closing Date", "Status");
         System.out.println("==============================================================");
 
         for (Internship internship : internships) {
-            System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n",
+            System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n | %-15s" ,
                             internship.getId(),
                             internship.getTitle(),
                             internship.getCompanyName(),
                             internship.getLevel(),
-                            internship.getAppCloseDate());
+                            internship.getAppCloseDate(),
+                            internship.getStatus());
         }
 
         System.out.println("==============================================================");

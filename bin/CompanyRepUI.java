@@ -58,6 +58,10 @@ public class CompanyRepUI {
                 if (companyRep != null) {
                     break;
                 }
+                if (companyRep.getRepStatus() != CompanyRepStatus.APPROVED) {
+                    System.out.println("Company rep is not approved!");
+                    return;
+                }
                 if (i == 2) {
                     return;
                 }
@@ -231,9 +235,17 @@ switch(level_no) {
      * @param sc         shared {@link Scanner} for user input
      */
     public void approveRejectInternship(CompanyRep companyRep, Scanner sc){
+        List<Internship> internshipList = internshipDbMgr.filter(InternshipAttributes.COMPANYNAME, companyRep.getName());
+        if (internshipList.size() == 0) {
+            System.out.println("=========================");
+            System.out.println("No internship applicants.");
+            System.out.println("=========================");
+            return;
+        }
+        viewInternshipOpps(companyRep, sc);
         System.out.println("=========================");
         System.out.println("Approve or reject internship.");
-        System.out.println("Enter internship id  to view applicant (-1 to escape)L: ");
+        System.out.println("Enter internship id  to view applicant (-1 to escape): ");
         int internshipId;
         Internship internship;
         while (true) {
