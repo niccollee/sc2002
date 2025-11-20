@@ -31,12 +31,25 @@ public class CompanyRepDbMgr {
 	 *
 	 * @return the shared {@code CompanyRepDbMgr} instance
 	 */
-	public static CompanyRepDbMgr getInstance() {
+	public static synchronized CompanyRepDbMgr getInstance() {
 		if (instance == null) {
 			instance = new CompanyRepDbMgr();
 		}
 		return instance;
 	}
+
+	/**
+     * Replace the singleton instance. Synchronized to avoid races during tests or state restoration.
+     *
+     * @param newInstance non-null CompanyRepDbMgr to set as the singleton
+     * @throws IllegalArgumentException if newInstance is null
+     */
+    public static synchronized void setInstance(CompanyRepDbMgr newInstance) {
+        if (newInstance == null) {
+            throw new IllegalArgumentException("newInstance must not be null");
+        }
+        instance = newInstance;
+    }
 
 	/**
 	 * Returns the company representative with the given ID, or null if not found.

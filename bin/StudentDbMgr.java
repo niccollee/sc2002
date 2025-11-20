@@ -14,6 +14,40 @@ public class StudentDbMgr {
     private static StudentDbMgr instance;
 
     /**
+     * Private constructor to enforce singleton. Initializes the internal list
+     * and imports data from CSV.
+     */
+    private StudentDbMgr() {
+        this.studentList = new ArrayList<Student>();
+        importDb();
+    }
+
+    /**
+     * Obtain the singleton instance of StudentDbMgr, creating it if necessary.
+     *
+     * @return the singleton StudentDbMgr
+     */
+    public static StudentDbMgr getInstance() {
+        if (instance == null) {
+            instance = new StudentDbMgr();
+        }
+        return instance;
+    }
+
+    /**
+     * Replace the singleton instance. Synchronized to avoid races during tests or state restoration.
+     *
+     * @param newInstance non-null StudentDbMgr to set as the singleton
+     * @throws IllegalArgumentException if newInstance is null
+     */
+    public static synchronized void setInstance(StudentDbMgr newInstance) {
+        if (newInstance == null) {
+            throw new IllegalArgumentException("newInstance must not be null");
+        }
+        instance = newInstance;
+    }
+
+    /**
      * Load students from the CSV file "../data/student_list.csv" into the
      * internal list.
      *
@@ -67,26 +101,7 @@ public class StudentDbMgr {
             System.out.println("ERROR: Unable to write file: " + e.getMessage());
         }
     }
-    /**
-     * Private constructor to enforce singleton. Initializes the internal list
-     * and imports data from CSV.
-     */
-    private StudentDbMgr() {
-        this.studentList = new ArrayList<Student>();
-        importDb();
-    }
 
-    /**
-     * Obtain the singleton instance of StudentDbMgr, creating it if necessary.
-     *
-     * @return the singleton StudentDbMgr
-     */
-    public static StudentDbMgr getInstance() {
-        if (instance == null) {
-            instance = new StudentDbMgr();
-        }
-        return instance;
-    }
     /**
      * Add {@link Student} into the list.
      * @param student the student that is added into the list.
@@ -105,7 +120,7 @@ public class StudentDbMgr {
      *
      * @return the list of Student instances
      */
-    public List<Student> get() {
+    public List<Student> getAll() {
         return studentList;
     }
 
