@@ -205,14 +205,12 @@ switch(level_no) {
             }
         }
         System.out.println();
-        System.out.print("Company name: ");
-        String companyName = sc.nextLine();
         System.out.println();
         System.out.print("Number of slots: ");
         int noSlots = sc.nextInt();
         System.out.println();
         boolean visibility = false;
-        Internship internship = new Internship(title, description, level, preferredMajor, appOpenDate, appCloseDate, Status.PENDING, companyName, companyRep, noSlots, visibility);
+        Internship internship = new Internship(title, description, level, preferredMajor, appOpenDate, appCloseDate, Status.PENDING, companyRep.getName(), companyRep, noSlots, visibility);
         boolean successfulAdd = companyRep.addInternship(internship);
         if (successfulAdd) System.out.println("Internship added successfully.");
         else System.out.println("Internship adding failed.");
@@ -257,9 +255,24 @@ switch(level_no) {
      */
     public void toggleInternshipVisibility(CompanyRep companyRep){
         System.out.println("=========================");
-        System.out.print("Internship name: ");
-        String internshipTitle = sc.nextLine();
-        Internship internship = companyRep.getInternship(internshipTitle);
+        System.out.println("Toggling internship visibility. ");
+        
+        int internshipId;
+        Internship internship;
+        while (true) {
+            System.out.print("Enter internship id: ");
+            try {
+                internshipId = sc.nextInt();
+                internship = internshipDbMgr.get(internshipId);
+                if (internship != null && internship.getCompanyName() != companyRep.getName()) {
+                    break;
+                } else {
+                    System.out.println("Invalid internship id!");
+                }
+            } catch(Exception e) {
+                System.out.println("Invalid input!");
+            }
+        }
         System.out.println("Set visibility to: press 0 for invisible, press 1 for visible.");
         int decision_no = sc.nextInt();
         System.out.println();
@@ -271,6 +284,9 @@ switch(level_no) {
         if (decision_no==0){decision = false;}
         else {decision = true;}
         internship.setVisibility(decision);
+        System.out.println("Internship id: " + internship.getId()
+            + " successfully set to "
+            + (decision ? "visible" : "not visible"));
         System.out.println("=========================");
     }
 
