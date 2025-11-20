@@ -1,5 +1,15 @@
 import java.util.List;
+
+/**
+ * Console display utilities for student-related screens.
+ *
+ * Provides methods to print login, menu, internship listings and related
+ * student views to standard output.
+ */
 public class StudentDisplay extends ADisplay {
+    /**
+     * Show the student login prompt.
+     */
     public void showStudentLogin() {
         String output = """
                 =========================
@@ -10,6 +20,10 @@ public class StudentDisplay extends ADisplay {
                 """;
         System.out.println(output);
     }
+
+    /**
+     * Show the main student menu.
+     */
     public void showMenu() {
         String output = """
                 =========================
@@ -25,6 +39,11 @@ public class StudentDisplay extends ADisplay {
         System.out.println(output);
     }
 
+    /**
+     * Display a list of internships.
+     *
+     * @param internships the internships to display
+     */
     public void showViewOpportunities(List<Internship> internships) {
         System.out.println("=========================");
         System.out.println("Internship Opportunities");
@@ -39,6 +58,10 @@ public class StudentDisplay extends ADisplay {
         }
         System.out.println("=========================");
     }
+
+    /**
+     * Show the internship application header.
+     */
     public void showApplyFor() {
         String output = """
                 =========================
@@ -49,6 +72,12 @@ public class StudentDisplay extends ADisplay {
                 """;
         System.out.println(output);
     }
+
+    /**
+     * Show internships the student has applied for.
+     *
+     * @param student the student whose applications are shown
+     */
     public void showAppliedInternships(Student student) {
         System.out.println("=========================");
         System.out.println("INTERNSHIPS APPLIED");
@@ -58,6 +87,12 @@ public class StudentDisplay extends ADisplay {
         }
         System.out.println("=========================");
     }
+
+    /**
+     * Show the student's accepted internship if any.
+     *
+     * @param student the student whose accepted internship is shown
+     */
     public void showAcceptInternships(Student student) {
         Internship acceptedInternship = student.getAcceptedInternship();
         System.out.println("=========================");
@@ -70,6 +105,10 @@ public class StudentDisplay extends ADisplay {
         }
         System.out.println("=========================");
     }
+
+    /**
+     * Show sorting options for internships.
+     */
     public void showSortInternshipsBy() {
         String output = """
                 Sort By:

@@ -1,4 +1,12 @@
+/**
+ * Console display for the main application menu.
+ *
+ * Shows the top-level options presented when the application starts.
+ */
 public class MainDisplay extends ADisplay{
+    /**
+     * Print the main menu to stdout.
+     */
     public void showMenu() {
         String output = """
                 =========================

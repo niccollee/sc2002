@@ -3,7 +3,20 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Provides sorting operations for lists of {@link CompanyRep}.
+ * Supports sorting by the attributes defined in {@link CompanyRepAttributes}.
+ */
 public class CompanyRepSorter {
+
+    /**
+     * Sorts the given list of company representatives based on the specified attribute.
+     * If {@code sortBy} is {@code null}, a shallow copy of the original list is returned.
+     *
+     * @param companyRepList the list of {@link CompanyRep} to sort
+     * @param sortBy         the {@link CompanyRepAttributes} used as the sort key
+     * @return a new list of {@link CompanyRep} sorted according to {@code sortBy}
+     */
     public static List<CompanyRep> sort(List<CompanyRep> companyRepList, CompanyRepAttributes sortBy) {
 		if (sortBy == null)
 			return new ArrayList<>(companyRepList);

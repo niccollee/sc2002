@@ -3,8 +3,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Utility for sorting lists of Student by a specified StudentAttributes key.
+ *
+ * Provides a single static method that returns a new sorted list and does
+ * not modify the input list.
+ */
 public class StudentSorter {
-    // Sort studentList by attribute specified in sortBy and return the sorted list.
+    /**
+     * Sort the provided studentList by the attribute specified in sortBy.
+     *
+     * Returns a new List containing the sorted students. If the attribute is
+     * not recognised an empty list is returned.
+     *
+     * @param studentList the list of students to sort (may be empty, not null)
+     * @param sortBy the attribute to sort by
+     * @return a new List of Student sorted according to sortBy, or an empty list
+     *         if sortBy is not supported
+     */
     public static List<Student> sort(List<Student> studentList, StudentAttributes sortBy) {
         switch(sortBy) {
             // Sort by name based on alphabetical order

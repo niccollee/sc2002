@@ -7,7 +7,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Manages the in-memory list and CSV persistence of {@link CareerStaff} records.
+ * This class is implemented as a singleton and is responsible for importing
+ * career staff data from a CSV file at startup and exporting the current state
+ * back to the CSV file when requested. It also provides helper methods for
+ * searching, adding, removing, sorting, and filtering career staff.
+ */
 public class CareerStaffDbMgr {
+
+    /**
+     * Simple test entry point for importing and exporting the career staff
+     * database. This can be used to verify that the CSV read/write logic works.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         CareerStaffDbMgr.getInstance();
         CareerStaffDbMgr.getInstance().exportDb();
@@ -16,11 +30,21 @@ public class CareerStaffDbMgr {
     private List<CareerStaff> careerStaffList;
     private static CareerStaffDbMgr instance;
 
+    /**
+     * Creates a new {@code CareerStaffDbMgr} and initializes the internal list
+     * of career staff by importing from the CSV file.
+     */
     private CareerStaffDbMgr() {
         this.careerStaffList = new ArrayList<>();
         this.importDb();
     }
 
+    /**
+     * Returns the singleton instance of {@code CareerStaffDbMgr}.
+     * If no instance exists yet, a new one is created and initialized.
+     *
+     * @return the single {@code CareerStaffDbMgr} instance
+     */
     public static CareerStaffDbMgr getInstance() {
         if (instance == null) {
             instance = new CareerStaffDbMgr();
@@ -29,6 +53,13 @@ public class CareerStaffDbMgr {
     }
 
     // read in from career staff list csv and initalize list of career staff
+    /**
+     * Imports the career staff data from the CSV file into memory.
+     * Each line after the header is parsed into a {@link CareerStaff} object and
+     * added to the internal list.
+     *
+     * @return {@code true} if the file was read successfully; {@code false} if an I/O error occurred
+     */
     private boolean importDb() {
         String filepath = "../data/career_staff_list.csv";
 
@@ -54,6 +85,11 @@ public class CareerStaffDbMgr {
     }
 
     // export list of career staff into csv
+    /**
+     * Exports the current list of career staff to the CSV file.
+     * The existing file is overwritten with a new header row followed by one
+     * line per {@link CareerStaff}, with values separated by commas.
+     */
     private void exportDb() {
         String filepath = "../data/career_staff_list.csv";
 
@@ -78,18 +114,44 @@ public class CareerStaffDbMgr {
         }
     }
 
+    /**
+     * Returns a sorted view of the career staff list based on the given attribute.
+     *
+     * @param sortBy the attribute used to sort the staff list
+     * @return a new {@link List} of {@link CareerStaff} sorted by the specified attribute
+     */
     public List<CareerStaff> sort(CareerStaffAttributes sortBy) {
         return CareerStaffSorter.sort(careerStaffList, sortBy);
     }
 
+    /**
+     * Returns a filtered view of the career staff list based on the given attribute
+     * and filter argument.
+     *
+     * @param filterBy the attribute used for filtering
+     * @param args     the argument or value used as the filter criterion
+     * @return a new {@link List} of {@link CareerStaff} that match the filter
+     */
     public List<CareerStaff> filter(CareerStaffAttributes filterBy, String args) {
         return CareerStaffFilter.filter(careerStaffList, filterBy, args);
     }
 
+    /**
+     * Removes the specified {@link CareerStaff} from the internal list.
+     *
+     * @param careerStaff the staff record to be removed
+     * @return {@code true} if the staff was present and removed; {@code false} otherwise
+     */
     public boolean remove(CareerStaff careerStaff) {
         return careerStaffList.remove(careerStaff);
     }
 
+    /**
+     * Retrieves a {@link CareerStaff} by its ID.
+     *
+     * @param id the ID of the staff to look up
+     * @return the matching {@link CareerStaff}, or {@code null} if not found
+     */
     public CareerStaff getCareerStaff(String id) {
         for (CareerStaff cStaff : this.careerStaffList) {
             if (cStaff.getId().equals(id)) {
@@ -100,6 +162,18 @@ public class CareerStaffDbMgr {
         return null;
     }
 
+    /**
+     * Adds a new {@link CareerStaff} record to the internal list if the ID passes
+     * the check performed by {@link #getCareerStaff(String)}.
+     *
+     * @param id          the staff ID
+     * @param name        the staff name
+     * @param role        the staff role
+     * @param department  the staff department
+     * @param email       the staff email
+     * @param passwordTxt the plain-text password to be hashed and stored
+     * @return {@code true} if the staff was added; {@code false} otherwise
+     */
     public boolean add(String id, String name, String role, String department, String email, String passwordTxt) {
         if (this.getCareerStaff(id) == null) {
             return false;
@@ -110,6 +184,11 @@ public class CareerStaffDbMgr {
         }
     }
 
+    /**
+     * Returns the full list of {@link CareerStaff} managed by this database manager.
+     *
+     * @return the internal list of career staff
+     */
     public List<CareerStaff> showAll() {
         return this.careerStaffList;
     }

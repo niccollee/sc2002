@@ -13,6 +13,12 @@ public class StudentDbMgr {
     private List<Student> studentList;
     private static StudentDbMgr instance;
 
+    /**
+     * Load students from the CSV file "../data/student_list.csv" into the
+     * internal list.
+     *
+     * @return true when the file was read successfully, false on I/O error
+     */
     private boolean importDb() {
         String filepath = "../data/student_list.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -35,7 +41,8 @@ public class StudentDbMgr {
     }
 
     /**
-     * Exports the csv from the filepath and 
+     * Write the internal student list to the CSV file "../data/student_list.csv".
+     * Existing file content is overwritten.
      */
     private void exportDb() {
         String filepath = "../data/student_list.csv";
@@ -61,8 +68,8 @@ public class StudentDbMgr {
         }
     }
     /**
-     * Private contructor to ensure only one instance of itself. Initialise ArrayList and import the csv 
-     * into this class.
+     * Private constructor to enforce singleton. Initializes the internal list
+     * and imports data from CSV.
      */
     private StudentDbMgr() {
         this.studentList = new ArrayList<Student>();
@@ -70,8 +77,9 @@ public class StudentDbMgr {
     }
 
     /**
-     * Gets an instance of this. If not initialised yet, initialise.
-     * @return an instance of itself.
+     * Obtain the singleton instance of StudentDbMgr, creating it if necessary.
+     *
+     * @return the singleton StudentDbMgr
      */
     public static StudentDbMgr getInstance() {
         if (instance == null) {
@@ -92,13 +100,21 @@ public class StudentDbMgr {
         return true;
     }
 
-    // Getter method to get student
+    /**
+     * Return the internal list of students.
+     *
+     * @return the list of Student instances
+     */
     public List<Student> get() {
         return studentList;
     }
 
-    // Method to check if duplicate id exist. Return true if id exist, otherwise
-    // false.
+    /**
+     * Check whether a student id already exists.
+     *
+     * @param id the student id to check
+     * @return true if an entry with the given id exists, false otherwise
+     */
     public boolean containsId(String id) {
         for (Student i : studentList) {
             if (i.getId() == id) {
@@ -108,8 +124,12 @@ public class StudentDbMgr {
         return false;
     }
 
-    // Getter method for student from the studentList. If student does not exist,
-    // return null
+    /**
+     * Retrieve a Student by id.
+     *
+     * @param id the student id to find
+     * @return the Student with the matching id, or null if not found
+     */
     public Student getStudent(String id) {
         for (Student i : studentList) {
             if (i.getId().equals(id)) {
@@ -119,11 +139,23 @@ public class StudentDbMgr {
         return null;
     }
 
-    // Sort studentList by attribute specified in sortBy and return the sorted list.
+    /**
+     * Return a new list of students sorted by the given attribute.
+     *
+     * @param sortBy attribute to sort by
+     * @return a sorted List of Student
+     */
     public List<Student> sort(StudentAttributes sortBy) {
         return StudentSorter.sort(studentList, sortBy);
     }
 
+    /**
+     * Return a filtered list of students matching the given attribute and argument.
+     *
+     * @param filterBy attribute to filter by
+     * @param args filter argument (string form; numeric filters expect parseable integer)
+     * @return a List of Student that match the filter
+     */
     public List<Student> filter(StudentAttributes filterBy, String args) {
         return StudentFilter.filter(studentList, filterBy, args);
     }
