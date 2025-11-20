@@ -159,7 +159,7 @@ public class CompanyRepDbMgr{
 			br.readLine(); // ignore first read line of column headers
 			while ((line = br.readLine()) != null) {
 
-				System.out.println("reading in: " + line);
+				// System.out.println("reading in: " + line);
 
 				values = line.split(","); // seperate at delimiter ','
 				companyRepList.add(new CompanyRep(values[5], values[2], values[3], values[4],

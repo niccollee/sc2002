@@ -52,7 +52,7 @@ public class InternshipDbMgr{
 			br.readLine(); // ignore first read line of column headers
 			while ((line = br.readLine()) != null) {
 
-				System.out.println("reading in: " + line);
+				//System.out.println("reading in: " + line);
 
 				values = line.split(","); // seperate at delimiter ','
                 LocalDate openDate;
