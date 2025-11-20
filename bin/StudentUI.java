@@ -88,17 +88,19 @@ public class StudentUI {
      * @return true if validation successful, otherwise return false.
      */
     public Student login() {
-        System.out.println("=========================");
+        System.out.println("=======================================");
         System.out.println("STUDENT");
+        System.out.println("=======================================");
         System.out.println("Enter Username: (matriculation number)");
-        String username = sc.nextLine();
+        String username = sc.next();
         System.out.println("Enter Password: ");
-        String password = sc.nextLine();
+        String password = sc.next();
         Student student = studentDbMgr.getStudent(username);
         if (student != null) {
             if (studentPasswordMgr.validate(student, password)) {
                 return student;
             }
+            else { System.out.println("Invalid Password!");}
         } else {
             System.out.println("Student does not exist!");
         }
@@ -138,7 +140,7 @@ public class StudentUI {
      * Display process for applying internships.
      */
     public void applyForInternship() {
-        System.out.println("=========================");
+        System.out.println("=======================================");
         System.out.println("Apply for internship. Enter internship id: ");
         int id;
         while (true) {
@@ -154,18 +156,18 @@ public class StudentUI {
         Internship applyingInternship = internshipDbMgr.get(id);
         if (student.applyInternship(applyingInternship)) {
             System.out.println("Internship id: " + applyingInternship.getId() + " added!");
-                System.out.println("=========================");
+                System.out.println("=======================================");
                 return;
         }
         System.out.println("Invalid internship!");
-        System.out.println("=========================");
+        System.out.println("=======================================");
         if (applyingInternship != null && applyingInternship.getVisibility() && applyingInternship.getStatus() == Status.APPROVED) {
             if (student.applyInternship(applyingInternship)) {
                 
             } 
         }
         System.out.println("Invalid internship!");
-        System.out.println("=========================");
+        System.out.println("=======================================");
     }
     /**
      * View applied internship for that student.
@@ -179,7 +181,7 @@ public class StudentUI {
     public void acceptInternship() {
         studentDisplay.showAppliedInternships(student);
         
-        System.out.println("=========================");
+        System.out.println("=======================================");
         if (student.getAcceptedInternship() == null) {
             System.out.println("Enter application id to accept: ");
         } else {
@@ -187,7 +189,7 @@ public class StudentUI {
             System.out.println("Accepted internship: ");
             System.out.println("Intenship id \t\t:\tTitle");
             System.out.println(student.getAcceptedInternship().getId() +  "\t\t\t:\t" + student.getAcceptedInternship().getTitle() + "\t\t");
-            System.out.println("=========================");
+            System.out.println("=======================================");
             return;
         }
         int choice;
@@ -204,6 +206,7 @@ public class StudentUI {
         }
         if (choice < 0 || choice >= student.getAppliedInternships().getAll().size()) {
             System.out.println("Invalid response!");
+            System.out.println("=======================================");
             return;
         }
         if (student.acceptInternship(student.getAppliedInternships().getAll().get(choice).getInternship())) {
@@ -212,13 +215,13 @@ public class StudentUI {
             System.out.println("Internship not accepted!");
         }
         
-        System.out.println("=========================");
+        System.out.println("=======================================");
     }
     /**
      * Display process for withdrawing from internship after it has been accepted.
      */
     public void requestWithdrawal() {
-        System.out.println("=========================");
+        System.out.println("=======================================");
         System.out.println("Enter internship id to withdraw: ");
         int id;
         while (true) {
@@ -234,7 +237,7 @@ public class StudentUI {
         Internship internship = internshipDbMgr.get(id);
         if (internship == null) {
             System.out.println("Invalid internship id!");
-            System.out.println("=========================");
+            System.out.println("=======================================");
             return;
         }
         if (internshipWithdrawalDbMgr.add(student, internship)) {
@@ -243,28 +246,30 @@ public class StudentUI {
             System.out.println("Error: internship id " + id + " not added to withdrawal request.");
         }
         
-        System.out.println("=========================");
+        System.out.println("=======================================");
     }
     /**
      * Display process for changing password.
      */
     public void changePassword(Student student, Scanner sc, StudentPasswordMgr studentPasswordMgr) {
-        System.out.println("=========================");
+        System.out.println("=======================================");
         System.out.println("Change Password");
+        System.out.println("=======================================");
+
 
         System.out.println("Old password: ");
-        String oldPassword = sc.nextLine();
+        String oldPassword = sc.next();
 
         System.out.println("New password: ");
-        String newPassword = sc.nextLine();
+        String newPassword = sc.next();
 
         boolean changed = studentPasswordMgr.changePassword(student, oldPassword, newPassword);
         if (changed) {
             System.out.println("Successfully changed password!");
-            System.out.println("=========================");
+            System.out.println("=======================================");
         } else {
             System.out.println("Failed to change password...");
-            System.out.println("=========================");
+            System.out.println("=======================================");
         }
     }
 }

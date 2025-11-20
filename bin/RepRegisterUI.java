@@ -28,7 +28,7 @@ public class RepRegisterUI {
      */
     public void start() {
         String output = """
-                =========================
+                ==============================================
                 Company representative registration form.
                 Enter id:
                 """;
@@ -46,12 +46,12 @@ public class RepRegisterUI {
             department, 
             position, 
             CompanyRepStatus.PENDING, 
-            IPasswordMgr.hashPassword("password")
+            "password"
             )) {
                 System.out.println("Successfully registered!");
             } else {
                 System.out.println("Error in registration.");
             }
-        System.out.println("=========================");
+        System.out.println("==============================================");
     }
 }

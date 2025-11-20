@@ -120,8 +120,10 @@ public class CareerStaffUI {
      *         otherwise
      */
     public CareerStaff login(Scanner sc, CareerStaffPasswordMgr careerStaffPasswordMgr) {
-        System.out.println("=========================");
+        System.out.println("=======================================");
         System.out.println("CAREER STAFF");
+        System.out.println("=======================================");
+
         System.out.println("Enter StaffID: ");
         String username = sc.nextLine();
         System.out.println("\nEnter Password: ");

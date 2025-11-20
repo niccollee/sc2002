@@ -12,11 +12,11 @@ public class StudentDisplay extends ADisplay {
      */
     public void showStudentLogin() {
         String output = """
-                =========================
+                ===================================
                 STUDENT
                 Username: (matriculation number)
                 Password:
-                =========================
+                ===================================
                 """;
         System.out.println(output);
     }
@@ -26,7 +26,7 @@ public class StudentDisplay extends ADisplay {
      */
     public void showMenu() {
         String output = """
-                =========================
+                ===================================
                 1) View Internship Opportunities
                 2) Apply For Internship
                 3) View Applied Internships
@@ -34,7 +34,7 @@ public class StudentDisplay extends ADisplay {
                 5) Request Internship Withdrawal
                 6) Change Password
                 7) Quit
-                =========================
+                ===================================
                 """;
         System.out.println(output);
     }
@@ -84,11 +84,11 @@ public class StudentDisplay extends ADisplay {
      */
     public void showApplyFor() {
         String output = """
-                =========================
+                ===========================================
                 INTERNSHIP APPLICATION
                 Internship To Apply For: (user response)
                 *student can only sign up for 3 max
-                =========================
+                ===========================================
                 """;
         System.out.println(output);
     }

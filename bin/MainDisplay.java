@@ -16,7 +16,7 @@ public class MainDisplay extends ADisplay{
                 1)Student
                 2)Career Staff
                 3)Company Representative
-                4)Register as company representative
+                4)Register as Company Representative
                 5)Quit
                 ==========================================
                 """;
