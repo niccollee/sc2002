@@ -110,9 +110,6 @@ public class CompanyRepUI {
      * @return the logged-in {@link CompanyRep} if successful, or {@code null} if login fails
      */
     public CompanyRep login(Scanner sc, CompanyRepPasswordMgr companyRepPasswordMgr) {
-        for (CompanyRep i : companyRepDbMgr.getAll()) {
-            System.out.println(i.getId());
-        }
         System.out.println("=======================================");
         System.out.println("COMPANY REP");
         System.out.println("=======================================");
