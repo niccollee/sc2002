@@ -34,7 +34,7 @@ public class CareerStaffDbMgr {
      *
      * @return the single {@code CareerStaffDbMgr} instance
      */
-    public static CareerStaffDbMgr getInstance() {
+    public static synchronized CareerStaffDbMgr getInstance() {
         if (instance == null) {
             instance = new CareerStaffDbMgr();
         }
@@ -48,7 +48,7 @@ public class CareerStaffDbMgr {
      * @param newInstance the CareerStaffDbMgr to set as the singleton
      * @throws IllegalArgumentException if newInstance is null
      */
-    public static void setInstance(CareerStaffDbMgr newInstance) {
+    public static synchronized void setInstance(CareerStaffDbMgr newInstance) {
         if (newInstance == null) {
             throw new IllegalArgumentException("newInstance must not be null");
         }
