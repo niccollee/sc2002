@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.concurrent.Flow.Subscriber;
 
 public class CompanyRepDisplay extends ADisplay{
     
@@ -24,6 +25,7 @@ public class CompanyRepDisplay extends ADisplay{
         6) Quit
         =========================
         """;
+        System.out.println(output);
     }
 
     

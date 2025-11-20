@@ -42,6 +42,7 @@ public class MainUI {
                     break;
                 case "3":
                     new CompanyRepUI(CompanyRepDbMgr.getInstance(), InternshipDbMgr.getInstance(), InternshipWithdrawalDbMgr.getInstance());
+                    break;
                 case "4":
                     new RepRegisterUI(
                         CompanyRepDbMgr.getInstance()
