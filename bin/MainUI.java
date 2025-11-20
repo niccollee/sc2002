@@ -24,7 +24,8 @@ public class MainUI {
                         InternshipDbMgr.getInstance(), 
                         InternshipWithdrawalDbMgr.getInstance(), 
                         internshipUI,
-                        CompanyRepDbMgr.getInstance());
+                        CompanyRepDbMgr.getInstance(),
+                        CareerStaffController.getInstance());
                     break;
                 case "4":
                     new RepRegisterUI(
