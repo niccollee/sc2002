@@ -69,7 +69,7 @@ public class StudentUI {
                 requestWithdrawal();
                 break;
             case 6:
-                changePassword();
+                changePassword(student, sc, studentPasswordMgr);
                 break;
             case 7:
                 studentDisplay.showQuit();
@@ -242,13 +242,16 @@ public class StudentUI {
     /**
      * Display process for changing password.
      */
-    public void changePassword() {
+    public void changePassword(Student student, Scanner sc, StudentPasswordMgr studentPasswordMgr) {
         System.out.println("=========================");
         System.out.println("Change Password");
+
         System.out.println("Old password: ");
         String oldPassword = sc.nextLine();
+
         System.out.println("New password: ");
         String newPassword = sc.nextLine();
+
         boolean changed = studentPasswordMgr.changePassword(student, oldPassword, newPassword);
         if (changed) {
             System.out.println("Successfully changed password!");
