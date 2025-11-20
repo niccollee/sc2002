@@ -17,6 +17,7 @@ public class RepRegisterUI {
     public RepRegisterUI(CompanyRepDbMgr companyRepDbMgr) {
         sc = Input.SC;
         this.companyRepDbMgr = companyRepDbMgr;
+        start();
     }
 
     /**
