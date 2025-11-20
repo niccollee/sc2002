@@ -9,12 +9,19 @@ public class InternshipWithdrawalDbMgr {
     private InternshipWithdrawalDbMgr() {
         internshipWithdrawalList = new ArrayList<InternshipWithdrawalApplicant>();
     }
-
-    public static InternshipWithdrawalDbMgr getInstance() {
+    
+    public static synchronized InternshipWithdrawalDbMgr getInstance() {
         if (instance == null) {
             instance = new InternshipWithdrawalDbMgr();
         }
         return instance;
+    }
+
+    public static synchronized void setInstance(InternshipWithdrawalDbMgr newInstance) {
+        if (newInstance == null) {
+            throw new IllegalArgumentException("newInstance must not be null");
+        }
+        instance = newInstance;
     }
     // Getter methods for applicants
     public InternshipWithdrawalApplicant get(int id) {

@@ -1,29 +1,26 @@
 import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
- * Singleton application state container.
+ * Singleton application state container that saves DbMgr singletons.
  *
- * Holds the single shared copy of all managed lists and a current user index.
+ * Stores references to each DbMgr instance so state can be restored later.
  */
 public class AppState implements Serializable {
+    private static final long serialVersionUID = 1L;
     private static AppState instance;
 
     private CareerStaffDbMgr careerStaffDbMgrInstance;
-    private List<CompanyRep> companyRepList;
-    private List<Internship> internshipList;
-    private List<Student> studentList;
-    private List<InternshipApplication> internshipApplicationList;
-    private List<InternshipWithdrawalApplicant> internshipWithdrawalApplicantList;
+    private CompanyRepDbMgr companyRepDbMgrInstance;
+    private InternshipDbMgr internshipDbMgrInstance;
+    private StudentDbMgr studentDbMgrInstance;
+    private List<InternshipApplicationDbMgr> internshipApplicationDbMgrInstanceList;
+    private InternshipWithdrawalDbMgr internshipWithdrawalDbMgrInstance;
 
     private AppState() {
-        // private ctor to enforce singleton
-        this.careerStaffDbMgrInstance = CareerStaffDbMgr.getInstance();
-        this.companyRepList = CompanyRepDbMgr.getInstance().getAll();
-        this.internshipList = InternshipDbMgr.getInstance().getAll();
-        this.studentList = StudentDbMgr.getInstance().getAll();
-        this.internshipApplicationList = InternshipApplicationDbMgr.getInstance().getAll();
-        this.internshipWithdrawalApplicantList = InternshipWithdrawalDbMgr.getInstance().getAll();
+        // capture current singleton instances
+        updateSelfState();
     }
 
     /**
@@ -31,24 +28,11 @@ public class AppState implements Serializable {
      *
      * @return shared AppState
      */
-    public static AppState getInstance() {
+    public static synchronized AppState getInstance() {
         if (instance == null) {
             instance = new AppState();
         }
         return instance;
-    }
-
-    public void updateSelfState(){
-        this.careerStaffDbMgrInstance = CareerStaffDbMgr.getInstance();
-        this.companyRepList = CompanyRepDbMgr.getInstance().getAll();
-        this.internshipList = InternshipDbMgr.getInstance().getAll();
-        this.studentList = StudentDbMgr.getInstance().getAll();
-        this.internshipApplicationList = InternshipApplicationDbMgr.getInstance().getAll();
-        this.internshipWithdrawalApplicantList = InternshipWithdrawalDbMgr.getInstance().getAll();
-    }
-
-    public void restoreOtherState(){
-        CareerStaffDbMgr.setInstance(careerStaffDbMgrInstance);
     }
 
     /**
@@ -56,55 +40,94 @@ public class AppState implements Serializable {
      *
      * @param newState the AppState to set as the singleton
      */
-    public static void setInstance(AppState newState) {
+    public static synchronized void setInstance(AppState newState) {
         instance = newState;
     }
 
-    public List<CareerStaff> getCareerStaffList() {
-        return careerStaffList;
+    /**
+     * Capture current DbMgr singletons into this AppState.
+     */
+    public void updateSelfState() {
+        this.careerStaffDbMgrInstance = CareerStaffDbMgr.getInstance();
+        this.companyRepDbMgrInstance = CompanyRepDbMgr.getInstance();
+        this.internshipDbMgrInstance = InternshipDbMgr.getInstance();
+        this.studentDbMgrInstance = StudentDbMgr.getInstance();
+
+        // store the InternshipApplicationDbMgr singleton in a list to allow
+        // storing multiple instances if needed in future
+        this.internshipApplicationDbMgrInstanceList = new ArrayList<>();
+        InternshipApplicationDbMgr iadb = InternshipApplicationDbMgr.getInstance();
+        if (iadb != null) {
+            this.internshipApplicationDbMgrInstanceList.add(iadb);
+        }
+
+        this.internshipWithdrawalDbMgrInstance = InternshipWithdrawalDbMgr.getInstance();
     }
 
-    public void setCareerStaffList(List<CareerStaff> careerStaffList) {
-        this.careerStaffList = careerStaffList;
+    /**
+     * Restore the application's singleton DbMgrs from the saved instances in this AppState.
+     */
+    public void restoreOtherState() {
+        if (careerStaffDbMgrInstance != null) CareerStaffDbMgr.setInstance(careerStaffDbMgrInstance);
+        if (companyRepDbMgrInstance != null) CompanyRepDbMgr.setInstance(companyRepDbMgrInstance);
+        if (internshipDbMgrInstance != null) InternshipDbMgr.setInstance(internshipDbMgrInstance);
+        if (studentDbMgrInstance != null) StudentDbMgr.setInstance(studentDbMgrInstance);
+
+        // restore InternshipApplicationDbMgr: if multiple saved, restore the first one
+        if (internshipApplicationDbMgrInstanceList != null && !internshipApplicationDbMgrInstanceList.isEmpty()) {
+            InternshipApplicationDbMgr.setInstance(internshipApplicationDbMgrInstanceList.get(0));
+        }
+
+        if (internshipWithdrawalDbMgrInstance != null) InternshipWithdrawalDbMgr.setInstance(internshipWithdrawalDbMgrInstance);
     }
 
-    public List<CompanyRep> getCompanyRepList() {
-        return companyRepList;
+    // Getters and setters for saved DbMgr instances
+
+    public CareerStaffDbMgr getCareerStaffDbMgrInstance() {
+        return careerStaffDbMgrInstance;
     }
 
-    public void setCompanyRepList(List<CompanyRep> companyRepList) {
-        this.companyRepList = companyRepList;
+    public void setCareerStaffDbMgrInstance(CareerStaffDbMgr careerStaffDbMgrInstance) {
+        this.careerStaffDbMgrInstance = careerStaffDbMgrInstance;
     }
 
-    public List<Internship> getInternshipList() {
-        return internshipList;
+    public CompanyRepDbMgr getCompanyRepDbMgrInstance() {
+        return companyRepDbMgrInstance;
     }
 
-    public void setInternshipList(List<Internship> internshipList) {
-        this.internshipList = internshipList;
+    public void setCompanyRepDbMgrInstance(CompanyRepDbMgr companyRepDbMgrInstance) {
+        this.companyRepDbMgrInstance = companyRepDbMgrInstance;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
+    public InternshipDbMgr getInternshipDbMgrInstance() {
+        return internshipDbMgrInstance;
     }
 
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
+    public void setInternshipDbMgrInstance(InternshipDbMgr internshipDbMgrInstance) {
+        this.internshipDbMgrInstance = internshipDbMgrInstance;
     }
 
-    public List<InternshipApplication> getInternshipApplicationList() {
-        return internshipApplicationList;
+    public StudentDbMgr getStudentDbMgrInstance() {
+        return studentDbMgrInstance;
     }
 
-    public void setInternshipApplicationList(List<InternshipApplication> internshipApplicationList) {
-        this.internshipApplicationList = internshipApplicationList;
+    public void setStudentDbMgrInstance(StudentDbMgr studentDbMgrInstance) {
+        this.studentDbMgrInstance = studentDbMgrInstance;
     }
 
-    public List<InternshipWithdrawalApplicant> getInternshipWithdrawalApplicant() {
-        return internshipWithdrawalApplicant;
+    public List<InternshipApplicationDbMgr> getInternshipApplicationDbMgrInstanceList() {
+        return internshipApplicationDbMgrInstanceList;
     }
 
-    public void setInternshipWithdrawalApplicant(List<InternshipWithdrawalApplicant> internshipWithdrawalApplicant) {
-        this.internshipWithdrawalApplicant = internshipWithdrawalApplicant;
+    public void setInternshipApplicationDbMgrInstanceList(List<InternshipApplicationDbMgr> internshipApplicationDbMgrInstanceList) {
+        this.internshipApplicationDbMgrInstanceList = internshipApplicationDbMgrInstanceList;
+    }
+
+    public InternshipWithdrawalDbMgr getInternshipWithdrawalDbMgrInstance() {
+        return internshipWithdrawalDbMgrInstance;
+    }
+
+    public void setInternshipWithdrawalDbMgrInstance(InternshipWithdrawalDbMgr internshipWithdrawalDbMgrInstance) {
+        this.internshipWithdrawalDbMgrInstance = internshipWithdrawalDbMgrInstance;
     }
 }

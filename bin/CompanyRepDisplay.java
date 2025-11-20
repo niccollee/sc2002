@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.concurrent.Flow.Subscriber;
-
 public class CompanyRepDisplay extends ADisplay{
     
     public void showCompanyRepLogin() {

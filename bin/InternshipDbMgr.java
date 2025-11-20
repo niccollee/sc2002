@@ -14,7 +14,13 @@ public class InternshipDbMgr {
         internshipList = new ArrayList<Internship>();
         importDb(CompanyRepDbMgr.getInstance());
     }
+    
     // Get an instance of this DbMgr. If it exist, return it, otherwise create a new instance of it.
+    /**
+     * Return the singleton InternshipDbMgr, creating it if necessary.
+     *
+     * @return the shared InternshipDbMgr instance
+     */
     public static synchronized InternshipDbMgr getInstance() {
         if (instance == null) {
             instance = new InternshipDbMgr();

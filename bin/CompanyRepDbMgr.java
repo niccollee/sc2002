@@ -31,7 +31,7 @@ public class CompanyRepDbMgr {
 	 *
 	 * @return the shared {@code CompanyRepDbMgr} instance
 	 */
-	public static CompanyRepDbMgr getInstance() {
+	public static synchronized CompanyRepDbMgr getInstance() {
 		if (instance == null) {
 			instance = new CompanyRepDbMgr();
 		}
@@ -44,7 +44,7 @@ public class CompanyRepDbMgr {
      * @param newInstance non-null CompanyRepDbMgr to set as the singleton
      * @throws IllegalArgumentException if newInstance is null
      */
-    public static void setInstance(CompanyRepDbMgr newInstance) {
+    public static synchronized void setInstance(CompanyRepDbMgr newInstance) {
         if (newInstance == null) {
             throw new IllegalArgumentException("newInstance must not be null");
         }
