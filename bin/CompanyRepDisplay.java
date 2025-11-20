@@ -52,11 +52,7 @@ public class CompanyRepDisplay extends ADisplay{
         }
         System.out.println("=========================");
     }
-    public void showSetVisibility(internship : Internship){
-    }
-    public void showViewInternship(internship : Internship){
-        
-    }
+    
     public void showChangePassword() {
         String output = """
         =========================
