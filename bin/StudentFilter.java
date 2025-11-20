@@ -58,7 +58,7 @@ public class StudentFilter {
                 try {
                     yield studentList
                             .stream()
-                            .filter(student -> student.getAppliedInternships().showAll()
+                            .filter(student -> student.getAppliedInternships().getAll()
                                     .stream()
                                     .anyMatch(internshipApplication -> internshipApplication.getInternship()
                                             .getId() == Integer.parseInt(args)))

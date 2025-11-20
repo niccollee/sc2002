@@ -189,7 +189,7 @@ public class CareerStaffDbMgr {
      *
      * @return the internal list of career staff
      */
-    public List<CareerStaff> showAll() {
+    public List<CareerStaff> getAll() {
         return this.careerStaffList;
     }
 
