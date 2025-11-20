@@ -1,6 +1,17 @@
 import java.util.List;
 
+/**
+ * Console display for internships and related menus.
+ *
+ * Provides methods to print a formatted internship table and several
+ * menu prompts used by student and staff UIs.
+ */
 public class InternshipDisplay extends ADisplay{
+    /**
+     * Print a formatted table of internships to stdout.
+     *
+     * @param internships the list of internships to display
+     */
     public void showInternships(List<Internship> internships) {
         System.out.println("==============================================================");
         System.out.printf("%-3s | %-35s | %-20s | %-10s | %-12s%n", 
@@ -19,6 +30,11 @@ public class InternshipDisplay extends ADisplay{
         System.out.println("==============================================================");
     }
 
+    /**
+     * Print the sort options menu.
+     *
+     * @param isStudent if true, print the student-specific sort options; otherwise print full options
+     */
     public void showSortMenu(boolean isStudent) {
         String outputNotStudent = """
                 =========================
@@ -54,6 +70,12 @@ public class InternshipDisplay extends ADisplay{
             System.out.println(outputNotStudent);
         }
     }
+
+    /**
+     * Print the filter options menu.
+     *
+     * @param isStudent if true, print the student-specific filter options; otherwise print full options
+     */
     public void showFilterMenu(boolean isStudent) {
         String outputNotStudent = """
                 =========================
@@ -89,6 +111,10 @@ public class InternshipDisplay extends ADisplay{
             System.out.println(outputNotStudent);
         }
     }
+
+    /**
+     * Print the internship level selection menu.
+     */
     public void showLevelMenu() {
         String output = """
                 =========================
@@ -100,6 +126,10 @@ public class InternshipDisplay extends ADisplay{
                 """;
         System.out.println(output);
     }
+
+    /**
+     * Print the date filter selection menu (before/after).
+     */
     public void showDateMenu() {
         String output = """
                 =========================
@@ -110,6 +140,10 @@ public class InternshipDisplay extends ADisplay{
                 """;
         System.out.println(output);
     }
+
+    /**
+     * Print the status filter selection menu.
+     */
     public void showStatusMenu() {
         String output = """
                 =========================
@@ -121,6 +155,10 @@ public class InternshipDisplay extends ADisplay{
                 """;
         System.out.println(output);
     }
+    
+    /**
+     * Print the visibility filter selection menu.
+     */
     public void showVisibilityMenu() {
         String output = """
                 =========================
