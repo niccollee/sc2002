@@ -91,14 +91,15 @@ public class StudentUI {
         System.out.println("=========================");
         System.out.println("STUDENT");
         System.out.println("Enter Username: (matriculation number)");
-        String username = sc.nextLine();
+        String username = sc.next();
         System.out.println("Enter Password: ");
-        String password = sc.nextLine();
+        String password = sc.next();
         Student student = studentDbMgr.getStudent(username);
         if (student != null) {
             if (studentPasswordMgr.validate(student, password)) {
                 return student;
             }
+            else { System.out.println("Invalid Password!");}
         } else {
             System.out.println("Student does not exist!");
         }
@@ -202,6 +203,7 @@ public class StudentUI {
         }
         if (choice < 0 || choice >= student.getAppliedInternships().getAll().size()) {
             System.out.println("Invalid response!");
+            System.out.println("=========================");
             return;
         }
         if (student.acceptInternship(student.getAppliedInternships().getAll().get(choice).getInternship())) {
@@ -247,10 +249,10 @@ public class StudentUI {
         System.out.println("Change Password");
 
         System.out.println("Old password: ");
-        String oldPassword = sc.nextLine();
+        String oldPassword = sc.next();
 
         System.out.println("New password: ");
-        String newPassword = sc.nextLine();
+        String newPassword = sc.next();
 
         boolean changed = studentPasswordMgr.changePassword(student, oldPassword, newPassword);
         if (changed) {
