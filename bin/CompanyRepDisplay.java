@@ -49,7 +49,7 @@ public class CompanyRepUI {
                 constructInternship(companyRep, sc);
                 break;
             case 2:
-                approveRejectInternship(commpanyRep, sc);
+                approveRejectInternship(companyRep, sc);
                 break;
             case 3:
                 toggleInternshipVisibility(companyRep);
