@@ -14,9 +14,8 @@ public class Internship {
     private int numSlots;
     private boolean visibility;
     private int confirmedSlots = 0;
-
+    private static int count = 0;
     public Internship(
-            int id,
             String title, 
             String description, 
             InternshipLevel level, 
@@ -28,7 +27,7 @@ public class Internship {
             CompanyRep companyRep, 
             int numSlots, 
             boolean visibility) {
-        this.id = id;
+        this.id = count++;
         this.title = title;
         this.description = description;
         this.level = level;

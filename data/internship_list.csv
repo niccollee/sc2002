@@ -1,51 +1,51 @@
 ﻿ID,Title,Description,Level,PreferredMajor,AppOpenDate,AppCloseDate,Status,CompanyName,CompanyRepID,NumSlots,Visibility,ConfirmedSlots
-1,Software Dev Internship,Work on backend systems,BASIC,Computer Science,01-11-2025,20-11-2025,PENDING,TechCorp,1,5,true,2
-2,AI Research Internship,Assist in AI model development,INTERMEDIATE,Data Science & AI,05-11-2025,25-11-2025,APPROVED,InnoSoft,2,4,true,3
+1,Software Dev Internship,Work on backend systems,BASIC,Computer Science,01-11-2025,20-12-2025,PENDING,TechCorp,1,5,true,2
+2,AI Research Internship,Assist in AI model development,INTERMEDIATE,Data Science & AI,05-11-2025,25-12-2025,APPROVED,InnoSoft,2,4,true,3
 3,Frontend Engineering,Develop user interfaces,ADVANCE,Computer Engineering,03-11-2025,28-11-2025,FILLED,FutureTech,3,6,true,6
-4,IT Support Internship,Support IT operations,BASIC,Information Engineering & Media,02-11-2025,22-11-2025,REJECT,NextGen Solutions,4,3,false,0
+4,IT Support Internship,Support IT operations,BASIC,Information Engineering & Media,02-11-2025,22-12-2025,REJECT,NextGen Solutions,4,3,false,0
 5,Data Analytics,Analyze company datasets,INTERMEDIATE,Data Science & AI,04-11-2025,24-11-2025,PENDING,Alpha Inc,5,2,true,1
 6,Software Testing,Test software products,ADVANCE,Computer Science,06-11-2025,26-11-2025,APPROVED,OmniCorp,6,5,true,4
-7,Marketing Analytics,Support marketing campaigns,BASIC,Information Engineering & Media,01-11-2025,21-11-2025,PENDING,TechFusion,7,4,true,1
+7,Marketing Analytics,Support marketing campaigns,BASIC,Information Engineering & Media,01-11-2025,21-12-2025,PENDING,TechFusion,7,4,true,1
 8,Research Intern,Assist in research projects,INTERMEDIATE,Data Science & AI,07-11-2025,27-11-2025,FILLED,Synergia,8,3,true,3
 9,UI/UX Design Internship,Design UI/UX interfaces,ADVANCE,Computer Engineering,05-11-2025,25-11-2025,REJECT,Innovent,9,2,false,0
 10,Logistics Management,Support logistics operations,BASIC,Computer Science,03-11-2025,23-11-2025,APPROVED,NextWave,10,4,true,2
-11,Backend Dev Internship,Develop server-side logic,INTERMEDIATE,Computer Science,02-11-2025,22-11-2025,PENDING,TechCorp,1,3,true,1
+11,Backend Dev Internship,Develop server-side logic,INTERMEDIATE,Computer Science,02-11-2025,22-12-2025,PENDING,TechCorp,1,3,true,1
 12,AI Product Internship,Work on AI pipelines,ADVANCE,Data Science & AI,04-11-2025,24-11-2025,APPROVED,InnoSoft,2,6,true,5
-13,Database Internship,Manage database systems,BASIC,Computer Engineering,01-11-2025,20-11-2025,FILLED,FutureTech,3,2,true,2
-14,Cybersecurity Internship,Secure company systems,INTERMEDIATE,Information Engineering & Media,03-11-2025,23-11-2025,REJECT,NextGen Solutions,4,4,false,0
-15,Data Visualization Internship,Visualize analytics,ADVANCE,Data Science & AI,06-11-2025,26-11-2025,PENDING,Alpha Inc,5,5,true,3
+13,Database Internship,Manage database systems,BASIC,Computer Engineering,01-11-2025,20-12-2025,FILLED,FutureTech,3,2,true,2
+14,Cybersecurity Internship,Secure company systems,INTERMEDIATE,Information Engineering & Media,03-11-2025,23-12-2025,REJECT,NextGen Solutions,4,4,false,0
+15,Data Visualization Internship,Visualize analytics,ADVANCE,Data Science & AI,06-11-2025,26-12-2025,PENDING,Alpha Inc,5,5,true,3
 16,DevOps Internship,Assist in CI/CD pipelines,BASIC,Computer Science,02-11-2025,22-11-2025,APPROVED,OmniCorp,6,7,true,7
 17,Digital Marketing Internship,Support online campaigns,INTERMEDIATE,Information Engineering & Media,04-11-2025,24-11-2025,PENDING,TechFusion,7,2,true,1
-18,AI Research Intern,Develop machine learning models,ADVANCE,Data Science & AI,05-11-2025,25-11-2025,FILLED,Synergia,8,3,true,3
-19,UI Intern,Design user interfaces,BASIC,Computer Engineering,01-11-2025,21-11-2025,REJECT,Innovent,9,4,false,0
-20,Supply Chain Internship,Manage logistics,BASIC,Computer Science,03-11-2025,23-11-2025,APPROVED,NextWave,10,6,true,4
-21,Cloud Dev Internship,Cloud architecture,INTERMEDIATE,Computer Science,02-11-2025,22-11-2025,PENDING,TechCorp,1,5,true,2
-22,Machine Learning Internship,Develop AI models,ADVANCE,Data Science & AI,04-11-2025,24-11-2025,APPROVED,InnoSoft,2,3,true,3
+18,AI Research Intern,Develop machine learning models,ADVANCE,Data Science & AI,05-11-2025,25-12-2025,FILLED,Synergia,8,3,true,3
+19,UI Intern,Design user interfaces,BASIC,Computer Engineering,01-11-2025,21-12-2025,REJECT,Innovent,9,4,false,0
+20,Supply Chain Internship,Manage logistics,BASIC,Computer Science,03-11-2025,23-12-2025,APPROVED,NextWave,10,6,true,4
+21,Cloud Dev Internship,Cloud architecture,INTERMEDIATE,Computer Science,02-11-2025,22-12-2025,PENDING,TechCorp,1,5,true,2
+22,Machine Learning Internship,Develop AI models,ADVANCE,Data Science & AI,04-11-2025,24-12-2025,APPROVED,InnoSoft,2,3,true,3
 23,Embedded Systems Internship,Work on hardware integration,BASIC,Computer Engineering,01-11-2025,20-11-2025,FILLED,FutureTech,3,4,true,4
 24,IT Admin Internship,Manage IT infrastructure,INTERMEDIATE,Information Engineering & Media,03-11-2025,23-11-2025,REJECT,NextGen Solutions,4,2,false,0
 25,Analytics Internship,Data insights,ADVANCE,Data Science & AI,06-11-2025,26-11-2025,PENDING,Alpha Inc,5,6,true,5
 26,Software QA Internship,Bug testing,INTERMEDIATE,Computer Science,02-11-2025,22-11-2025,APPROVED,OmniCorp,6,3,true,3
-27,Social Media Internship,Manage campaigns,BASIC,Information Engineering & Media,04-11-2025,24-11-2025,PENDING,TechFusion,7,5,true,2
-28,AI Engineering Internship,Model deployment,ADVANCE,Data Science & AI,05-11-2025,25-11-2025,FILLED,Synergia,8,4,true,4
-29,UX Research Internship,User experience research,BASIC,Computer Engineering,01-11-2025,21-11-2025,REJECT,Innovent,9,3,false,0
+27,Social Media Internship,Manage campaigns,BASIC,Information Engineering & Media,04-11-2025,24-12-2025,PENDING,TechFusion,7,5,true,2
+28,AI Engineering Internship,Model deployment,ADVANCE,Data Science & AI,05-11-2025,25-12-2025,FILLED,Synergia,8,4,true,4
+29,UX Research Internship,User experience research,BASIC,Computer Engineering,01-11-2025,21-12-2025,REJECT,Innovent,9,3,false,0
 30,Operations Internship,Assist operations,BASIC,Computer Science,03-11-2025,23-11-2025,APPROVED,NextWave,10,7,true,6
 31,Java Dev Internship,Backend services,BASIC,Computer Science,02-11-2025,22-11-2025,PENDING,TechCorp,1,4,true,1
-32,Data Modeling Internship,Data pipelines,INTERMEDIATE,Data Science & AI,04-11-2025,24-11-2025,APPROVED,InnoSoft,2,6,true,5
+32,Data Modeling Internship,Data pipelines,INTERMEDIATE,Data Science & AI,04-11-2025,24-12-2025,APPROVED,InnoSoft,2,6,true,5
 33,Hardware Internship,Embedded dev,ADVANCE,Computer Engineering,01-11-2025,20-11-2025,FILLED,FutureTech,3,5,true,5
-34,Network Admin Internship,Network maintenance,INTERMEDIATE,Information Engineering & Media,03-11-2025,23-11-2025,REJECT,NextGen Solutions,4,2,false,0
+34,Network Admin Internship,Network maintenance,INTERMEDIATE,Information Engineering & Media,03-11-2025,23-12-2025,REJECT,NextGen Solutions,4,2,false,0
 35,BI Internship,Visualize analytics,ADVANCE,Data Science & AI,06-11-2025,26-11-2025,PENDING,Alpha Inc,5,4,true,3
 36,Scrum Master Internship,Agile processes,BASIC,Computer Science,02-11-2025,22-11-2025,APPROVED,OmniCorp,6,3,true,2
 37,Content Creation Internship,Marketing content,INTERMEDIATE,Information Engineering & Media,04-11-2025,24-11-2025,PENDING,TechFusion,7,5,true,3
 38,Deep Learning Internship,Neural networks,ADVANCE,Data Science & AI,05-11-2025,25-11-2025,FILLED,Synergia,8,6,true,6
 39,Graphic Design Internship,Design media,BASIC,Computer Engineering,01-11-2025,21-11-2025,REJECT,Innovent,9,2,false,0
-40,Warehouse Internship,Inventory management,BASIC,Computer Science,03-11-2025,23-11-2025,APPROVED,NextWave,10,4,true,3
+40,Warehouse Internship,Inventory management,BASIC,Computer Science,03-11-2025,23-12-2025,APPROVED,NextWave,10,4,true,3
 41,Python Dev Internship,Backend dev,BASIC,Computer Science,02-11-2025,22-11-2025,PENDING,TechCorp,1,5,true,4
-42,Data Engineer Internship,Data pipelines,INTERMEDIATE,Data Science & AI,04-11-2025,24-11-2025,APPROVED,InnoSoft,2,4,true,2
-43,Robotics Internship,Hardware programming,ADVANCE,Computer Engineering,01-11-2025,20-11-2025,FILLED,FutureTech,3,3,true,3
-44,System Admin Internship,IT systems,INTERMEDIATE,Information Engineering & Media,03-11-2025,23-11-2025,REJECT,NextGen Solutions,4,2,false,0
-45,Data Science Internship,Analyze datasets,ADVANCE,Data Science & AI,06-11-2025,26-11-2025,PENDING,Alpha Inc,5,6,true,4
+42,Data Engineer Internship,Data pipelines,INTERMEDIATE,Data Science & AI,04-11-2025,24-12-2025,APPROVED,InnoSoft,2,4,true,2
+43,Robotics Internship,Hardware programming,ADVANCE,Computer Engineering,01-11-2025,20-12-2025,FILLED,FutureTech,3,3,true,3
+44,System Admin Internship,IT systems,INTERMEDIATE,Information Engineering & Media,03-12-2025,23-11-2025,REJECT,NextGen Solutions,4,2,false,0
+45,Data Science Internship,Analyze datasets,ADVANCE,Data Science & AI,06-11-2025,26-12-2025,PENDING,Alpha Inc,5,6,true,4
 46,Backend API Internship,API development,BASIC,Computer Science,02-11-2025,22-11-2025,APPROVED,OmniCorp,6,4,true,3
 47,SEO Internship,Optimize content,INTERMEDIATE,Information Engineering & Media,04-11-2025,24-11-2025,PENDING,TechFusion,7,3,true,2
 48,ML Ops Internship,Deploy AI models,ADVANCE,Data Science & AI,05-11-2025,25-11-2025,FILLED,Synergia,8,5,true,5
-49,UI Prototyping Internship,Design interfaces,BASIC,Computer Engineering,01-11-2025,21-11-2025,REJECT,Innovent,9,2,false,0
-50,Operations Assistant Internship,Support operations,BASIC,Computer Science,03-11-2025,23-11-2025,APPROVED,NextWave,10,6,true,4
+49,UI Prototyping Internship,Design interfaces,BASIC,Computer Engineering,01-11-2025,21-12-2025,REJECT,Innovent,9,2,false,0
+50,Operations Assistant Internship,Support operations,BASIC,Computer Science,03-11-2025,23-12-2025,APPROVED,NextWave,10,6,true,4

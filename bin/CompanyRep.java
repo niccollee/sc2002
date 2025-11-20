@@ -1,4 +1,3 @@
-
 import java.util.List;
 
 public class CompanyRep implements IUser {
@@ -140,4 +139,3 @@ public class CompanyRep implements IUser {
 		dbInternship.setVisibility(!dbInternship.getVisibility());
 		return true;
 	}
-}

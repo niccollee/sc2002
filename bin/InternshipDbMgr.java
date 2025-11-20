@@ -53,7 +53,6 @@ public class InternshipDbMgr {
                 }
                 CompanyRep companyRep = companyRepDbMgr.get(values[9]);
                 Internship internship = new Internship(
-                    Integer.parseInt(values[0]), 
                     values[1], 
                     values[2], 
                     InternshipLevel.valueOf(values[3]), 

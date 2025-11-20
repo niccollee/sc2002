@@ -5,7 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Database manager which contains all the {@link Student} object and the associated 
+ * actions. 
+ */
 public class StudentDbMgr {
     private List<Student> studentList;
     private static StudentDbMgr instance;
@@ -31,7 +34,9 @@ public class StudentDbMgr {
         return true;
     }
 
-    // export student list into csv
+    /**
+     * Exports the csv from the filepath and 
+     */
     private void exportDb() {
         String filepath = "../data/student_list.csv";
 
@@ -55,23 +60,30 @@ public class StudentDbMgr {
             System.out.println("ERROR: Unable to write file: " + e.getMessage());
         }
     }
-
+    /**
+     * Private contructor to ensure only one instance of itself. Initialise ArrayList and import the csv 
+     * into this class.
+     */
     private StudentDbMgr() {
         this.studentList = new ArrayList<Student>();
         importDb();
     }
 
-    // Returns an instance of the this class
+    /**
+     * Gets an instance of this. If not initialised yet, initialise.
+     * @return an instance of itself.
+     */
     public static StudentDbMgr getInstance() {
         if (instance == null) {
             instance = new StudentDbMgr();
         }
         return instance;
     }
-
-    // Add student to studentList. If id of student exist,
-    // return false and student not added.
-    // Else return true and add student to studentList.
+    /**
+     * Add {@link Student} into the list.
+     * @param student the student that is added into the list.
+     * @return true if {@link Student} id does not exist
+     */
     public boolean add(Student student) {
         if (containsId(student.getId())) {
             return false;

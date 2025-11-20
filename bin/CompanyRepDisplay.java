@@ -25,33 +25,7 @@ public class CompanyRepDisplay extends ADisplay{
         =========================
         """;
     }
-    
-    public void showCreateInternship(boolean isStudent) {
-        String output ="""
-        =========================
-        Internship title: 
-        Description: 
-        Internship level:
-        Basic
-        Intermediate
-        Advanced
-        Preferred major: 
-        Application opening date: 	
-        Application closing date: 	
-        Company name: 
-        Number of slots:
-        ==========================
-        """;
-        System.out.println(output);
-    }
-    public void showApproveInternship(internships : List<Internships>) {
-        System.out.println("=========================");
-        for (int i = 0; i != internships.size(); i++) {
-            System.out.print("Applicant name:");
-            System.out.println(internships.get(i).get)
-        }
-        System.out.println("=========================");
-    }
+
     
     public void showChangePassword() {
         String output = """
@@ -64,7 +38,7 @@ public class CompanyRepDisplay extends ADisplay{
         """;
         System.out.println(output);
     }
-    public void showBye() {
+    public void showQuit() {
         String output = """
         =========================
         BYE!
