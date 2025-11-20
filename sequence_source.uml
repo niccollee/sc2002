@@ -1,0 +1,125 @@
+@startuml
+actor CompanyRepUI
+entity CompanyRep
+entity InternshipApplication
+control InternshipApplicationDbMgr
+control InternshipDbMgr
+entity Internship
+control CareerStaffController
+entity CareerStaff
+control StudentDbMgr
+participant StudentFilter
+entity Student
+
+
+
+activate CompanyRepUI
+activate CompanyRep
+
+== CompanyRep creates Internship ==
+CompanyRepUI -> CompanyRep : constructInternship()
+
+CompanyRep -> InternshipDbMgr : addInternship(Internship)
+activate InternshipDbMgr
+InternshipDbMgr -> Internship : add(Internship)
+activate Internship
+InternshipDbMgr <-- Internship : boolean
+deactivate Internship
+CompanyRep <-- InternshipDbMgr : boolean
+deactivate InternshipDbMgr
+
+CompanyRepUI <-- CompanyRep : boolean
+
+deactivate CompanyRep
+deactivate CompanyRepUI
+
+== Internship approval from CareerStaff ==
+CareerStaff -> CareerStaffController : approveInternship(internshipId)
+activate CareerStaff
+activate CareerStaffController
+CareerStaffController -> InternshipDbMgr : get(internshipId)
+activate InternshipDbMgr
+InternshipDbMgr --> CareerStaffController : Internship (or null)
+deactivate InternshipDbMgr
+alt Internship exists
+    alt Internship approved
+       CareerStaffController -> Internship : approveInternship
+       activate Internship
+       Internship --> CareerStaffController : return true
+       deactivate Internship
+       CareerStaffController --> CareerStaff : return true
+    else Internship rejected
+       CareerStaffController -> Internship : rejectInternship
+       activate Internship
+       Internship --> CareerStaffController : return true
+       deactivate Internship
+       CareerStaffController --> CareerStaff : return true
+    end
+else Internship does not exist
+    CareerStaffController --> CareerStaff : return false
+end
+
+deactivate CareerStaff
+deactivate CareerStaffController
+
+
+== CompanyRep toggles Internship Visibility ==
+CompanyRepUI -> CompanyRep : toggleVisibility(internshipTitle, visible)
+activate CompanyRepUI
+activate CompanyRep
+CompanyRep -> Internship : setVisibility(visible)
+activate Internship
+CompanyRep <-- Internship
+deactivate Internship
+CompanyRepUI <-- CompanyRep
+deactivate CompanyRep
+deactivate CompanyRepUI
+
+== Student application for internship ==
+activate Student
+Student -> InternshipApplication : applyInternship
+activate InternshipApplication
+Student <-- InternshipApplication
+deactivate InternshipApplication
+deactivate Student
+
+== CompanyRep accepts / rejects application ==
+activate CompanyRepUI
+CompanyRepUI -> Internship : get(internshipId)
+activate Internship
+CompanyRepUI <-- Internship : Internship
+deactivate Internship
+
+CompanyRepUI -> StudentDbMgr : getAll()
+activate StudentDbMgr
+CompanyRepUI <-- StudentDbMgr : studentList
+deactivate StudentDbMgr
+
+CompanyRepUI -> StudentFilter : filter(studentList, StudentAttributes.APPLIEDINTERNSHIP, ""+internship.getId())
+activate StudentFilter
+CompanyRepUI <-- StudentFilter : List<Student>
+deactivate StudentFilter
+
+CompanyRepUI -> StudentDbMgr : getStudent(applicationMatric)
+activate StudentDbMgr
+CompanyRepUI <-- StudentDbMgr : StudentDbMgr
+deactivate StudentDbMgr
+
+CompanyRepUI -> CompanyRep : acceptStudentInternship(student, internship, decision_no)
+activate CompanyRep
+
+alt Student is SUCCESSFUL
+  CompanyRep -> InternshipApplication : setInternshipApplicationStatus(SUCCESSFUL)
+  activate InternshipApplication
+  CompanyRep <-- InternshipApplication : boolean
+  deactivate InternshipApplication
+else Student is UNSUCCESSFUL
+  CompanyRep -> InternshipApplication : setInternshipApplicationStatus(UNSUCCESSFUL)
+  activate InternshipApplication
+  CompanyRep <-- InternshipApplication : boolean
+  deactivate InternshipApplication
+
+CompanyRepUI <-- CompanyRep : boolean
+deactivate CompanyRep
+deactivate CompanyRepUI
+@enduml
