@@ -134,7 +134,7 @@ public class CompanyRepUI {
         companyRepDisplay.showMenu();
         int choice = sc.nextInt();
         sc.nextLine();
-        if (choice > 0 && choice < 8) {
+        if (choice > 0 && choice < 7) {
             return choice;
         }
         return -1;
@@ -162,6 +162,7 @@ public class CompanyRepUI {
                 3) Advanced
                 """);
         int level_no = sc.nextInt();
+        sc.nextLine();
         InternshipLevel level = null;
 switch(level_no) {
     case 1:
