@@ -46,7 +46,7 @@ public class RepRegisterUI {
             department, 
             position, 
             CompanyRepStatus.PENDING, 
-            IPasswordMgr.hashPassword("password")
+            "password"
             )) {
                 System.out.println("Successfully registered!");
             } else {
