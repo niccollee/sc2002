@@ -244,7 +244,7 @@ public class CareerStaffUI {
             System.out.println("Invalid internship ID, Enter again (-1 to escape)");
             internshipID = sc.nextInt();
             sc.nextLine();
-            if (internshipID == -1)) {
+            if (internshipID == -1) {
             return;
         }
         }
