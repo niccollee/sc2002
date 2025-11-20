@@ -38,7 +38,7 @@ public class CompanyRepDisplay extends ADisplay{
         """;
         System.out.println(output);
     }
-    public void showBye() {
+    public void showQuit() {
         String output = """
         =========================
         BYE!
