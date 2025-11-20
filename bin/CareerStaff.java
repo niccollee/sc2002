@@ -79,10 +79,8 @@ public class CareerStaff implements IUser {
 
     /**
      * Updates the password of this staff user.
-     * <p>
      * The provided plain-text password will be hashed using
      * {@link IPasswordMgr#hashPassword(String)} before being stored.
-     * </p>
      *
      * @param password the new plain-text password
      */
