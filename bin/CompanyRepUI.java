@@ -145,11 +145,12 @@ public class CompanyRepUI {
     
 
     public void approveRejectInternship(commpanyRep, sc){
+        StudentDbMgr studentDbMgr = StudentDbMgr.getInstance();
         System.out.println("=========================");
-        System.out.print("Applicant name:");
-        String applicantName = sc.nextLine();
+        System.out.print("Applicant matriculation number:");
+        String applicantMatric = sc.nextLine();
         System.out.println();
-        Student student = companyRep.getStudent(applicantName); //need to write getStudent method
+        Student student = studentDbMgr.getStudent(applicantMatric);
         System.out.print("Application decision. Enter 0 for reject, 1 for accept: ");
         int decision_no = sc.nextInt();
         System.out.println();
