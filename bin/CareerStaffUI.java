@@ -151,9 +151,10 @@ public class CareerStaffUI {
         System.out.println("Enter CompanyRepID to approve");
         System.out.println("or -1 to return back to menu");
         String companyRepId = sc.nextLine();
-        if (Integer.parseInt(companyRepId) == -1) {
+        if (companyRepId.equals("-1")) {
             return;
         }
+        
 
         while (companyRepDbMgr.get(companyRepId) == null || companyRepDbMgr.get(companyRepId).getRepStatus() != CompanyRepStatus.PENDING) {
             System.out.println("Invalid CompanyRepID, enter again");
@@ -196,7 +197,7 @@ public class CareerStaffUI {
         System.out.println("or -1 to return back to menu");
 
         String studentId = sc.nextLine();
-        if (Integer.parseInt(studentId) == -1) {
+        if (studentId.equals("-1")) {
             return;
         }
 

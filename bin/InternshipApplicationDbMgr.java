@@ -4,25 +4,11 @@ import java.util.Iterator;
 
 public class InternshipApplicationDbMgr {
     private List<InternshipApplication> internshipApplicationList;
-    private static InternshipApplicationDbMgr instance;
     
-
     public InternshipApplicationDbMgr() {
         internshipApplicationList = new ArrayList<InternshipApplication>();
     }
 
-    public List<InternshipApplication> getAll() {
-        return internshipApplicationList;
-    }
-
-    public static InternshipApplicationDbMgr getInstance(){
-        if(instance == null){
-            return new InternshipApplicationDbMgr();
-        }
-        else{
-            return instance;
-        }
-    }
 
     public InternshipApplication get(Internship internship) {
         for (InternshipApplication i: internshipApplicationList) {
@@ -31,6 +17,9 @@ public class InternshipApplicationDbMgr {
             }
         }
         return null;
+    }
+    public List<InternshipApplication> getAll() {
+        return internshipApplicationList;
     }
 
     public InternshipApplication get(int idx) {
