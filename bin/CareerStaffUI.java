@@ -116,7 +116,8 @@ public class CareerStaffUI {
      *
      * @param sc                     shared {@link Scanner} for user input
      * @param careerStaffPasswordMgr password manager used for validation
-     * @return the logged-in {@link CareerStaff} if successful; {@code null} otherwise
+     * @return the logged-in {@link CareerStaff} if successful; {@code null}
+     *         otherwise
      */
     public CareerStaff login(Scanner sc, CareerStaffPasswordMgr careerStaffPasswordMgr) {
         System.out.println("=========================");
@@ -148,17 +149,19 @@ public class CareerStaffUI {
         careerStaffDisplay.showCompanyRepApplications();
         System.out.println("=========================");
 
-        System.out.println("Enter CompanyRepID to approve");
-        System.out.println("or -1 to return back to menu");
+        System.out.println("Enter CompanyRepID to approve (-1 to escape)");
         String companyRepId = sc.nextLine();
         if (companyRepId.equals("-1")) {
             return;
         }
-        
 
-        while (companyRepDbMgr.get(companyRepId) == null || companyRepDbMgr.get(companyRepId).getRepStatus() != CompanyRepStatus.PENDING) {
-            System.out.println("Invalid CompanyRepID, enter again");
+        while (companyRepDbMgr.get(companyRepId) == null
+                || companyRepDbMgr.get(companyRepId).getRepStatus() != CompanyRepStatus.PENDING) {
+            System.out.println("Invalid CompanyRepID, enter again (-1 to escape)");
             companyRepId = sc.nextLine();
+            if (companyRepId.equals("-1")) {
+                return;
+            }
         }
 
         System.out.println("Enter 1 or 0 to (Approve or reject)");
@@ -166,9 +169,12 @@ public class CareerStaffUI {
         sc.nextLine();
 
         while (approveOrReject < 0 || approveOrReject > 1) {
-            System.out.println("Invalid option, enter again");
+            System.out.println("Invalid option, enter again (-1 to escape");
             approveOrReject = sc.nextInt();
             sc.nextLine();
+            if (approveOrReject == -1) {
+                return;
+            }
         }
 
         if (approveOrReject == 1) {
@@ -193,9 +199,7 @@ public class CareerStaffUI {
         }
 
         System.out.println("=========================");
-        System.out.println("Enter Index Option of interest: ");
-        System.out.println("or -1 to return back to menu");
-
+        System.out.println("Enter Index Option of interest (-1 to escape): ");
         String studentId = sc.nextLine();
         if (studentId.equals("-1")) {
             return;
@@ -206,9 +210,12 @@ public class CareerStaffUI {
         sc.nextLine();
 
         while (approveOrReject < 0 || approveOrReject > 1) {
-            System.out.println("Invalid option, enter again");
+            System.out.println("Invalid option, enter again (-1 to escape)");
             approveOrReject = sc.nextInt();
             sc.nextLine();
+            if (studentId.equals("-1")) {
+                return;
+            }
         }
 
         if (approveOrReject == 1) {
@@ -227,19 +234,20 @@ public class CareerStaffUI {
     public void approveInternshipOpportunity(Scanner sc) {
         careerStaffDisplay.showInternshipsPending();
         System.out.println("=========================");
-        System.out.println("Enter Intership ID of interest: ");
-        System.out.println("or -1 to return back to menu");
+        System.out.println("Enter Intership ID of interest (-1 to escape): ");
         int internshipID = sc.nextInt();
         sc.nextLine();
-
         if (internshipID == -1) {
             return;
         }
 
         while (internshipDbMgr.get(internshipID) == null) {
-            System.out.println("Invalid internship ID, Enter again");
+            System.out.println("Invalid internship ID, Enter again (-1 to escape)");
             internshipID = sc.nextInt();
             sc.nextLine();
+            if (internshipID == -1)) {
+            return;
+        }
         }
 
         System.out.println("Enter 1 or 0 to (Approve or Reject)");
@@ -247,9 +255,12 @@ public class CareerStaffUI {
         sc.nextLine();
 
         while (approveOrReject < 0 || approveOrReject > 1) {
-            System.out.println("Invalid option, enter again");
+            System.out.println("Invalid option, enter again (-1 to escape)");
             approveOrReject = sc.nextInt();
             sc.nextLine();
+             if (approveOrReject == -1) {
+            return;
+        }
         }
 
         if (approveOrReject == 1) {
