@@ -67,12 +67,15 @@ public class Student implements IUser {
         }
 
         if (internship.getStatus() == Status.FILLED) {
-            System.out.println("Internship application is full.");
             return false;
         }
 
         if (internship.getStatus() != Status.APPROVED) {
             return false;
+        }
+
+        if (!internship.getVisibility()) {
+            
         }
 
         LocalDate today = LocalDate.now();
@@ -81,7 +84,6 @@ public class Student implements IUser {
         }
 
         if (getAppliedInternships().showAll().size() > 2) {
-            System.out.println("You have already applied for 3 internships!");
             return false;
         }
 

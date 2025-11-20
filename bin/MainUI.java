@@ -16,7 +16,7 @@ public class MainUI {
                         StudentDbMgr.getInstance(), 
                         InternshipDbMgr.getInstance(),
                         InternshipWithdrawalDbMgr.getInstance(), 
-                        new StudentPasswordMgr());
+                        new StudentPasswordMgr()).start();
                     break;
                 case "2":
                     new CareerStaffUI(

@@ -60,6 +60,8 @@ public class CareerStaffUI {
                     break;
                 case 5:
                     changePassword(careerStaff, sc, careerStaffPasswordMgr);
+                case 6:
+                    return;
                 default:
                     break;
             }

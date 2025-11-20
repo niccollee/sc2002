@@ -1,6 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ * Displays the main student UI in order to perform the student function.
+ */
 public class StudentUI {
     private StudentDisplay studentDisplay;
     private InternshipUI internshipUI;
@@ -24,6 +26,11 @@ public class StudentUI {
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
         this.studentPasswordMgr = studentPasswordMgr;
         sc = Input.SC;
+    }
+    /**
+     * Method to start and run the main student ui class.
+     */
+    public void start() {
         student = login();
         /* If login details is invalid, continue prompting user to login for 3 more
          * times. Afterwards return back to main page.
@@ -73,9 +80,13 @@ public class StudentUI {
                 System.out.println("Invalid input! Enter input again.");
                 choice = menu();
             }
-        }        
+        }
     }
-    // Login system. Returns the Student object with that username and password, otherwise return null
+    /**
+     * Prompts user to enter their user name and password and verify it. Display 
+     * the respective success and failure outcomes.
+     * @return true if validation successful, otherwise return false.
+     */
     public Student login() {
         System.out.println("=========================");
         System.out.println("STUDENT");
@@ -93,6 +104,11 @@ public class StudentUI {
         }
         return null;
     }
+    /**
+     * Displays the student main menu options and takes in the user inputs.
+     * Repeatedly prompts user to enter the correct input.
+     * @return the value of that user input.
+     */
     public int menu() {
         studentDisplay.showMenu();
         int choice;
@@ -111,10 +127,16 @@ public class StudentUI {
         }
         return -1;
     }
+    /**
+     * Display all internship opportunity that is given to that particular student
+     */
     public void viewOpportunities() {
         internshipUI.viewAllInternships(student);
         internshipUI.filterInternshipsBy(student);      
     }
+    /**
+     * Display process for applying internships.
+     */
     public void applyForInternship() {
         System.out.println("=========================");
         System.out.println("Apply for internship. Enter internship id: ");
@@ -130,19 +152,30 @@ public class StudentUI {
             }
         }
         Internship applyingInternship = internshipDbMgr.get(id);
-        if (applyingInternship != null && applyingInternship.getVisibility() && applyingInternship.getStatus() == Status.APPROVED) {
-            if (student.applyInternship(applyingInternship)) {
-                System.out.println("Internship id: " + applyingInternship.getId() + " added!");
+        if (student.applyInternship(applyingInternship)) {
+            System.out.println("Internship id: " + applyingInternship.getId() + " added!");
                 System.out.println("=========================");
                 return;
+        }
+        System.out.println("Invalid internship!");
+        System.out.println("=========================");
+        if (applyingInternship != null && applyingInternship.getVisibility() && applyingInternship.getStatus() == Status.APPROVED) {
+            if (student.applyInternship(applyingInternship)) {
+                
             } 
         }
         System.out.println("Invalid internship!");
         System.out.println("=========================");
     }
+    /**
+     * View applied internship for that student.
+     */
     public void viewAppliedInternships() {
         studentDisplay.showAppliedInternships(student);
     }
+    /**
+     * Display process for  accepting internship.
+     */
     public void acceptInternship() {
         studentDisplay.showAcceptInternships(student);
         System.out.println("=========================");
@@ -179,6 +212,9 @@ public class StudentUI {
         
         System.out.println("=========================");
     }
+    /**
+     * Display process for withdrawing from internship after it has been accepted.
+     */
     public void requestWithdrawal() {
         System.out.println("=========================");
         System.out.println("Enter internship id to withdraw: ");
@@ -203,6 +239,9 @@ public class StudentUI {
         System.out.println("Internship id " + id + " added to withdrawal request.");
         System.out.println("=========================");
     }
+    /**
+     * Display process for changing password.
+     */
     public void changePassword() {
         System.out.println("=========================");
         System.out.println("Change Password");
