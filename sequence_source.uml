@@ -118,6 +118,7 @@ else Student is UNSUCCESSFUL
   activate InternshipApplication
   CompanyRep <-- InternshipApplication : boolean
   deactivate InternshipApplication
+end
 
 CompanyRepUI <-- CompanyRep : boolean
 deactivate CompanyRep
