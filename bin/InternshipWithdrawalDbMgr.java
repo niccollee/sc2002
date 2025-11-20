@@ -25,6 +25,15 @@ public class InternshipWithdrawalDbMgr {
         }
         return null;
     }
+
+    public InternshipWithdrawalApplicants getFromStudentId(String id) {
+        for (InternshipWithdrawalApplicants i: internshipWithdrawalList) {
+            if (i.getStudent().getId().equals(id)) {
+                return i;
+            }
+        }
+        return null;
+    }
     // Add applicants based on student and internship. If student already inside, return false.
     // Otherwise add applicants to list and return true.
     public boolean add(Student student, Internship internship) {
@@ -95,8 +104,5 @@ public class InternshipWithdrawalDbMgr {
 
     public List<InternshipWithdrawalApplicants> showAll(){
         return this.internshipWithdrawalList;
-    }
-
-
-        
+    }        
 }
