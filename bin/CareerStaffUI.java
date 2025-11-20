@@ -88,7 +88,7 @@ public class CareerStaffUI {
         System.out.println("CAREER STAFF");
         System.out.println("Enter StaffID: ");
         String username = sc.nextLine();
-        System.out.println("Enter Password: ");
+        System.out.println("\nEnter Password: ");
         String password = sc.nextLine();
 
         CareerStaff careerStaff = careerStaffDbMgr.getCareerStaff(username);
@@ -114,7 +114,7 @@ public class CareerStaffUI {
             return;
         }
 
-        while (companyRepDbMgr.get(companyRepId) == null) {
+        while (companyRepDbMgr.get(companyRepId) == null || companyRepDbMgr.get(companyRepId).getRepStatus() != CompanyRepStatus.PENDING) {
             System.out.println("Invalid CompanyRepID, enter again");
             companyRepId = sc.nextLine();
         }
@@ -140,7 +140,7 @@ public class CareerStaffUI {
     public void approveStudentWithdrawlApplication(Scanner sc) {
         careerStaffDisplay.showWithdrawalRequest();
         if (InternshipWithdrawalApplicants.getCounter() == 0) {
-            System.out.println("No Student Withdrawal Applicants");
+            System.out.println("\nNo Student Withdrawal Applicants\n");
             return;
         }
 

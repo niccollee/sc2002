@@ -35,13 +35,19 @@ public class CareerStaffDisplay {
                 System.out.println("=========================");
                 System.out.println("Company Representative Applications");
 
+                // Header
                 System.out.printf(
-                                "%-5s %-20s %-25s %-20s %-15s %-20s%n",
+                                "%-5s | %-20s | %-25s | %-20s | %-15s | %-20s%n",
                                 "No.", "Company Rep ID", "Company Name", "Department", "Position", "Rep Status");
 
+                // Separator line
+                System.out.println(
+                                "===============================================================================================================");
+
+                // Rows
                 for (int i = 0; i < cRepList.size(); i++) {
                         System.out.printf(
-                                        "%-5d %-20s %-25s %-20s %-15s %-20s%n",
+                                        "%-5d | %-20s | %-25s | %-20s | %-15s | %-20s%n",
                                         i,
                                         cRepList.get(i).getId(),
                                         cRepList.get(i).getName(),
@@ -50,7 +56,9 @@ public class CareerStaffDisplay {
                                         cRepList.get(i).getRepStatus());
                 }
 
-                System.out.println("=========================");
+                System.out.println(
+                                "===============================================================================================================");
+
         }
 
         public void showWithdrawalRequest() {
@@ -77,20 +85,28 @@ public class CareerStaffDisplay {
 
                 System.out.println("=========================");
                 System.out.println("Internship Pending Approval");
-                System.out.println(
-                                "No. \t:\tInternship Title \t:\t Internship ID \t:\t Opening Date \t:\t Closing Date \t:\t Status");
 
+                // Header
+                System.out.printf(
+                                "%-5s | %-30s | %-15s | %-15s | %-15s | %-15s%n",
+                                "No.", "Internship Title", "Internship ID", "Opening Date", "Closing Date", "Status");
+
+                System.out.println(
+                                "============================================================================================================");
+                // Rows
                 for (int i = 0; i < notApprovedinternshipList.size(); i++) {
-                        System.out.println(
-                                        notApprovedinternshipList.get(i).getTitle() + "\t:\t" +
-                                                        notApprovedinternshipList.get(i).getId() + "\t:\t" +
-                                                        notApprovedinternshipList.get(i).getAppOpenDate() + "\t:\t" +
-                                                        notApprovedinternshipList.get(i).getAppCloseDate() + "\t:\t" +
-                                                        notApprovedinternshipList.get(i).getStatus().toString()
-                                                        + "\t:\t");
+                        System.out.printf(
+                                        "%-5d | %-30s | %-15s | %-15s | %-15s | %-15s%n",
+                                        i,
+                                        notApprovedinternshipList.get(i).getTitle(),
+                                        notApprovedinternshipList.get(i).getId(),
+                                        notApprovedinternshipList.get(i).getAppOpenDate(),
+                                        notApprovedinternshipList.get(i).getAppCloseDate(),
+                                        notApprovedinternshipList.get(i).getStatus().toString());
                 }
 
-                System.out.println("=========================");
+                System.out.println(
+                                "============================================================================================================");
         }
 
 }
