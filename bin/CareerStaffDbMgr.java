@@ -8,13 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Manages the in-memory list and CSV persistence of {@link CareerStaff} records.
+ * Manages the in-memory list and CSV persistence of {@link CareerStaff}
+ * records.
  * This class is implemented as a singleton and is responsible for importing
  * career staff data from a CSV file at startup and exporting the current state
  * back to the CSV file when requested. It also provides helper methods for
  * searching, adding, removing, sorting, and filtering career staff.
  */
-public class CareerStaffDbMgr{
+public class CareerStaffDbMgr {
 
     private List<CareerStaff> careerStaffList;
     private static CareerStaffDbMgr instance;
@@ -61,7 +62,8 @@ public class CareerStaffDbMgr{
      * Each line after the header is parsed into a {@link CareerStaff} object and
      * added to the internal list.
      *
-     * @return {@code true} if the file was read successfully; {@code false} if an I/O error occurred
+     * @return {@code true} if the file was read successfully; {@code false} if an
+     *         I/O error occurred
      */
     private boolean importDb() {
         String filepath = "../data/career_staff_list.csv";
@@ -73,7 +75,7 @@ public class CareerStaffDbMgr{
             br.readLine(); // ignore first read line of column headers
             while ((line = br.readLine()) != null) {
 
-                System.out.println("reading in: " + line);
+                //System.out.println("reading in: " + line);
 
                 values = line.split(","); // seperate at delimiter ','
                 careerStaffList.add(new CareerStaff(values[0], values[1], values[2], values[3], values[4], values[5]));
@@ -121,7 +123,8 @@ public class CareerStaffDbMgr{
      * Returns a sorted view of the career staff list based on the given attribute.
      *
      * @param sortBy the attribute used to sort the staff list
-     * @return a new {@link List} of {@link CareerStaff} sorted by the specified attribute
+     * @return a new {@link List} of {@link CareerStaff} sorted by the specified
+     *         attribute
      */
     public List<CareerStaff> sort(CareerStaffAttributes sortBy) {
         return CareerStaffSorter.sort(careerStaffList, sortBy);
@@ -143,7 +146,8 @@ public class CareerStaffDbMgr{
      * Removes the specified {@link CareerStaff} from the internal list.
      *
      * @param careerStaff the staff record to be removed
-     * @return {@code true} if the staff was present and removed; {@code false} otherwise
+     * @return {@code true} if the staff was present and removed; {@code false}
+     *         otherwise
      */
     public boolean remove(CareerStaff careerStaff) {
         return careerStaffList.remove(careerStaff);
@@ -188,7 +192,8 @@ public class CareerStaffDbMgr{
     }
 
     /**
-     * Returns the full list of {@link CareerStaff} managed by this database manager.
+     * Returns the full list of {@link CareerStaff} managed by this database
+     * manager.
      *
      * @return the internal list of career staff
      */
@@ -196,7 +201,7 @@ public class CareerStaffDbMgr{
         return this.careerStaffList;
     }
 
-    public void setAll(List<CareerStaff> careerStaffList){
+    public void setAll(List<CareerStaff> careerStaffList) {
         this.careerStaffList = careerStaffList;
     }
 
