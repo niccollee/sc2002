@@ -109,8 +109,10 @@ public class CompanyRepUI {
         for (CompanyRep i : companyRepDbMgr.getAll()) {
             System.out.println(i.getId());
         }
-        System.out.println("=========================");
+        System.out.println("=======================================");
         System.out.println("COMPANY REP");
+        System.out.println("=======================================");
+
         System.out.println("Enter Username: (email address)");
         String username = sc.nextLine();
         System.out.println("Enter Password: ");
