@@ -27,6 +27,8 @@ public class MainUI {
                         CompanyRepDbMgr.getInstance(),
                         CareerStaffController.getInstance());
                     break;
+                case "3":
+                    new CompanyRepUI(CompanyRepDbMgr.getInstance(), InternshipDbMgr.getInstance(), InternshipWithdrawalDbMgr.getInstance());
                 case "4":
                     new RepRegisterUI(
                         CompanyRepDbMgr.getInstance()

@@ -139,3 +139,4 @@ public class CompanyRep implements IUser {
 		dbInternship.setVisibility(!dbInternship.getVisibility());
 		return true;
 	}
+}

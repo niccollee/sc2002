@@ -82,7 +82,7 @@ public class CompanyRepDbMgr {
 				System.out.println("reading in: " + line);
 
 				values = line.split(","); // seperate at delimiter ','
-				companyRepList.add(new CompanyRep(values[0], values[2], values[3], values[4],
+				companyRepList.add(new CompanyRep(values[5], values[2], values[3], values[4],
 						CompanyRepStatus.valueOf(values[6]), values[7]));
 			}
 		} catch (IOException e) {
