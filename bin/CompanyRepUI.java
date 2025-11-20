@@ -15,6 +15,7 @@ public class CompanyRepUI {
     private CompanyRepDisplay companyRepDisplay;
     private InternshipUI internshipUI;
     private CompanyRep companyRep;
+    private StudentDbMgr studentDbMgr;
     private CompanyRepDbMgr companyRepDbMgr;
     private InternshipDbMgr internshipDbMgr;
     private InternshipWithdrawalDbMgr internshipWithdrawalDbMgr;
@@ -26,11 +27,13 @@ public class CompanyRepUI {
      * The constructor logs in the company representative, then repeatedly shows the menu
      * and handles user choices until the user quits or login fails too many times.
      *
+     * @param studentDbMgr             database manager for students
      * @param companyRepDbMgr          database manager for company representatives
      * @param internshipDbMgr          database manager for internships
      * @param internshipWithdrawalDbMgr database manager for internship withdrawals
      */
     public CompanyRepUI(
+        StudentDbMgr studentDbMgr,
         CompanyRepDbMgr companyRepDbMgr,
         InternshipDbMgr internshipDbMgr,
         InternshipWithdrawalDbMgr internshipWithdrawalDbMgr
@@ -38,6 +41,7 @@ public class CompanyRepUI {
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         companyRepDisplay = new CompanyRepDisplay();
         internshipUI = new InternshipUI();
+        this.studentDbMgr = studentDbMgr;
         this.companyRepDbMgr = companyRepDbMgr;
         this.internshipDbMgr = internshipDbMgr;
         this.internshipWithdrawalDbMgr = internshipWithdrawalDbMgr;
@@ -225,12 +229,52 @@ switch(level_no) {
      * @param sc         shared {@link Scanner} for user input
      */
     public void approveRejectInternship(CompanyRep companyRep, Scanner sc){
+        System.out.println("=========================");
+        System.out.println("Approve or reject internship.");
+        System.out.println("Enter internship id  to view applicant (-1 to escape)L: ");
+        int internshipId;
+        Internship internship;
+        while (true) {
+            System.out.print("Enter internship id: ");
+            try {
+                internshipId = sc.nextInt();
+                sc.nextLine();
+                if (internshipId == -1) {
+                    return;
+                }
+                internship = internshipDbMgr.get(internshipId);
+                if (internship != null && internship.getCompanyName() != companyRep.getName()) {
+                    break;
+                } else {
+                    System.out.println("Invalid internship id!");
+                }
+            } catch(Exception e) {
+                System.out.println("Invalid input!");
+            }
+        }
+        List<Student> studentList = studentDbMgr.get();
+        studentList = StudentFilter.filter(studentList, StudentAttributes.APPLIEDINTERNSHIP, ""+internship.getId());
+        StudentDisplay studentDisplay = new StudentDisplay();
+        studentDisplay.showStudentList(studentList);
         StudentDbMgr studentDbMgr = StudentDbMgr.getInstance();
         System.out.println("=========================");
-        System.out.print("Applicant matriculation number:");
-        String applicantMatric = sc.nextLine();
+        String applicationMatric;
+        Student student;
+        while (true) {
+            System.out.print("Enter student id:");
+            try {
+                applicationMatric = sc.nextLine();
+                student = studentDbMgr.getStudent(applicationMatric);
+                if (student != null) {
+                    break; 
+                } else {
+                    System.out.println("Invalid student id!");
+                } 
+            } catch (Exception e) {
+                    System.out.println("Invalid input!");
+                }
+            }
         System.out.println();
-        Student student = studentDbMgr.getStudent(applicantMatric);
         System.out.print("Application decision. Enter 1 for accept, 2 for reject: ");
         int decision_no = sc.nextInt();
         System.out.println();
@@ -238,9 +282,6 @@ switch(level_no) {
             System.out.println("please enter either 1 or 2");
             decision_no = sc.nextInt();
         }
-        System.out.print("Internship title: ");
-        String internshipTitle = sc.nextLine();
-        Internship internship = companyRep.getInternship(internshipTitle);
         boolean successfulDecide = companyRep.acceptStudentInternship(student, internship, decision_no);
         if (successfulDecide) System.out.println("Application decision successful. ");
         else System.out.println("Application decision failed. ");

@@ -60,6 +60,26 @@ public class StudentDisplay extends ADisplay {
     }
 
     /**
+     * Display a list of students.
+     * 
+     * @param student the students to display
+     */
+    public void showStudentList(List<Student> students) {
+        System.out.println("=========================");
+        System.out.println("Student list");
+        System.out.println("Id \t:\t Name \t:\t Major \t:\t Year");
+        for (Student i: students) {
+            System.out.println(
+                i.getId() + "\t:\t " + 
+                i.getName() + " \t:\t " +
+                i.getMajor() + " \t:\t " +
+                i.getYearOfStudy() + " \t:\t "
+            );
+        }
+        System.out.println("=========================");
+    }
+
+    /**
      * Show the internship application header.
      */
     public void showApplyFor() {
