@@ -51,6 +51,10 @@ public class CompanyRepUI {
         if (companyRep == null) {
             for (int i = 0; i != 3; i++) {
                 companyRep = login(sc, companyRepPasswordMgr);
+                if (companyRep != null && companyRep.getRepStatus() != CompanyRepStatus.APPROVED) {
+                    System.out.println("Company rep is not approved!");
+                    return;
+                }
                 if (companyRep != null) {
                     break;
                 }
