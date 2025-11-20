@@ -4,10 +4,10 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class InternshipWithdrawalDbMgr {
-    private List<InternshipWithdrawalApplicants> internshipWithdrawalList;
+    private List<InternshipWithdrawalApplicant> internshipWithdrawalList;
     private static InternshipWithdrawalDbMgr instance;
     private InternshipWithdrawalDbMgr() {
-        internshipWithdrawalList = new ArrayList<InternshipWithdrawalApplicants>();
+        internshipWithdrawalList = new ArrayList<InternshipWithdrawalApplicant>();
     }
 
     public static InternshipWithdrawalDbMgr getInstance() {
@@ -17,8 +17,8 @@ public class InternshipWithdrawalDbMgr {
         return instance;
     }
     // Getter methods for applicants
-    public InternshipWithdrawalApplicants get(int id) {
-        for (InternshipWithdrawalApplicants i: internshipWithdrawalList) {
+    public InternshipWithdrawalApplicant get(int id) {
+        for (InternshipWithdrawalApplicant i: internshipWithdrawalList) {
             if (i.getId() == id) {
                 return i;
             }
@@ -26,8 +26,8 @@ public class InternshipWithdrawalDbMgr {
         return null;
     }
 
-    public InternshipWithdrawalApplicants getFromStudentId(String id) {
-        for (InternshipWithdrawalApplicants i: internshipWithdrawalList) {
+    public InternshipWithdrawalApplicant getFromStudentId(String id) {
+        for (InternshipWithdrawalApplicant i: internshipWithdrawalList) {
             if (i.getStudent().getId().equals(id)) {
                 return i;
             }
@@ -37,19 +37,19 @@ public class InternshipWithdrawalDbMgr {
     // Add applicants based on student and internship. If student already inside, return false.
     // Otherwise add applicants to list and return true.
     public boolean add(Student student, Internship internship) {
-        for (InternshipWithdrawalApplicants i: internshipWithdrawalList) {
+        for (InternshipWithdrawalApplicant i: internshipWithdrawalList) {
             if (i.getStudent() == student) {
                 return false;
             }
         }
-        InternshipWithdrawalApplicants internshipWithdrawalApplicants = new InternshipWithdrawalApplicants(student, internship);
+        InternshipWithdrawalApplicant internshipWithdrawalApplicants = new InternshipWithdrawalApplicant(student, internship);
         internshipWithdrawalList.add(internshipWithdrawalApplicants);
         return true;
     }
     // Remove appplicants. Return true if applicants in list, then remove them.
     // False if applicants not in list.
     public boolean remove(int id) {
-        for (InternshipWithdrawalApplicants i: internshipWithdrawalList) {
+        for (InternshipWithdrawalApplicant i: internshipWithdrawalList) {
             if (i.getId() == id) {
                 internshipWithdrawalList.remove(get(id));
                 return true;
@@ -58,7 +58,7 @@ public class InternshipWithdrawalDbMgr {
         return false;
     }
     // Sort based in attributes. 
-    public List<InternshipWithdrawalApplicants> sort(InternshipWithdrawalApplicantsAttributes sortBy) {
+    public List<InternshipWithdrawalApplicant> sort(InternshipWithdrawalApplicantsAttributes sortBy) {
         switch (sortBy) {
             case InternshipWithdrawalApplicantsAttributes.ID:
                 return internshipWithdrawalList
@@ -81,7 +81,7 @@ public class InternshipWithdrawalDbMgr {
     // Filter based on attributes.
     // For student, args comapares with the name,
     // for internship, args compares with the title.
-    public List<InternshipWithdrawalApplicants> filter(InternshipWithdrawalApplicantsAttributes filterBy, String args) {
+    public List<InternshipWithdrawalApplicant> filter(InternshipWithdrawalApplicantsAttributes filterBy, String args) {
         switch (filterBy) {
             case InternshipWithdrawalApplicantsAttributes.ID:
                 return internshipWithdrawalList
@@ -102,7 +102,7 @@ public class InternshipWithdrawalDbMgr {
         return null;
     }
 
-    public List<InternshipWithdrawalApplicants> showAll(){
+    public List<InternshipWithdrawalApplicant> getAll(){
         return this.internshipWithdrawalList;
     }        
 }

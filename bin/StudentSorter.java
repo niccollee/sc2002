@@ -50,8 +50,8 @@ public class StudentSorter {
             case StudentAttributes.APPLIEDINTERNSHIP:
                 return studentList
                     .stream()
-                    .filter(student -> student.getAppliedInternships().showAll().size() != 0)
-                    .sorted(Comparator.comparing(student -> student.getAppliedInternships().showAll().get(0).getInternship().getTitle()))
+                    .filter(student -> student.getAppliedInternships().getAll().size() != 0)
+                    .sorted(Comparator.comparing(student -> student.getAppliedInternships().getAll().get(0).getInternship().getTitle()))
                     .collect(Collectors.toList());
             // sort by acceptedInternship by alphabetical order
             case StudentAttributes.ACCEPTEDINTERNSHIP:

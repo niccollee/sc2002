@@ -16,11 +16,11 @@ public class InternshipUI {
     }
 
     public void viewAllInternships() {
-        internshipDisplay.showInternships(internshipDbMgr.showAll());
+        internshipDisplay.showInternships(internshipDbMgr.getAll());
     }
 
     public void viewAllInternships(Student student) {
-        List<Internship> internshipList = internshipDbMgr.showAll();
+        List<Internship> internshipList = internshipDbMgr.getAll();
         internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.PREFERREDMAJOR, student.getMajor());
         internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.VISIBILITY, "true");
         internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.STATUS, "APPROVED");

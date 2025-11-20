@@ -81,6 +81,7 @@ public class CareerStaffUI {
                     break;
                 case 5:
                     changePassword(careerStaff, sc, careerStaffPasswordMgr);
+                    break;
                 case 6:
                     return;
                 default:
@@ -185,7 +186,7 @@ public class CareerStaffUI {
      */
     public void approveStudentWithdrawlApplication(Scanner sc) {
         careerStaffDisplay.showWithdrawalRequest();
-        if (InternshipWithdrawalApplicants.getCounter() == 0) {
+        if (InternshipWithdrawalApplicant.getCounter() == 0) {
             System.out.println("\nNo Student Withdrawal Applicants\n");
             return;
         }

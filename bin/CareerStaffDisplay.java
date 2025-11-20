@@ -87,8 +87,8 @@ public class CareerStaffDisplay {
          * The data is retrieved from {@link InternshipWithdrawalDbMgr}.
          */
         public void showWithdrawalRequest() {
-                List<InternshipWithdrawalApplicants> internshipWithdrawlList = InternshipWithdrawalDbMgr.getInstance()
-                                .showAll();
+                List<InternshipWithdrawalApplicant> internshipWithdrawlList = InternshipWithdrawalDbMgr.getInstance()
+                                .getAll();
 
                 System.out.println("=========================");
                 System.out.println("Internship Withdrawl Applicants");

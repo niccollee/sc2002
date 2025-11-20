@@ -4,14 +4,24 @@ import java.util.Iterator;
 
 public class InternshipApplicationDbMgr {
     private List<InternshipApplication> internshipApplicationList;
-    private int count = 0;
+    private static InternshipApplicationDbMgr instance;
+    
 
     public InternshipApplicationDbMgr() {
         internshipApplicationList = new ArrayList<InternshipApplication>();
     }
 
-    public List<InternshipApplication> showAll() {
+    public List<InternshipApplication> getAll() {
         return internshipApplicationList;
+    }
+
+    public static InternshipApplicationDbMgr getInstance(){
+        if(instance == null){
+            return new InternshipApplicationDbMgr();
+        }
+        else{
+            return instance;
+        }
     }
 
     public InternshipApplication get(Internship internship) {
@@ -28,7 +38,7 @@ public class InternshipApplicationDbMgr {
     }
 
     public boolean add(InternshipApplication internshipApplication) {
-        if (count > 3) {
+        if (internshipApplicationList.size() > 3) {
             return false;
         }
         for (InternshipApplication i: internshipApplicationList) {
@@ -36,7 +46,7 @@ public class InternshipApplicationDbMgr {
                 return false;
             }
         }
-        count++;
+
         internshipApplicationList.add(internshipApplication);
         return true;   
     }

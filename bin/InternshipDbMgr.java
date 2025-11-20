@@ -99,7 +99,7 @@ public class InternshipDbMgr {
         internshipList.remove(internship);
     }
     // Return the whole list
-    public List<Internship> showAll() {
+    public List<Internship> getAll() {
         return internshipList;
     }
     public List<Internship> filter(InternshipAttributes filterBy, String args) {

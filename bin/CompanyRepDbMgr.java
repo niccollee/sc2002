@@ -121,7 +121,7 @@ public class CompanyRepDbMgr {
 	 *
 	 * @return the list of all {@link CompanyRep}
 	 */
-	public List<CompanyRep> showAll() {
+	public List<CompanyRep> getAll() {
 		return this.companyRepList;
 	}
 

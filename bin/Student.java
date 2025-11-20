@@ -166,7 +166,7 @@ public class Student implements IUser {
             return false;
         }
 
-        if (getAppliedInternships().showAll().size() > 2) {
+        if (getAppliedInternships().getAll().size() > 2) {
             return false;
         }
 

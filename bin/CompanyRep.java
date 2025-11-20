@@ -125,7 +125,7 @@ public class CompanyRep implements IUser {
 		if(internship.getCompanyRep() != this) return false;
 
 		int countForThisRep = 0;
-		for (Internship i : internshipdbmanager.showAll()) {
+		for (Internship i : internshipdbmanager.getAll()) {
 			if (i.getCompanyRep() == this) {
 				countForThisRep++;
 			}

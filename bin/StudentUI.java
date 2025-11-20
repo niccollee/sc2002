@@ -200,11 +200,11 @@ public class StudentUI {
                 continue;
             }
         }
-        if (choice < 0 || choice >= student.getAppliedInternships().showAll().size()) {
+        if (choice < 0 || choice >= student.getAppliedInternships().getAll().size()) {
             System.out.println("Invalid response!");
             return;
         }
-        if (student.acceptInternship(student.getAppliedInternships().showAll().get(choice).getInternship())) {
+        if (student.acceptInternship(student.getAppliedInternships().getAll().get(choice).getInternship())) {
             System.out.println("Internship accepted!");
         } else {
             System.out.println("Internship not accepted!");
