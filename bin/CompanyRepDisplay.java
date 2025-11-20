@@ -1,5 +1,12 @@
+/**
+ * Handles display screens for company representatives,
+ * including login prompts, menus, and system messages.
+ */
 public class CompanyRepDisplay extends ADisplay{
     
+    /**
+     * Displays the login screen for a company representative.
+     */
     public void showCompanyRepLogin() {
         String output = """
         =========================
@@ -11,6 +18,9 @@ public class CompanyRepDisplay extends ADisplay{
         System.out.println(output);
     }
 
+    /**
+     * Displays the main menu options for a company representative.
+     */
     public void showMenu(){
         String output = """
         =========================
@@ -25,7 +35,9 @@ public class CompanyRepDisplay extends ADisplay{
         System.out.println(output);
     }
 
-    
+    /**
+     * Displays the prompt sequence for changing a password.
+     */
     public void showChangePassword() {
         String output = """
         =========================
@@ -37,6 +49,10 @@ public class CompanyRepDisplay extends ADisplay{
         """;
         System.out.println(output);
     }
+    
+    /**
+     * Displays the quit message.
+     */
     public void showQuit() {
         String output = """
         =========================

@@ -67,7 +67,8 @@ public class MainUI {
      * Application entry point.
      *
      * Creates a MainUI instance and starts the menu loop.
-     *
+     * read seralized saved state and write seralized saved state upon exit
+     * 
      * @param args command line arguments (ignored)
      */
     public static void main(String[] args) {

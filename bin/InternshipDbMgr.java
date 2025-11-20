@@ -7,9 +7,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Manages the collection of Internship objects.
+ * Provides loading from CSV, retrieval, filtering, and sorting operations.
+ * Implements the singleton pattern to ensure a single shared instance.
+ */
 public class InternshipDbMgr{
     private List<Internship> internshipList;
     private static InternshipDbMgr instance;
+
+    /**
+     * Creates the manager and loads internship data from the CSV file.
+     * Private constructor to enforce the singleton pattern.
+     */
     private InternshipDbMgr() {
         internshipList = new ArrayList<Internship>();
         importDb(CompanyRepDbMgr.getInstance());
@@ -41,7 +51,12 @@ public class InternshipDbMgr{
         instance = newInstance;
     }
 
-    // read in from Company Rep list csv and initalize list of Company Rep
+    /**
+     * Loads internship data from the CSV file and populates the internship list.
+     *
+     * @param companyRepDbMgr the manager used to match internships to company representatives
+     * @return true if loading succeeds, false if any error occurs
+     */
 	private boolean importDb(CompanyRepDbMgr companyRepDbMgr) {
 		String filepath = "../data/internship_list.csv";
 
@@ -92,7 +107,13 @@ public class InternshipDbMgr{
 
 		return true;
 	}
-    // Getter method for internship based on id. If does not exist, return null.
+
+    /**
+     * Retrieves an internship by its numeric ID.
+     *
+     * @param id the internship ID
+     * @return the matching Internship, or null if none is found
+     */
     public Internship get(int id) {
         for (Internship i: internshipList) {
             if (i.getId() == id) {
@@ -101,9 +122,13 @@ public class InternshipDbMgr{
         }
         return null;
     }
-    // Add internship based on parameters.
-    // If title does not exist, create internship and add it to list and return true,
-    // otherwise return false.
+
+    /**
+     * Adds a new internship to the list if its ID does not already exist.
+     *
+     * @param internship the internship to add
+     * @return true if the internship was added, false if a duplicate ID exists
+     */
     public boolean add(Internship internship) {
        for (Internship i: internshipList) {
         if (i.getId() == internship.getId()) {
@@ -113,24 +138,63 @@ public class InternshipDbMgr{
         internshipList.add(internship);
         return true;
     }
-    // Remove internship from the list
+
+    /**
+     * Removes the specified internship from the list.
+     *
+     * @param internship the internship to remove
+     */
     public void remove(Internship internship) {
         internshipList.remove(internship);
     }
-    // Return the whole list
+
+    /**
+     * Returns all internships managed by this manager.
+     *
+     * @return the list of internships
+     */
     public List<Internship> getAll() {
         return internshipList;
     }
 
+    /**
+     * Replaces the current list of internships.
+     *
+     * @param internshipList the new list to use
+     */
     public void setAll(List<Internship> internshipList){
         this.internshipList = internshipList;
     }
+
+    /**
+     * Filters internships using a string-based criterion.
+     *
+     * @param filterBy the attribute to filter by
+     * @param args the comparison value
+     * @return the list of internships that match the filter
+     */
     public List<Internship> filter(InternshipAttributes filterBy, String args) {
         return InternshipFilter.filter(internshipList, filterBy, args);
     }
+
+    /**
+     * Filters internships using a date criterion.
+     *
+     * @param filterBy the attribute to filter by
+     * @param date the date used for comparison
+     * @param before true to filter for dates before the given date, false otherwise
+     * @return the list of internships that match the filter
+     */
     public List<Internship> filter(InternshipAttributes filterBy, LocalDate date, boolean before) {
         return InternshipFilter.filter(internshipList, filterBy, date, before);
     }
+
+    /**
+     * Sorts the internship list by the specified attribute.
+     *
+     * @param sortBy the attribute to sort by
+     * @return the sorted internship list
+     */
     public List<Internship> filter(InternshipAttributes sortBy) {
         return InternshipSorter.sort(internshipList, sortBy);
     }

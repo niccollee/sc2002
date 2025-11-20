@@ -4,21 +4,37 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Handles user interactions for viewing and filtering internships.
+ * Provides methods for displaying internships and filtering them
+ * by various attributes for general users or specific students.
+ */
 public class InternshipUI {
     private InternshipDisplay internshipDisplay;
     private InternshipDbMgr internshipDbMgr;
     Scanner sc;
 
+    /**
+     * Creates a new InternshipUI instance and initializes required components.
+     */
     public InternshipUI() {
         internshipDisplay = new InternshipDisplay();
         internshipDbMgr = InternshipDbMgr.getInstance();
         sc = Input.SC;
     }
 
+    /**
+     * Displays all internships without filtering.
+     */
     public void viewAllInternships() {
         internshipDisplay.showInternships(internshipDbMgr.getAll());
     }
 
+    /**
+     * Displays internships filtered based on a specific student's major and year of study.
+     *
+     * @param student the student used to filter internships
+     */
     public void viewAllInternships(Student student) {
         List<Internship> internshipList = internshipDbMgr.getAll();
         internshipList = InternshipFilter.filter(internshipList, InternshipAttributes.PREFERREDMAJOR, student.getMajor());
@@ -35,6 +51,11 @@ public class InternshipUI {
         internshipDisplay.showInternships(internshipList);
     }
 
+    /**
+     * Prompts the user to filter internships by various criteria.
+     * Supports filtering by title, level, preferred major, application dates,
+     * status, company name, number of slots, and visibility.
+     */
     public void filterInternshipsBy() {
         internshipDisplay.showFilterMenu(false);
         System.out.println("Enter your input:");
@@ -183,6 +204,12 @@ public class InternshipUI {
         internshipDisplay.showInternships(internshipList);
     } 
 
+    /**
+     * Prompts a specific student to filter internships according to criteria relevant to them.
+     * Automatically applies additional filters based on student's major, year, visibility, and approved status.
+     *
+     * @param student the student for whom the internships are filtered
+     */
     public void filterInternshipsBy(Student student) {
         internshipDisplay.showFilterMenu(true);
         System.out.println("Enter your input:");
