@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public class InternshipWithdrawalDbMgr {
+public class InternshipWithdrawalDbMgr{
     private List<InternshipWithdrawalApplicant> internshipWithdrawalList;
     private static InternshipWithdrawalDbMgr instance;
     private InternshipWithdrawalDbMgr() {
@@ -111,5 +111,9 @@ public class InternshipWithdrawalDbMgr {
 
     public List<InternshipWithdrawalApplicant> getAll(){
         return this.internshipWithdrawalList;
-    }        
+    }
+    
+    public void setAll(List<InternshipWithdrawalApplicant> internshipWithdrawalList){
+        this.internshipWithdrawalList = internshipWithdrawalList;
+    }
 }

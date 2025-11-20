@@ -14,7 +14,7 @@ import java.io.IOException;
  * back to the CSV file when requested. It also provides helper methods for
  * searching, adding, removing, sorting, and filtering career staff.
  */
-public class CareerStaffDbMgr {
+public class CareerStaffDbMgr{
 
     private List<CareerStaff> careerStaffList;
     private static CareerStaffDbMgr instance;
@@ -194,6 +194,10 @@ public class CareerStaffDbMgr {
      */
     public List<CareerStaff> getAll() {
         return this.careerStaffList;
+    }
+
+    public void setAll(List<CareerStaff> careerStaffList){
+        this.careerStaffList = careerStaffList;
     }
 
 }

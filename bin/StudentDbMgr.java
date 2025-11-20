@@ -9,7 +9,7 @@ import java.util.List;
  * Database manager which contains all the {@link Student} object and the associated 
  * actions. 
  */
-public class StudentDbMgr {
+public class StudentDbMgr{
     private List<Student> studentList;
     private static StudentDbMgr instance;
 
@@ -122,6 +122,10 @@ public class StudentDbMgr {
      */
     public List<Student> getAll() {
         return studentList;
+    }
+
+    public void setAll(List<Student> studentList){
+        this.studentList = studentList;
     }
 
     /**

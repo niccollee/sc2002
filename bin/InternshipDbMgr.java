@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class InternshipDbMgr {
+public class InternshipDbMgr{
     private List<Internship> internshipList;
     private static InternshipDbMgr instance;
     private InternshipDbMgr() {
@@ -120,6 +120,10 @@ public class InternshipDbMgr {
     // Return the whole list
     public List<Internship> getAll() {
         return internshipList;
+    }
+
+    public void setAll(List<Internship> internshipList){
+        this.internshipList = internshipList;
     }
     public List<Internship> filter(InternshipAttributes filterBy, String args) {
         return InternshipFilter.filter(internshipList, filterBy, args);

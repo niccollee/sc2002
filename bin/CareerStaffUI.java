@@ -66,6 +66,7 @@ public class CareerStaffUI {
                 System.out.println("Invalid input!");
                 choice = menu(sc);
             }
+            
             switch (choice) {
                 case 1:
                     approveCompanyRepApplication(sc);
@@ -104,7 +105,7 @@ public class CareerStaffUI {
         int choice = sc.nextInt();
         sc.nextLine();
 
-        if (choice > 0 && choice < 7) {
+        if (choice > 0 && choice < 9) {
             return choice;
         }
 

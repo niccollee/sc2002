@@ -11,7 +11,7 @@ import java.util.List;
  * This class is implemented as a singleton and provides methods to add, remove,
  * retrieve, sort and filter company representatives.
  */
-public class CompanyRepDbMgr {
+public class CompanyRepDbMgr{
 
 	private List<CompanyRep> companyRepList;
 	private static CompanyRepDbMgr instance;
@@ -136,6 +136,10 @@ public class CompanyRepDbMgr {
 	 */
 	public List<CompanyRep> getAll() {
 		return this.companyRepList;
+	}
+
+	public void setAll(List<CompanyRep> companyRepList){
+		this.companyRepList = companyRepList;
 	}
 
 	/**
