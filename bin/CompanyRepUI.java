@@ -97,7 +97,7 @@ public class CompanyRepUI {
         }
         return -1;
     }
-    public void constructInternship(CompanyRep rep, Scanner sc) {
+    public void constructInternship(CompanyRep companyRep, Scanner sc) {
         System.out.println("=========================");
         System.out.print("Internship title: ");
         String title = sc.nextLine();
@@ -144,10 +144,9 @@ switch(level_no) {
         System.out.print("Number of slots: ");
         int noSlots = sc.nextInt();
         System.out.println();
-        CompanyRep companyRep = rep;
         boolean visibility = false;
         Internship internship = new Internship(title, description, level, preferredMajor, appOpenDate, appCloseDate, visibility, companyName, companyRep, noSlots, visibility);
-        boolean successfulAdd = rep.addInternship(internship);
+        boolean successfulAdd = companyRep.addInternship(internship);
         if (successfulAdd) System.out.println("Internship added successfully.");
         else System.out.println("Internship adding failed.");
     }
