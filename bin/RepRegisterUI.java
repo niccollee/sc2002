@@ -28,7 +28,7 @@ public class RepRegisterUI {
      */
     public void start() {
         String output = """
-                =========================
+                ==============================================
                 Company representative registration form.
                 Enter id:
                 """;
@@ -52,6 +52,6 @@ public class RepRegisterUI {
             } else {
                 System.out.println("Error in registration.");
             }
-        System.out.println("=========================");
+        System.out.println("==============================================");
     }
 }
