@@ -165,6 +165,7 @@ public class StudentUI {
         while (true) {
             try {
                 id = sc.nextInt();
+                sc.nextLine();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! Enter input again.");
