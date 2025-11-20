@@ -109,7 +109,7 @@ public class CareerStaffController {
     /**
      * Approves a student's internship withdrawal request.
      * <p>
-     * If a matching {@link InternshipWithdrawalApplicants} record is found for the
+     * If a matching {@link InternshipWithdrawalApplicant} record is found for the
      * given student ID, this method performs the withdrawal on that record.
      * </p>
      *
@@ -118,7 +118,7 @@ public class CareerStaffController {
      * @return {@code true} if a withdrawal request was found and processed; {@code false} otherwise
      */
     public boolean approveStudentWidthdrawl(String studentId, InternshipWithdrawalDbMgr internshipWithdrawalDbMgr) {
-        InternshipWithdrawalApplicants internshipWithdrawalApplicants = internshipWithdrawalDbMgr
+        InternshipWithdrawalApplicant internshipWithdrawalApplicants = internshipWithdrawalDbMgr
                 .getFromStudentId(studentId);
 
         if (internshipWithdrawalApplicants == null) {

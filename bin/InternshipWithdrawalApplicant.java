@@ -1,9 +1,9 @@
-public class InternshipWithdrawalApplicants {
+public class InternshipWithdrawalApplicant {
     private Student student;
     private Internship internship;
     private int id;
     private static int counter = 0;
-    public InternshipWithdrawalApplicants(Student student, Internship internship) {
+    public InternshipWithdrawalApplicant(Student student, Internship internship) {
         this.student = student;
         this.internship = internship;
         this.id = counter++;
@@ -11,7 +11,7 @@ public class InternshipWithdrawalApplicants {
 
     //Getter method for counter
     public static int getCounter(){
-        return InternshipWithdrawalApplicants.counter;
+        return InternshipWithdrawalApplicant.counter;
     }
     
     // Getter method for student

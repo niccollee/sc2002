@@ -15,11 +15,24 @@ public class InternshipDbMgr {
         importDb(CompanyRepDbMgr.getInstance());
     }
     // Get an instance of this DbMgr. If it exist, return it, otherwise create a new instance of it.
-    public static InternshipDbMgr getInstance() {
+    public static synchronized InternshipDbMgr getInstance() {
         if (instance == null) {
             instance = new InternshipDbMgr();
         }
         return instance;
+    }
+
+    /**
+     * Replace the singleton instance. Synchronized to avoid races during tests or state restoration.
+     *
+     * @param newInstance non-null InternshipDbMgr to set as the singleton
+     * @throws IllegalArgumentException if newInstance is null
+     */
+    public static synchronized void setInstance(InternshipDbMgr newInstance) {
+        if (newInstance == null) {
+            throw new IllegalArgumentException("newInstance must not be null");
+        }
+        instance = newInstance;
     }
 
     // read in from Company Rep list csv and initalize list of Company Rep

@@ -9,7 +9,7 @@ import java.util.List;
 public class AppState implements Serializable {
     private static AppState instance;
 
-    private List<CareerStaff> careerStaffList;
+    private CareerStaffDbMgr careerStaffDbMgrInstance;
     private List<CompanyRep> companyRepList;
     private List<Internship> internshipList;
     private List<Student> studentList;
@@ -18,7 +18,7 @@ public class AppState implements Serializable {
 
     private AppState() {
         // private ctor to enforce singleton
-        this.careerStaffList = CareerStaffDbMgr.getInstance().getAll();
+        this.careerStaffDbMgrInstance = CareerStaffDbMgr.getInstance();
         this.companyRepList = CompanyRepDbMgr.getInstance().getAll();
         this.internshipList = InternshipDbMgr.getInstance().getAll();
         this.studentList = StudentDbMgr.getInstance().getAll();
@@ -36,6 +36,19 @@ public class AppState implements Serializable {
             instance = new AppState();
         }
         return instance;
+    }
+
+    public void updateSelfState(){
+        this.careerStaffDbMgrInstance = CareerStaffDbMgr.getInstance();
+        this.companyRepList = CompanyRepDbMgr.getInstance().getAll();
+        this.internshipList = InternshipDbMgr.getInstance().getAll();
+        this.studentList = StudentDbMgr.getInstance().getAll();
+        this.internshipApplicationList = InternshipApplicationDbMgr.getInstance().getAll();
+        this.internshipWithdrawalApplicantList = InternshipWithdrawalDbMgr.getInstance().getAll();
+    }
+
+    public void restoreOtherState(){
+        CareerStaffDbMgr.setInstance(careerStaffDbMgrInstance);
     }
 
     /**

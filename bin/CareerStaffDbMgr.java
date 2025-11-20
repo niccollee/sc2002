@@ -16,17 +16,6 @@ import java.io.IOException;
  */
 public class CareerStaffDbMgr {
 
-    /**
-     * Simple test entry point for importing and exporting the career staff
-     * database. This can be used to verify that the CSV read/write logic works.
-     *
-     * @param args command-line arguments (not used)
-     */
-    public static void main(String[] args) {
-        CareerStaffDbMgr.getInstance();
-        CareerStaffDbMgr.getInstance().exportDb();
-    }
-
     private List<CareerStaff> careerStaffList;
     private static CareerStaffDbMgr instance;
 
@@ -50,6 +39,20 @@ public class CareerStaffDbMgr {
             instance = new CareerStaffDbMgr();
         }
         return instance;
+    }
+
+    /**
+     * Replace the singleton instance. This is synchronized to avoid races
+     * during tests or state restoration. newInstance must not be null.
+     *
+     * @param newInstance the CareerStaffDbMgr to set as the singleton
+     * @throws IllegalArgumentException if newInstance is null
+     */
+    public static void setInstance(CareerStaffDbMgr newInstance) {
+        if (newInstance == null) {
+            throw new IllegalArgumentException("newInstance must not be null");
+        }
+        instance = newInstance;
     }
 
     // read in from career staff list csv and initalize list of career staff

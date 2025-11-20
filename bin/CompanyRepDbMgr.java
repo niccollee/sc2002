@@ -39,6 +39,19 @@ public class CompanyRepDbMgr {
 	}
 
 	/**
+     * Replace the singleton instance. Synchronized to avoid races during tests or state restoration.
+     *
+     * @param newInstance non-null CompanyRepDbMgr to set as the singleton
+     * @throws IllegalArgumentException if newInstance is null
+     */
+    public static void setInstance(CompanyRepDbMgr newInstance) {
+        if (newInstance == null) {
+            throw new IllegalArgumentException("newInstance must not be null");
+        }
+        instance = newInstance;
+    }
+
+	/**
 	 * Returns the company representative with the given ID, or null if not found.
 	 *
 	 * @param id the ID of the company representative to retrieve

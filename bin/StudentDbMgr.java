@@ -105,7 +105,7 @@ public class StudentDbMgr {
      *
      * @return the list of Student instances
      */
-    public List<Student> get() {
+    public List<Student> getAll() {
         return studentList;
     }
 
