@@ -251,7 +251,7 @@ switch(level_no) {
                     return;
                 }
                 internship = internshipDbMgr.get(internshipId);
-                if (internship != null && internship.getCompanyName() != companyRep.getName()) {
+                if (internship != null && internship.getCompanyName().equals(companyRep.getName())) {
                     break;
                 } else {
                     System.out.println("Invalid internship id!");
@@ -315,7 +315,7 @@ switch(level_no) {
             try {
                 internshipId = sc.nextInt();
                 internship = internshipDbMgr.get(internshipId);
-                if (internship != null && internship.getCompanyName() != companyRep.getName()) {
+                if (internship != null && internship.getCompanyName().equals(companyRep.getName())) {
                     break;
                 } else {
                     System.out.println("Invalid internship id!");
